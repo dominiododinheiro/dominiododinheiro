@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo 8 — Conversor de Vergonha</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding: 15px 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            padding: 25px 20px 25px;
+            position: relative;
+        }
+
+        .top-actions {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+            flex-wrap: wrap;
+        }
+
+        .top-actions button {
+            padding: 5px 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        .top-actions .btn-limpar {
+            background: #e0e0e0;
+            color: #555;
+        }
+        .top-actions .btn-limpar:hover {
+            background: #d0d0d0;
+        }
+        .top-actions .btn-pdf {
+            background: #1a237e;
+            color: #fff;
+        }
+        .top-actions .btn-pdf:hover {
+            background: #0d1555;
+        }
+        .top-actions .btn-inicio {
+            background: #2e7d32;
+            color: #fff;
+        }
+        .top-actions .btn-inicio:hover {
+            background: #1b5e20;
+        }
+
+        @media (max-width: 768px) {
+            .top-actions {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: flex-end;
+                margin-bottom: 10px;
+                padding-top: 6px;
+            }
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #1a237e;
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+            padding-right: 120px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding-right: 0;
+                padding-top: 40px;
+            }
+        }
+
+        .header .brand {
+            font-size: 12px;
+            font-weight: 700;
+            color: #1a237e;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 4px;
+        }
+        .header .subtitle {
+            font-size: 14px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .description {
+            background: #f8f9fa;
+            border-left: 4px solid #1a237e;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 18px;
+        }
+        .description p {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 3px;
+        }
+        .description p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== EXERCÍCIO ===== */
+        .exercicio-wrapper {
+            border: 1.5px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            width: 100%;
+        }
+
+        .exercicio-header {
+            display: flex;
+            background: #1a237e;
+            color: #fff;
+        }
+        .exercicio-header .header-col {
+            flex: 1;
+            padding: 8px 12px;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .exercicio-header .header-col:last-child {
+            border-right: none;
+        }
+        .exercicio-header .cat-icon {
+            display: block;
+            font-size: 14px;
+        }
+        .exercicio-header .cat-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .exercicio-header .cat-sub {
+            display: block;
+            font-size: 9px;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .exercicio-linha {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            width: 100%;
+        }
+        .exercicio-linha:last-child {
+            border-bottom: none;
+        }
+        .exercicio-linha .col {
+            flex: 1;
+            padding: 8px 12px;
+            border-right: 1px solid #eee;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            min-width: 0;
+        }
+        .exercicio-linha .col:last-child {
+            border-right: none;
+        }
+
+        .col-exemplo {
+            font-size: 12px;
+            color: #555;
+            font-style: italic;
+            background: #fafafa;
+            line-height: 1.4;
+        }
+        .col-exemplo .autor {
+            font-weight: 600;
+            color: #1a237e;
+            font-style: normal;
+        }
+        .col-exemplo .destaque {
+            color: #c62828;
+            font-weight: 600;
+        }
+
+        /* ===== TEXTAREA ===== */
+        .col-texto textarea {
+            width: 100%;
+            min-height: 40px;
+            padding: 6px 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fafafa;
+            display: block;
+            resize: none;
+            overflow: hidden;
+            transition: border-color 0.3s;
+            line-height: 1.5;
+        }
+        .col-texto textarea:focus {
+            outline: none;
+            border-color: #1a237e;
+            background: #fff;
+        }
+        .col-texto textarea::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        /* ===== DIV PARA IMPRESSÃO - OCULTA NO NAVEGADOR ===== */
+        .print-text {
+            display: none !important;
+        }
+
+        .linha-sua {
+            background: #e8eaf6;
+            width: 100%;
+            padding: 8px 12px;
+            font-weight: 600;
+            color: #1a237e;
+        }
+        .linha-sua .dica {
+            font-weight: 400;
+            color: #555;
+            font-size: 12px;
+            display: block;
+        }
+
+        .linha-sua-texto .col-texto textarea {
+            min-height: 35px;
+            border-color: #c5cae9;
+        }
+        .linha-sua-texto .col-texto textarea:focus {
+            border-color: #1a237e;
+        }
+
+        /* ===== REFRAMING ===== */
+        .reframing-box {
+            background: #e8eaf6;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            border-left: 4px solid #1a237e;
+        }
+        .reframing-box .titulo {
+            font-weight: 700;
+            color: #1a237e;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        .reframing-box .grid {
+            display: flex;
+            gap: 12px 20px;
+            flex-wrap: wrap;
+        }
+        .reframing-box .grid .item {
+            flex: 1;
+            min-width: 200px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .reframing-box .grid .item.vergonha {
+            background: #ffebee;
+            border-left: 3px solid #c62828;
+        }
+        .reframing-box .grid .item.vergonha .label {
+            font-weight: 700;
+            color: #c62828;
+        }
+        .reframing-box .grid .item.estoico {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+        }
+        .reframing-box .grid .item.estoico .label {
+            font-weight: 700;
+            color: #2e7d32;
+        }
+        .reframing-box .citacao {
+            margin-top: 8px;
+            font-style: italic;
+            color: #555;
+            font-size: 12px;
+            text-align: center;
+            border-top: 1px dashed #c5cae9;
+            padding-top: 8px;
+        }
+        .reframing-box .citacao .autor {
+            font-weight: 600;
+            color: #1a237e;
+            font-style: normal;
+        }
+
+        /* ===== AFIRMAÇÃO ===== */
+        .afirmacao-box {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+        }
+        .afirmacao-box .titulo {
+            font-weight: 700;
+            color: #1a237e;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        .afirmacao-box .texto-base {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.6;
+            padding: 6px 0;
+        }
+        .afirmacao-box .texto-base .destaque {
+            color: #1a237e;
+            font-weight: 600;
+        }
+        .afirmacao-box textarea {
+            width: 100%;
+            min-height: 40px;
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fafafa;
+            display: block;
+            margin-top: 4px;
+            resize: none;
+            overflow: hidden;
+            transition: border-color 0.3s;
+            line-height: 1.5;
+        }
+        .afirmacao-box textarea:focus {
+            outline: none;
+            border-color: #1a237e;
+            background: #fff;
+        }
+        .afirmacao-box textarea::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        /* ===== AÇÃO ===== */
+        .acao-box {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            border-left: 4px solid #f9a825;
+        }
+        .acao-box .titulo {
+            font-weight: 700;
+            color: #e65100;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .acao-box .opcoes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 16px;
+        }
+        .acao-box .opcoes .opcao {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 0;
+            font-size: 13px;
+            color: #333;
+            cursor: pointer;
+        }
+        .acao-box .opcoes .opcao input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #1a237e;
+            flex-shrink: 0;
+        }
+        .acao-box .opcoes .opcao .emoji {
+            font-size: 16px;
+        }
+        .acao-box .opcao-outra {
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .acao-box .opcao-outra input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #1a237e;
+            flex-shrink: 0;
+        }
+        .acao-box .opcao-outra input[type="text"] {
+            flex: 1;
+            min-width: 150px;
+            padding: 5px 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fafafa;
+        }
+        .acao-box .opcao-outra input[type="text"]:focus {
+            outline: none;
+            border-color: #1a237e;
+            background: #fff;
+        }
+        .acao-box .prazo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #e0e0e0;
+            flex-wrap: wrap;
+        }
+        .acao-box .prazo label {
+            font-weight: 600;
+            color: #1a237e;
+            font-size: 13px;
+        }
+        .acao-box .prazo input[type="text"] {
+            padding: 5px 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fafafa;
+            color: #333;
+            width: 120px;
+        }
+        .acao-box .prazo input[type="text"]:focus {
+            outline: none;
+            border-color: #1a237e;
+            background: #fff;
+        }
+        .acao-box .prazo input[type="text"]::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        /* ===== SENTIMENTO ===== */
+        .sentimento-box {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+        }
+        .sentimento-box .titulo {
+            font-weight: 700;
+            color: #1a237e;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        .sentimento-box textarea {
+            width: 100%;
+            min-height: 40px;
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fafafa;
+            display: block;
+            resize: none;
+            overflow: hidden;
+            transition: border-color 0.3s;
+            line-height: 1.5;
+        }
+        .sentimento-box textarea:focus {
+            outline: none;
+            border-color: #1a237e;
+            background: #fff;
+        }
+        .sentimento-box textarea::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        /* ===== RODAPÉ ===== */
+        .footer-citacao {
+            text-align: center;
+            padding: 12px 0 0;
+            border-top: 2px solid #e0e0e0;
+            margin-top: 4px;
+        }
+        .footer-citacao p {
+            font-size: 13px;
+            color: #555;
+            font-style: italic;
+        }
+        .footer-citacao .autor {
+            font-weight: 600;
+            color: #1a237e;
+            font-style: normal;
+        }
+        .footer-citacao .marca {
+            font-size: 11px;
+            color: #999;
+            margin-top: 4px;
+            font-style: normal;
+        }
+
+        /* ============================================
+           IMPRESSÃO
+           ============================================ */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body {
+                background: #fff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .container {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                padding: 8px 10px !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            .top-actions {
+                display: none !important;
+            }
+
+            .header {
+                padding-right: 0 !important;
+                border-bottom: 2px solid #1a237e !important;
+                padding-bottom: 5px !important;
+                margin-bottom: 6px !important;
+            }
+            .header h1 {
+                font-size: 14px !important;
+            }
+            .header .subtitle {
+                font-size: 10px !important;
+            }
+            .header .brand {
+                font-size: 9px !important;
+            }
+
+            .description {
+                padding: 4px 8px !important;
+                margin-bottom: 6px !important;
+                border-left-width: 3px !important;
+            }
+            .description p {
+                font-size: 9px !important;
+                line-height: 1.3 !important;
+            }
+
+            .exercicio-wrapper {
+                border: 1px solid #ccc !important;
+                border-radius: 3px !important;
+                margin-bottom: 6px !important;
+            }
+            .exercicio-header .header-col {
+                padding: 3px 6px !important;
+            }
+            .exercicio-header .cat-label {
+                font-size: 8px !important;
+            }
+            .exercicio-header .cat-sub {
+                font-size: 6px !important;
+            }
+            .exercicio-header .cat-icon {
+                font-size: 10px !important;
+            }
+            .exercicio-linha .col {
+                padding: 3px 6px !important;
+                font-size: 8px !important;
+                line-height: 1.2 !important;
+            }
+            .col-exemplo {
+                font-size: 8px !important;
+                background: #fafafa !important;
+            }
+            .col-exemplo .autor {
+                font-size: 8px !important;
+            }
+            .linha-sua {
+                padding: 3px 6px !important;
+                font-size: 8px !important;
+                background: #e8eaf6 !important;
+            }
+            .linha-sua .dica {
+                font-size: 7px !important;
+            }
+
+            /* ===== NO PDF: OCULTA TEXTAREAS, MOSTRA DIVs ===== */
+            .col-texto textarea,
+            .afirmacao-box textarea,
+            .sentimento-box textarea {
+                display: none !important;
+            }
+
+            .print-text {
+                display: block !important;
+                border: 1px solid #ccc !important;
+                background: #fff !important;
+                padding: 3px 5px !important;
+                font-size: 8px !important;
+                font-family: 'Segoe UI', Roboto, Arial, sans-serif !important;
+                line-height: 1.3 !important;
+                min-height: 25px !important;
+                width: 100% !important;
+                white-space: pre-wrap !important;
+                word-wrap: break-word !important;
+                border-radius: 2px !important;
+                color: #333 !important;
+            }
+
+            .print-text:empty::before {
+                content: "____________";
+                color: #ccc;
+            }
+
+            .reframing-box {
+                background: #e8eaf6 !important;
+                padding: 4px 8px !important;
+                margin-bottom: 6px !important;
+                border-radius: 3px !important;
+                border-left-width: 3px !important;
+            }
+            .reframing-box .titulo {
+                font-size: 9px !important;
+                margin-bottom: 2px !important;
+            }
+            .reframing-box .grid .item {
+                font-size: 8px !important;
+                padding: 3px 6px !important;
+                border-radius: 2px !important;
+            }
+            .reframing-box .citacao {
+                font-size: 8px !important;
+                padding-top: 3px !important;
+                margin-top: 3px !important;
+            }
+
+            .afirmacao-box {
+                background: #f5f5f5 !important;
+                padding: 4px 8px !important;
+                margin-bottom: 6px !important;
+                border-radius: 3px !important;
+            }
+            .afirmacao-box .titulo {
+                font-size: 9px !important;
+                margin-bottom: 2px !important;
+            }
+            .afirmacao-box .texto-base {
+                font-size: 8px !important;
+                padding: 2px 0 !important;
+                line-height: 1.2 !important;
+            }
+
+            .acao-box {
+                background: #fff8e1 !important;
+                padding: 4px 8px !important;
+                margin-bottom: 6px !important;
+                border-radius: 3px !important;
+                border-left-width: 3px !important;
+            }
+            .acao-box .titulo {
+                font-size: 9px !important;
+                margin-bottom: 2px !important;
+            }
+            .acao-box .opcoes {
+                gap: 1px 8px !important;
+            }
+            .acao-box .opcoes .opcao {
+                font-size: 8px !important;
+                padding: 1px 0 !important;
+                gap: 3px !important;
+            }
+            .acao-box .opcoes .opcao .emoji {
+                font-size: 10px !important;
+            }
+            .acao-box .opcao-outra {
+                margin-top: 2px !important;
+                gap: 3px !important;
+            }
+            .acao-box .opcao-outra input[type="text"] {
+                border: 1px solid #ccc !important;
+                background: #fff !important;
+                font-size: 8px !important;
+                padding: 2px 4px !important;
+                min-width: 60px !important;
+                border-radius: 2px !important;
+            }
+            .acao-box .prazo {
+                margin-top: 3px !important;
+                padding-top: 3px !important;
+                gap: 3px !important;
+            }
+            .acao-box .prazo label {
+                font-size: 8px !important;
+            }
+            .acao-box .prazo input[type="text"] {
+                border: 1px solid #ccc !important;
+                background: #fff !important;
+                font-size: 8px !important;
+                padding: 2px 4px !important;
+                width: 70px !important;
+                border-radius: 2px !important;
+            }
+
+            .sentimento-box {
+                background: #f5f5f5 !important;
+                padding: 4px 8px !important;
+                margin-bottom: 6px !important;
+                border-radius: 3px !important;
+            }
+            .sentimento-box .titulo {
+                font-size: 9px !important;
+                margin-bottom: 2px !important;
+            }
+
+            .footer-citacao {
+                border-top: 2px solid #e0e0e0 !important;
+                padding: 4px 0 0 !important;
+            }
+            .footer-citacao p {
+                font-size: 9px !important;
+            }
+            .footer-citacao .marca {
+                font-size: 7px !important;
+            }
+
+            .header-card,
+            .description,
+            .exercicio-wrapper,
+            .reframing-box,
+            .afirmacao-box,
+            .acao-box,
+            .sentimento-box,
+            .footer-citacao {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .exercicio-linha .col {
+                word-break: break-word !important;
+            }
+        }
+
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px 10px;
+            }
+            .header h1 {
+                font-size: 20px;
+            }
+            .header {
+                padding-right: 0;
+                padding-top: 40px;
+            }
+            .top-actions {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: flex-end;
+                margin-bottom: 10px;
+                padding-top: 6px;
+            }
+            .reframing-box .grid {
+                flex-direction: column;
+            }
+            .acao-box .opcoes {
+                grid-template-columns: 1fr;
+            }
+            .exercicio-linha {
+                flex-wrap: wrap;
+            }
+            .exercicio-linha .col {
+                flex: 1 1 100%;
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+            .exercicio-linha .col:last-child {
+                border-bottom: none;
+            }
+            .exercicio-header {
+                flex-wrap: wrap;
+            }
+            .exercicio-header .header-col {
+                flex: 1 1 50%;
+            }
+            .col-texto textarea {
+                min-height: 30px;
+                font-size: 12px;
+            }
+            .acao-box .opcao-outra {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .acao-box .opcao-outra input[type="text"] {
+                min-width: unset;
+            }
+            .acao-box .prazo {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .acao-box .prazo input[type="text"] {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px 6px;
+            }
+            .header h1 {
+                font-size: 16px;
+            }
+            .header .subtitle {
+                font-size: 12px;
+            }
+            .exercicio-header .header-col {
+                padding: 4px 6px;
+            }
+            .exercicio-header .cat-label {
+                font-size: 9px;
+            }
+            .exercicio-header .cat-sub {
+                font-size: 7px;
+            }
+            .exercicio-linha .col {
+                padding: 4px 6px;
+                font-size: 10px;
+            }
+            .col-exemplo {
+                font-size: 9px;
+            }
+            .col-texto textarea {
+                font-size: 11px;
+                min-height: 25px;
+                padding: 4px 6px;
+            }
+            .top-actions button {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+            .reframing-box .grid .item {
+                font-size: 11px;
+                padding: 6px 8px;
+            }
+            .acao-box .opcoes .opcao {
+                font-size: 11px;
+            }
+            .afirmacao-box .texto-base {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="conteudoPDF">
+
+        <!-- BOTÕES TOPO -->
+        <div class="top-actions" id="botoesTopo">
+            <button class="btn-inicio" onclick="window.location.href='../index-principal.html'">🏠 Início</button>
+            <button class="btn-limpar" onclick="limparTudo()">🗑️ Limpar</button>
+            <button class="btn-pdf" onclick="gerarPDF()">📄 Salvar PDF</button>
+        </div>
+
+        <!-- CABEÇALHO -->
+        <div class="header">
+            <div class="brand">Domínio do Dinheiro</div>
+            <h1>Protocolo 8 — Conversor de Vergonha</h1>
+            <div class="subtitle">Transforme a vergonha financeira em ação corajosa</div>
+        </div>
+
+        <!-- DESCRIÇÃO -->
+        <div class="description">
+            <p>A vergonha paralisa. O fato libera para a ação. Escreva a frase de vergonha financeira que mais pesa em você. Depois reescreva a mesma situação usando apenas <strong>fatos verificáveis</strong>. Sem julgamento. Sem adjetivos negativos. Sem "deveria".</p>
+        </div>
+
+        <!-- EXERCÍCIO -->
+        <div class="exercicio-wrapper">
+            <div class="exercicio-header">
+                <div class="header-col">
+                    <span class="cat-icon">😰</span>
+                    <span class="cat-label">História da Vergonha</span>
+                    <span class="cat-sub">o que a voz interna diz</span>
+                </div>
+                <div class="header-col">
+                    <span class="cat-icon">✅</span>
+                    <span class="cat-label">Fato Real</span>
+                    <span class="cat-sub">o que realmente aconteceu</span>
+                </div>
+            </div>
+
+            <div class="exercicio-linha">
+                <div class="col col-exemplo">
+                    <span class="autor">Exemplo:</span><br>
+                    "Sou um fracasso com dinheiro. Nunca vou conseguir me organizar."
+                </div>
+                <div class="col col-exemplo">
+                    <span class="autor">Exemplo:</span><br>
+                    "Tomei decisões financeiras que não funcionaram. Estou aprendendo a fazer diferente agora."
+                </div>
+            </div>
+
+            <div class="exercicio-linha">
+                <div class="col col-exemplo">
+                    <span class="autor">Exemplo:</span><br>
+                    "Todo mundo tem a vida financeira em ordem menos eu."
+                </div>
+                <div class="col col-exemplo">
+                    <span class="autor">Exemplo:</span><br>
+                    "Mais de <span class="destaque">70 milhões de brasileiros</span> têm alguma dívida. A maioria luta em silêncio. Não estou sozinho."
+                </div>
+            </div>
+
+            <div class="exercicio-linha">
+                <div class="col col-exemplo">
+                    <span class="autor">Exemplo:</span><br>
+                    "Deveria saber lidar com dinheiro a essa altura da vida."
+                </div>
+                <div class="col col-exemplo">
+                    <span class="autor">Exemplo:</span><br>
+                    "Educação financeira não é ensinada nas escolas brasileiras. Estou aprendendo agora. <span class="destaque">Isso é coragem.</span>"
+                </div>
+            </div>
+
+            <div class="exercicio-linha">
+                <div class="col col-exemplo">
+                    <span class="autor">Exemplo:</span><br>
+                    "Se minha família soubesse do tamanho da minha dívida, ficaria envergonhado."
+                </div>
+                <div class="col col-exemplo">
+                    <span class="autor">Exemplo:</span><br>
+                    "Tenho <span class="destaque">R$ _____</span> de dívida. Esse número tem solução. Pessoas quitam dívidas maiores todos os anos."
+                </div>
+            </div>
+
+            <div class="exercicio-linha" style="background:#e8eaf6; border-bottom:1px solid #eee;">
+                <div class="linha-sua">
+                    <strong>✍️ Agora escreva a sua.</strong>
+                    <span class="dica">A mais pesada. A que você nunca disse em voz alta.</span>
+                </div>
+            </div>
+
+            <div class="exercicio-linha linha-sua-texto">
+                <div class="col col-texto">
+                    <textarea id="vergonhaUsuario" placeholder="Escreva aqui sua vergonha..." oninput="autoExpand(this)"></textarea>
+                    <div class="print-text" id="vergonhaUsuarioPrint"></div>
+                </div>
+                <div class="col col-texto">
+                    <textarea id="fatoUsuario" placeholder="Reescreva como fato..." oninput="autoExpand(this)"></textarea>
+                    <div class="print-text" id="fatoUsuarioPrint"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REFRAMING -->
+        <div class="reframing-box">
+            <div class="titulo">🔄 O Reframing Estoico</div>
+            <div class="grid">
+                <div class="item vergonha">
+                    <div class="label">😰 A vergonha diz:</div>
+                    "Você é as suas escolhas passadas."
+                </div>
+                <div class="item estoico">
+                    <div class="label">💪 O estoicismo diz:</div>
+                    "Suas escolhas passadas não definem seu caráter presente."
+                </div>
+            </div>
+            <div class="citacao">
+                “Sofremos mais na imaginação do que na realidade.” — <span class="autor">Sêneca</span>
+            </div>
+        </div>
+
+        <!-- AFIRMAÇÃO -->
+        <div class="afirmacao-box">
+            <div class="titulo">✍️ Escreva sua afirmação de substituição</div>
+            <div class="texto-base">
+                <span class="destaque">Complete:</span><br>
+                "Minhas escolhas financeiras passadas foram feitas por uma versão de mim com menos conhecimento. Hoje, escolho a sabedoria. Hoje, escolho a coragem. A partir de agora,
+            </div>
+            <textarea id="afirmacao" placeholder="Escreva aqui sua afirmação..." oninput="autoExpand(this)"></textarea>
+            <div class="print-text" id="afirmacaoPrint"></div>
+        </div>
+
+        <!-- AÇÃO -->
+        <div class="acao-box">
+            <div class="titulo">⚡ A Primeira Ação Corajosa — escolha UMA</div>
+            <div class="opcoes">
+                <label class="opcao">
+                    <input type="radio" name="acao" value="Abrir aquela conta ou fatura que estou evitando">
+                    <span class="emoji">📂</span> Abrir aquela conta ou fatura que estou evitando
+                </label>
+                <label class="opcao">
+                    <input type="radio" name="acao" value="Escrever o total das minhas dívidas num papel e olhar por 60 segundos">
+                    <span class="emoji">📝</span> Escrever o total das minhas dívidas num papel e olhar por 60 segundos
+                </label>
+                <label class="opcao">
+                    <input type="radio" name="acao" value="Ligar para o banco e perguntar sobre renegociação">
+                    <span class="emoji">📞</span> Ligar para o banco e perguntar sobre renegociação
+                </label>
+                <label class="opcao">
+                    <input type="radio" name="acao" value="Dizer para uma pessoa de confiança: 'preciso de ajuda com dinheiro'">
+                    <span class="emoji">💬</span> Dizer para uma pessoa de confiança: "preciso de ajuda com dinheiro"
+                </label>
+                <label class="opcao">
+                    <input type="radio" name="acao" value="Acessar o Registrato (registrato.bcb.gov.br) e ver todas as dívidas">
+                    <span class="emoji">🏦</span> Acessar o Registrato (registrato.bcb.gov.br) e ver todas as dívidas
+                </label>
+                <label class="opcao">
+                    <input type="radio" name="acao" value="Entrar no Serasa e verificar a situação do meu CPF">
+                    <span class="emoji">🔍</span> Entrar no Serasa e verificar a situação do meu CPF
+                </label>
+            </div>
+
+            <div class="opcao-outra">
+                <input type="radio" name="acao" value="Outra" id="outraRadio">
+                <span class="emoji">✏️</span>
+                <input type="text" id="outraAcao" placeholder="Outra ação:" onfocus="document.getElementById('outraRadio').checked=true">
+            </div>
+
+            <div class="prazo">
+                <label>📅 Farei essa ação até:</label>
+                <input type="text" id="prazo" placeholder="dd/mm/aaaa" maxlength="10" oninput="mascaraData(this)">
+            </div>
+        </div>
+
+        <!-- SENTIMENTO -->
+        <div class="sentimento-box">
+            <div class="titulo">💭 Como me senti depois:</div>
+            <textarea id="sentimento" placeholder="Descreva como você se sentiu após realizar a ação..." oninput="autoExpand(this)"></textarea>
+            <div class="print-text" id="sentimentoPrint"></div>
+        </div>
+
+        <!-- RODAPÉ -->
+        <div class="footer-citacao">
+            <p>“Não explique a sua filosofia. Encarne-a.”</p>
+            <p class="autor">— Epicteto</p>
+            <p class="marca">Domínio do Dinheiro — O Guia Estoico para Quitar Dívidas e Ter Paz com o Dinheiro</p>
+        </div>
+
+    </div>
+
+    <script>
+        // =============================================
+        // AUTO-EXPAND TEXTAREA
+        // =============================================
+        function autoExpand(element) {
+            element.style.height = 'auto';
+            element.style.height = element.scrollHeight + 'px';
+            
+            // Atualizar a div de impressão (que fica oculta no navegador)
+            var printId = element.id + 'Print';
+            var printDiv = document.getElementById(printId);
+            if (printDiv) {
+                printDiv.textContent = element.value;
+            }
+        }
+
+        // =============================================
+        // MÁSCARA DE DATA
+        // =============================================
+        function mascaraData(input) {
+            var valor = input.value.replace(/\D/g, '');
+            if (valor.length > 8) valor = valor.substring(0, 8);
+            if (valor.length > 4) {
+                valor = valor.substring(0, 2) + '/' + valor.substring(2, 4) + '/' + valor.substring(4, 8);
+            } else if (valor.length > 2) {
+                valor = valor.substring(0, 2) + '/' + valor.substring(2, 4);
+            }
+            input.value = valor;
+        }
+
+        // =============================================
+        // LIMPAR TUDO
+        // =============================================
+        function limparTudo() {
+            document.querySelectorAll('textarea').forEach(function(el) {
+                el.value = '';
+                autoExpand(el);
+            });
+            document.querySelectorAll('input[type="text"]').forEach(function(el) { el.value = ''; });
+            document.querySelectorAll('input[type="radio"]').forEach(function(el) { el.checked = false; });
+            document.activeElement && document.activeElement.blur();
+        }
+
+        // =============================================
+        // GERAR PDF
+        // =============================================
+        function gerarPDF() {
+            // Atualizar todas as divs de impressão com o conteúdo dos textareas
+            document.querySelectorAll('textarea').forEach(function(el) {
+                var printId = el.id + 'Print';
+                var printDiv = document.getElementById(printId);
+                if (printDiv) {
+                    printDiv.textContent = el.value;
+                }
+            });
+            
+            setTimeout(function() {
+                window.print();
+            }, 200);
+        }
+
+        // =============================================
+        // INICIALIZAR
+        // =============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('textarea').forEach(function(el) {
+                autoExpand(el);
+                el.addEventListener('input', function() {
+                    autoExpand(this);
+                });
+            });
+        });
+
+        // =============================================
+        // ANTES DE IMPRIMIR (fallback)
+        // =============================================
+        window.addEventListener('beforeprint', function() {
+            document.querySelectorAll('textarea').forEach(function(el) {
+                var printId = el.id + 'Print';
+                var printDiv = document.getElementById(printId);
+                if (printDiv) {
+                    printDiv.textContent = el.value;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
