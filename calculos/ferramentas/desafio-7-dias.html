@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desafio dos 7 Dias — Domínio do Dinheiro</title>
+<style>
+
+/* =============================================
+   RESET & BASE
+   ============================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --azul:       #2C5F8A;
+  --azul-claro: #D6E4F0;
+  --azul-bg:    #EBF3FA;
+  --azul-leve:  #F0F6FB;
+  --azul-linha: #B8CDE0;
+  --texto:      #1A1A1A;
+  --sub:        #555;
+  --tempo:      #2C5F8A;
+  --radius:     10px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #e8eef4;
+  color: var(--texto);
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* =============================================
+   TOOLBAR
+   ============================================= */
+.toolbar {
+  background: var(--azul);
+  color: #fff;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.toolbar-title {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 700;
+  min-width: 150px;
+}
+.toolbar-title small {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  opacity: .8;
+  margin-top: 1px;
+}
+
+/* Progresso */
+.prog-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.prog-label { font-size: 13px; font-weight: 700; white-space: nowrap; }
+.prog-bar {
+  width: 100px;
+  height: 8px;
+  background: rgba(255,255,255,.3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.prog-fill {
+  height: 100%;
+  background: #fff;
+  border-radius: 4px;
+  transition: width .4s ease;
+  width: 0%;
+}
+
+.btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+.btn:hover { opacity: .85; transform: translateY(-1px); }
+.btn:active { transform: scale(.97); }
+.btn-pdf    { background: #fff; color: var(--azul); }
+.btn-limpar { background: rgba(255,255,255,.2); color: #fff; border: 1.5px solid rgba(255,255,255,.5); }
+.btn-inicio { background: #2e7d32; color: #fff; border: none; }
+.btn-inicio:hover { background: #1b5e20; }
+
+/* =============================================
+   CONTAINER
+   ============================================= */
+.container {
+  max-width: 700px;
+  margin: 28px auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* =============================================
+   CABEÇALHO
+   ============================================= */
+.header-card {
+  background: var(--azul-bg);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--azul-claro);
+  text-align: center;
+  padding: 24px 20px 18px;
+}
+.header-card .marca {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--azul);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.header-card h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--texto);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.header-card .subtitulo {
+  font-size: 14px;
+  color: var(--sub);
+}
+
+/* =============================================
+   CARD GENÉRICO
+   ============================================= */
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--azul-claro);
+  overflow: hidden;
+}
+.card-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--azul);
+  padding: 10px 18px 4px;
+  border-bottom: 1px solid var(--azul-claro);
+  background: var(--azul-leve);
+}
+
+/* =============================================
+   DIAS
+   ============================================= */
+.dia-item {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 0;
+  border-bottom: 1.5px solid var(--azul-claro);
+  transition: background .2s;
+}
+.dia-item:last-child { border-bottom: none; }
+.dia-item.concluido { background: #f0fff8; }
+
+/* número + nome */
+.dia-num-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 8px;
+  background: var(--azul-leve);
+  border-right: 1.5px solid var(--azul-claro);
+  min-width: 56px;
+}
+.dia-num {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--azul);
+  line-height: 1;
+}
+.dia-nome {
+  font-size: 10px;
+  color: #888;
+  margin-top: 2px;
+}
+
+/* conteúdo */
+.dia-content {
+  padding: 14px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.dia-titulo {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--texto);
+  line-height: 1.3;
+}
+.dia-desc {
+  font-size: 13px;
+  color: var(--sub);
+  line-height: 1.5;
+}
+.dia-tempo {
+  font-size: 12px;
+  color: var(--tempo);
+  font-style: italic;
+}
+.dia-data-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+.dia-data-wrap label {
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+}
+/* CORREÇÃO: input type="date" */
+.dia-data-wrap input[type="date"] {
+  border: none;
+  border-bottom: 1.5px solid var(--azul-linha);
+  background: transparent;
+  font-size: 13px;
+  color: var(--texto);
+  outline: none;
+  font-family: Arial, sans-serif;
+  padding: 2px 4px;
+  min-width: 140px;
+  cursor: pointer;
+}
+.dia-data-wrap input[type="date"]:focus { 
+  border-bottom-color: var(--azul); 
+}
+.dia-data-wrap input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+}
+.dia-data-wrap input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* checkbox */
+.dia-check-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 16px;
+  border-left: 1.5px solid var(--azul-claro);
+}
+.check-box {
+  width: 44px;
+  height: 44px;
+  border: 2.5px solid var(--azul-linha);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: transparent;
+  transition: all .25s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.check-box:hover { border-color: var(--azul); background: var(--azul-leve); }
+.check-box.checked {
+  background: var(--azul);
+  border-color: var(--azul);
+  color: #fff;
+}
+
+/* =============================================
+   DATAS DE INÍCIO / CONCLUSÃO
+   ============================================= */
+.datas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.data-campo {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.data-campo:first-child { border-right: 1.5px solid var(--azul-claro); }
+.data-campo label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--azul);
+}
+/* CORREÇÃO: input type="date" */
+.data-campo input[type="date"] {
+  border: none;
+  border-bottom: 2px solid var(--azul-linha);
+  background: transparent;
+  font-size: 15px;
+  color: var(--texto);
+  outline: none;
+  font-family: Arial, sans-serif;
+  padding: 4px 0;
+  width: 100%;
+  cursor: pointer;
+}
+.data-campo input[type="date"]:focus { 
+  border-bottom-color: var(--azul); 
+}
+.data-campo input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+}
+.data-campo input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* =============================================
+   TEXTAREA FIELDS
+   ============================================= */
+.textarea-campo {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.textarea-campo label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--azul);
+}
+.textarea-campo textarea {
+  border: none;
+  border-bottom: 2px solid var(--azul-linha);
+  background: transparent;
+  font-size: 14px;
+  color: var(--texto);
+  outline: none;
+  font-family: Arial, sans-serif;
+  resize: none;
+  width: 100%;
+  line-height: 1.6;
+  padding: 4px 0;
+  min-height: 60px;
+}
+.textarea-campo textarea:focus { border-bottom-color: var(--azul); }
+
+/* Anotações com altura maior */
+.textarea-campo.anotacoes-campo textarea { min-height: 130px; }
+
+/* =============================================
+   CITAÇÃO
+   ============================================= */
+.citacao-card {
+  background: var(--azul-bg);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--azul-claro);
+  padding: 20px;
+  text-align: center;
+}
+.citacao-card p {
+  font-size: 16px;
+  font-style: italic;
+  color: var(--texto);
+  line-height: 1.5;
+}
+.citacao-card .autor {
+  font-size: 13px;
+  color: var(--azul);
+  margin-top: 8px;
+  display: block;
+}
+
+/* =============================================
+   AVISO RECOMEÇO
+   ============================================= */
+.aviso-card {
+  background: var(--azul-leve);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--azul-claro);
+  padding: 16px 20px;
+  text-align: center;
+}
+.aviso-card strong { font-size: 15px; color: var(--texto); display: block; margin-bottom: 4px; }
+.aviso-card span   { font-size: 13px; color: var(--sub); }
+.aviso-card em     { color: var(--azul); font-style: normal; font-weight: 700; }
+
+/* =============================================
+   RODAPÉ
+   ============================================= */
+.footer-note {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  padding: 8px;
+}
+
+/* =============================================
+   RESPONSIVO MOBILE
+   ============================================= */
+@media (max-width: 480px) {
+  .toolbar { gap: 8px; }
+  .toolbar-title { font-size: 14px; }
+  .btn { padding: 9px 13px; font-size: 13px; }
+  .prog-bar { width: 70px; }
+
+  .header-card h1 { font-size: 22px; }
+  .header-card .subtitulo { font-size: 13px; }
+
+  .dia-item { grid-template-columns: 48px 1fr auto; }
+  .dia-num { font-size: 22px; }
+  .dia-titulo { font-size: 14px; }
+  .dia-desc { font-size: 12px; }
+  .check-box { width: 40px; height: 40px; font-size: 20px; }
+  .dia-check-col { padding: 12px 10px; }
+  .dia-num-col { min-width: 48px; padding: 12px 6px; }
+
+  .dia-data-wrap input[type="date"] {
+    font-size: 12px;
+    min-width: 120px;
+  }
+
+  .datas-grid { grid-template-columns: 1fr; }
+  .data-campo:first-child { border-right: none; border-bottom: 1.5px solid var(--azul-claro); }
+}
+
+/* =============================================
+   IMPRESSÃO — A4
+   ============================================= */
+@media print {
+  @page { size: A4; margin: 7.5mm; }
+
+  body { background: none; padding: 0; }
+  .toolbar { display: none !important; }
+  .container { max-width: 100%; margin: 0; padding: 0; gap: 5px; }
+
+  /* Cabeçalho */
+  .header-card {
+    border-radius: 3px;
+    padding: 6px 8px 5px;
+    background: var(--azul-bg) !important;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .header-card .marca { font-size: 7px; letter-spacing: 2px; }
+  .header-card h1 { font-size: 16px; }
+  .header-card .subtitulo { font-size: 8px; }
+
+  /* Cards */
+  .card { border-radius: 3px; border-width: 1px; }
+  .card-label { font-size: 7.5px; padding: 4px 8px 3px; }
+
+  /* Dias */
+  .dia-item { grid-template-columns: 42px 1fr auto; border-bottom-width: 1px; }
+  .dia-num-col { padding: 6px 5px; min-width: 42px;
+    background: var(--azul-leve) !important;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .dia-num { font-size: 16px; }
+  .dia-nome { font-size: 7px; }
+  .dia-content { padding: 6px 10px 5px; gap: 2px; }
+  .dia-titulo { font-size: 8.5px; }
+  .dia-desc { font-size: 7.5px; line-height: 1.3; }
+  .dia-tempo { font-size: 7px; }
+  .dia-data-wrap { margin-top: 2px; }
+  .dia-data-wrap label { font-size: 7.5px; }
+  .dia-data-wrap input[type="date"] { 
+    font-size: 7.5px; 
+    min-width: 100px;
+    border-bottom-width: 1px;
+  }
+  .dia-check-col { padding: 6px 10px; }
+  .check-box {
+    width: 22px; height: 22px;
+    border-radius: 4px; font-size: 13px; border-width: 1.5px;
+  }
+  .check-box.checked {
+    background: var(--azul) !important;
+    border-color: var(--azul) !important;
+    color: #fff !important;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+
+  /* Datas */
+  .datas-grid { grid-template-columns: 1fr 1fr; }
+  .data-campo { padding: 6px 10px; gap: 2px; }
+  .data-campo label { font-size: 7.5px; }
+  .data-campo input[type="date"] { 
+    font-size: 8.5px; 
+    border-bottom-width: 1px;
+  }
+
+  /* Textareas */
+  .textarea-campo { padding: 6px 10px; gap: 2px; }
+  .textarea-campo label { font-size: 7.5px; }
+  .textarea-campo textarea { font-size: 8px; min-height: 18px; border-bottom-width: 1px; }
+  .textarea-campo.anotacoes-campo textarea { min-height: 90px; }
+
+  /* Citação */
+  .citacao-card { border-radius: 3px; padding: 8px 12px; border-width: 1px;
+    background: var(--azul-bg) !important;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .citacao-card p { font-size: 10px; }
+  .citacao-card .autor { font-size: 8px; margin-top: 3px; }
+
+  /* Aviso */
+  .aviso-card { border-radius: 3px; padding: 6px 10px; border-width: 1px;
+    background: var(--azul-leve) !important;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .aviso-card strong { font-size: 8px; margin-bottom: 1px; }
+  .aviso-card span { font-size: 7.5px; }
+
+  .footer-note { font-size: 6.5px; padding: 3px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+    <div class="toolbar-title">
+        Desafio dos 7 Dias
+        <small>Domínio do Dinheiro</small>
+    </div>
+    <div class="prog-wrap">
+      <span class="prog-label" id="prog-txt">0 / 7</span>
+      <div class="prog-bar">
+        <div class="prog-fill" id="prog-fill"></div>
+      </div>
+    </div>
+    <button class="btn btn-inicio" onclick="window.location.href='../index-principal.html'">🏠 Início</button>
+    <button class="btn btn-limpar" onclick="limparTudo()">🗑️ Limpar</button>
+    <button class="btn btn-pdf" onclick="window.print()">📄 Salvar PDF</button>
+</div>
+
+<!-- CONTEÚDO -->
+<div class="container">
+
+  <!-- CABEÇALHO -->
+  <div class="header-card">
+    <div class="marca">Domínio do Dinheiro</div>
+    <h1>Desafio dos 7 Dias</h1>
+    <div class="subtitulo">Uma tarefa por dia. 5 a 10 minutos. Comece agora.</div>
+  </div>
+
+  <!-- LISTA DOS DIAS -->
+  <div class="card">
+    <div class="card-label">Tarefas do Desafio</div>
+
+    <div class="dia-item" id="item1">
+      <div class="dia-num-col">
+        <span class="dia-num">1</span>
+        <span class="dia-nome">segunda</span>
+      </div>
+      <div class="dia-content">
+        <span class="dia-titulo">Declaração do Suficiente</span>
+        <span class="dia-desc">Escreva quanto você precisa por mês para viver com dignidade e paz — em reais.</span>
+        <span class="dia-tempo">Tempo: 10 minutos</span>
+        <div class="dia-data-wrap">
+          <label>Data:</label>
+          <input type="date" id="data1">
+        </div>
+      </div>
+      <div class="dia-check-col">
+        <div class="check-box" id="cb1" onclick="toggleCheck(1)" title="Marcar como feito">✓</div>
+      </div>
+    </div>
+
+    <div class="dia-item" id="item2">
+      <div class="dia-num-col">
+        <span class="dia-num">2</span>
+        <span class="dia-nome">terça</span>
+      </div>
+      <div class="dia-content">
+        <span class="dia-titulo">Liste Todas as Suas Dívidas</span>
+        <span class="dia-desc">Anote credor, valor total, taxa de juros e parcela mínima. Sem julgamento.</span>
+        <span class="dia-tempo">Tempo: 10 minutos</span>
+        <div class="dia-data-wrap">
+          <label>Data:</label>
+          <input type="date" id="data2">
+        </div>
+      </div>
+      <div class="dia-check-col">
+        <div class="check-box" id="cb2" onclick="toggleCheck(2)" title="Marcar como feito">✓</div>
+      </div>
+    </div>
+
+    <div class="dia-item" id="item3">
+      <div class="dia-num-col">
+        <span class="dia-num">3</span>
+        <span class="dia-nome">quarta</span>
+      </div>
+      <div class="dia-content">
+        <span class="dia-titulo">O Reset de 5 Minutos</span>
+        <span class="dia-desc">Aplique o protocolo com a situação financeira que mais pesa em você agora.</span>
+        <span class="dia-tempo">Tempo: 5 minutos</span>
+        <div class="dia-data-wrap">
+          <label>Data:</label>
+          <input type="date" id="data3">
+        </div>
+      </div>
+      <div class="dia-check-col">
+        <div class="check-box" id="cb3" onclick="toggleCheck(3)" title="Marcar como feito">✓</div>
+      </div>
+    </div>
+
+    <div class="dia-item" id="item4">
+      <div class="dia-num-col">
+        <span class="dia-num">4</span>
+        <span class="dia-nome">quinta</span>
+      </div>
+      <div class="dia-content">
+        <span class="dia-titulo">Intenção Matinal + Gratidão Noturna</span>
+        <span class="dia-desc">Manhã: uma intenção financeira para o dia. Noite: uma gratidão financeira pequena.</span>
+        <span class="dia-tempo">Tempo: 5 minutos</span>
+        <div class="dia-data-wrap">
+          <label>Data:</label>
+          <input type="date" id="data4">
+        </div>
+      </div>
+      <div class="dia-check-col">
+        <div class="check-box" id="cb4" onclick="toggleCheck(4)" title="Marcar como feito">✓</div>
+      </div>
+    </div>
+
+    <div class="dia-item" id="item5">
+      <div class="dia-num-col">
+        <span class="dia-num">5</span>
+        <span class="dia-nome">sexta</span>
+      </div>
+      <div class="dia-content">
+        <span class="dia-titulo">Auditoria de Estilo de Vida</span>
+        <span class="dia-desc">Compare o que você gastava há 3 anos com o que gasta hoje. Sem julgamento.</span>
+        <span class="dia-tempo">Tempo: 10 minutos</span>
+        <div class="dia-data-wrap">
+          <label>Data:</label>
+          <input type="date" id="data5">
+        </div>
+      </div>
+      <div class="dia-check-col">
+        <div class="check-box" id="cb5" onclick="toggleCheck(5)" title="Marcar como feito">✓</div>
+      </div>
+    </div>
+
+    <div class="dia-item" id="item6">
+      <div class="dia-num-col">
+        <span class="dia-num">6</span>
+        <span class="dia-nome">sábado</span>
+      </div>
+      <div class="dia-content">
+        <span class="dia-titulo">Escolha a Virtude do Mês</span>
+        <span class="dia-desc">Sabedoria, Coragem, Justiça ou Temperança. Escreva como vai praticá-la no dinheiro.</span>
+        <span class="dia-tempo">Tempo: 5 minutos</span>
+        <div class="dia-data-wrap">
+          <label>Data:</label>
+          <input type="date" id="data6">
+        </div>
+      </div>
+      <div class="dia-check-col">
+        <div class="check-box" id="cb6" onclick="toggleCheck(6)" title="Marcar como feito">✓</div>
+      </div>
+    </div>
+
+    <div class="dia-item" id="item7">
+      <div class="dia-num-col">
+        <span class="dia-num">7</span>
+        <span class="dia-nome">domingo</span>
+      </div>
+      <div class="dia-content">
+        <span class="dia-titulo">Preencha o Primeiro Planner Semanal</span>
+        <span class="dia-desc">Use o exemplo da Renata como guia e faça o seu primeiro planner da semana.</span>
+        <span class="dia-tempo">Tempo: 10 minutos</span>
+        <div class="dia-data-wrap">
+          <label>Data:</label>
+          <input type="date" id="data7">
+        </div>
+      </div>
+      <div class="dia-check-col">
+        <div class="check-box" id="cb7" onclick="toggleCheck(7)" title="Marcar como feito">✓</div>
+      </div>
+    </div>
+
+  </div><!-- /card dias -->
+
+  <!-- DATAS INÍCIO / CONCLUSÃO -->
+  <div class="card">
+    <div class="datas-grid">
+      <div class="data-campo">
+        <label>Minha data de início</label>
+        <input type="date" id="dt-inicio">
+      </div>
+      <div class="data-campo">
+        <label>Data de conclusão</label>
+        <input type="date" id="dt-conclusao">
+      </div>
+    </div>
+  </div>
+
+  <!-- SENTIMENTO -->
+  <div class="card">
+    <div class="textarea-campo">
+      <label>Como me senti ao concluir o desafio:</label>
+      <textarea placeholder="Escreva sobre sua experiência ao terminar os 7 dias..."></textarea>
+    </div>
+  </div>
+
+  <!-- CITAÇÃO -->
+  <div class="citacao-card">
+    <p>"Não explique a sua filosofia. Encarne-a."</p>
+    <span class="autor">— Epicteto</span>
+  </div>
+
+  <!-- AVISO RECOMEÇO -->
+  <div class="aviso-card">
+    <strong>Perdeu um dia? Sem problema.</strong>
+    <span>Recomece no <em>dia seguinte</em>. O que importa é continuar, <em>não ser perfeito</em>.</span>
+  </div>
+
+  <!-- ANOTAÇÕES -->
+  <div class="card">
+    <div class="textarea-campo anotacoes-campo">
+      <label>Minhas anotações do desafio</label>
+      <textarea placeholder="Escreva livremente suas reflexões, aprendizados e conquistas durante o desafio..."></textarea>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Domínio do Dinheiro — O Guia Estoico para Quitar Dívidas e Ter Paz com o Dinheiro
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  const estado = { checked: new Array(8).fill(false) };
+
+  function toggleCheck(n) {
+    estado.checked[n] = !estado.checked[n];
+    const cb = document.getElementById('cb' + n);
+    const item = document.getElementById('item' + n);
+    cb.classList.toggle('checked', estado.checked[n]);
+    item.classList.toggle('concluido', estado.checked[n]);
+    atualizarProgresso();
+  }
+
+  function atualizarProgresso() {
+    const total = 7;
+    const feitos = estado.checked.slice(1).filter(Boolean).length;
+    document.getElementById('prog-fill').style.width = (feitos / total * 100) + '%';
+    document.getElementById('prog-txt').textContent = feitos + ' / ' + total;
+  }
+
+  function limparTudo() {
+    if (!confirm('Limpar todo o preenchimento?')) return;
+    for (let i = 1; i <= 7; i++) {
+      estado.checked[i] = false;
+      document.getElementById('cb' + i).classList.remove('checked');
+      document.getElementById('item' + i).classList.remove('concluido');
+    }
+    document.querySelectorAll('input[type=date], textarea').forEach(el => el.value = '');
+    atualizarProgresso();
+  }
+
+  atualizarProgresso();
+
+  // ============================
+  // FUNÇÃO PARA GERAR PDF
+  // ============================
+  function gerarPDF() {
+      window.print();
+  }
+</script>
+</body>
+</html>
