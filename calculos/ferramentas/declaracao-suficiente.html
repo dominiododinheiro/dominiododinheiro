@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>Declaração do Suficiente — Domínio do Dinheiro</title>
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --verde:       #1A6B3C;
+  --verde-claro: #C8E6D0;
+  --verde-bg:    #F4FAF6;
+  --verde-leve:  #EAF4EE;
+  --verde-linha: #A8D5B5;
+  --ouro:        #8B5E1A;
+  --ouro-bg:     #FFFBF0;
+  --roxo:        #5B2D8E;
+  --roxo-bg:     #EEE8F5;
+  --texto:       #1A1A1A;
+  --sub:         #555;
+  --radius:      12px;
+  --font-base:   16px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: #cde0d5;
+  color: var(--texto);
+  min-height: 100vh;
+  padding-bottom: 40px;
+  font-size: var(--font-base);
+  line-height: 1.6;
+}
+
+/* ── TOOLBAR ── */
+.toolbar {
+  background: var(--verde);
+  color: #fff;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.toolbar-title {
+  flex: 1;
+  font-size: clamp(14px, 2.5vw, 18px);
+  font-weight: 700;
+  min-width: 120px;
+}
+.toolbar-title small {
+  display: block;
+  font-size: clamp(10px, 1.8vw, 13px);
+  font-weight: 400;
+  opacity: .8;
+  margin-top: 1px;
+}
+
+/* ── BOTÕES DA TOOLBAR ── */
+.toolbar button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: clamp(13px, 2vw, 15px);
+  font-weight: 700;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.toolbar button:hover { 
+  opacity: .85; 
+  transform: translateY(-1px); 
+}
+
+.toolbar button:active { 
+  transform: scale(.96); 
+}
+
+.toolbar .btn-inicio {
+  background: #2e7d32;
+  color: #fff;
+}
+
+.toolbar .btn-inicio:hover {
+  background: #1b5e20;
+}
+
+.toolbar .btn-limpar {
+  background: rgba(255,255,255,.2);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,.5);
+}
+
+.toolbar .btn-limpar:hover {
+  background: rgba(255,255,255,.3);
+}
+
+.toolbar .btn-pdf {
+  background: #fff;
+  color: var(--verde);
+}
+
+.toolbar .btn-pdf:hover {
+  opacity: .85;
+}
+
+/* ── CONTAINER ── */
+.container {
+  max-width: 700px;
+  margin: 16px auto;
+  padding: 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── CABEÇALHO ── */
+.header-card {
+  background: var(--verde-bg);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--verde-claro);
+  text-align: center;
+  padding: 20px 16px 16px;
+}
+.header-card .marca {
+  font-size: clamp(10px, 1.8vw, 13px);
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--verde);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.header-card h1 {
+  font-size: clamp(22px, 5vw, 32px);
+  font-weight: 700;
+  color: var(--texto);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.header-card .sub {
+  font-size: clamp(13px, 2vw, 16px);
+  color: var(--sub);
+  margin-bottom: 12px;
+}
+.citacao-header {
+  background: #fff;
+  border: 1px solid var(--verde-claro);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: clamp(14px, 2.2vw, 18px);
+  font-style: italic;
+  color: var(--texto);
+  line-height: 1.5;
+}
+.citacao-header .autor {
+  font-size: clamp(12px, 1.8vw, 15px);
+  color: var(--verde);
+  font-style: normal;
+  display: block;
+  margin-top: 6px;
+}
+
+/* ── CARD GENÉRICO ── */
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--verde-claro);
+  overflow: hidden;
+  page-break-inside: avoid;
+}
+.card-header {
+  background: var(--verde-claro);
+  padding: 14px 18px;
+  font-size: clamp(14px, 2.2vw, 17px);
+  font-weight: 700;
+  color: var(--verde);
+  border-bottom: 1px solid var(--verde-linha);
+}
+.card-body { padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+
+/* ── DADOS PESSOAIS ── */
+.dados-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 20px;
+  padding: 18px;
+}
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.campo label {
+  font-size: clamp(12px, 1.8vw, 14px);
+  font-weight: 700;
+  color: var(--verde);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.campo input, .campo textarea {
+  border: none;
+  border-bottom: 2px solid var(--verde-claro);
+  background: transparent;
+  font-size: clamp(16px, 2.5vw, 19px);
+  font-family: inherit;
+  color: var(--texto);
+  outline: none;
+  padding: 6px 0;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.campo input:focus, .campo textarea:focus { border-bottom-color: var(--verde); }
+.campo.full { grid-column: 1 / -1; }
+
+/* ── RESUMO 3 NÚMEROS ── */
+.tres-numeros {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+}
+.num-bloco {
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-right: 1px solid var(--verde-claro);
+}
+.num-bloco:last-child { border-right: none; }
+.num-bloco.verde { background: var(--verde-bg); }
+.num-bloco.ouro  { background: var(--ouro-bg); }
+.num-bloco.roxo  { background: var(--roxo-bg); }
+.num-titulo {
+  font-size: clamp(12px, 1.8vw, 15px);
+  font-weight: 700;
+}
+.num-bloco.verde .num-titulo { color: var(--verde); }
+.num-bloco.ouro  .num-titulo { color: var(--ouro); }
+.num-bloco.roxo  .num-titulo { color: var(--roxo); }
+.num-sub {
+  font-size: clamp(10px, 1.4vw, 12px);
+  color: #888;
+}
+.input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 4px;
+  margin-top: 6px;
+}
+.input-wrap:focus-within { border-bottom-color: var(--verde); }
+.input-prefix {
+  font-size: clamp(14px, 2vw, 17px);
+  font-weight: 700;
+  color: #888;
+  flex-shrink: 0;
+}
+.val-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: clamp(18px, 2.8vw, 22px);
+  font-weight: 700;
+  color: var(--texto);
+  font-family: inherit;
+  outline: none;
+  min-width: 0;
+  padding: 2px 0;
+  width: 100%;
+}
+/* Remove as setas de input number */
+.val-input::-webkit-inner-spin-button,
+.val-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.val-input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.num-bloco.verde .input-prefix { color: var(--verde); }
+.num-bloco.ouro  .input-prefix { color: var(--ouro); }
+.num-bloco.roxo  .input-prefix { color: var(--roxo); }
+.num-bloco.verde .input-wrap:focus-within { border-bottom-color: var(--verde); }
+.num-bloco.ouro  .input-wrap:focus-within { border-bottom-color: var(--ouro); }
+.num-bloco.roxo  .input-wrap:focus-within { border-bottom-color: var(--roxo); }
+
+/* ── DECLARAÇÃO ESCRITA ── */
+.declaracao-texto {
+  background: var(--verde-bg);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--verde-claro);
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  page-break-inside: avoid;
+}
+.declaracao-texto .decl-titulo {
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 700;
+  color: var(--verde);
+  margin-bottom: 2px;
+}
+.decl-linha {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.decl-fixo {
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: var(--sub);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.decl-input {
+  flex: 1;
+  min-width: 120px;
+  border: none;
+  border-bottom: 2px solid var(--verde-linha);
+  background: transparent;
+  font-size: clamp(16px, 2.5vw, 19px);
+  font-family: inherit;
+  color: var(--texto);
+  outline: none;
+  padding: 4px 4px;
+  font-weight: 700;
+}
+.decl-input:focus { border-bottom-color: var(--verde); }
+.decl-input.large {
+  font-size: clamp(20px, 3.2vw, 26px);
+  max-width: 200px;
+}
+.decl-input.readonly {
+  pointer-events: none;
+  cursor: default;
+  color: var(--verde);
+}
+
+.decl-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.decl-bloco label {
+  font-size: clamp(13px, 2vw, 16px);
+  color: var(--sub);
+  font-weight: 600;
+}
+.decl-bloco textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid var(--verde-linha);
+  background: transparent;
+  font-size: clamp(15px, 2.2vw, 18px);
+  font-family: inherit;
+  color: var(--texto);
+  outline: none;
+  resize: vertical;
+  min-height: 60px;
+  line-height: 1.6;
+  padding: 6px 0;
+}
+.decl-bloco textarea:focus { border-bottom-color: var(--verde); }
+.decl-bloco textarea::placeholder {
+  font-style: italic;
+  font-size: clamp(13px, 1.8vw, 15px);
+  color: #aaa;
+}
+
+.decl-escudo {
+  background: #fff;
+  border-left: 4px solid var(--verde);
+  border-radius: 0 6px 6px 0;
+  padding: 14px 16px;
+  font-size: clamp(14px, 2vw, 17px);
+  color: var(--verde);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ── COMPROMISSO ── */
+.compromisso-card {
+  background: var(--verde-leve);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--verde-claro);
+  overflow: hidden;
+  page-break-inside: avoid;
+}
+.compromisso-header {
+  background: var(--verde-claro);
+  padding: 14px 18px;
+  font-size: clamp(14px, 2.2vw, 17px);
+  font-weight: 700;
+  color: var(--verde);
+  border-bottom: 1px solid var(--verde-linha);
+}
+.compromisso-body { padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+.comp-item {
+  padding: 14px 16px;
+  background: #fff;
+  border-radius: 8px;
+  border-left: 4px solid var(--verde);
+  font-size: clamp(14px, 2vw, 17px);
+  line-height: 1.5;
+  color: var(--sub);
+}
+.comp-item strong {
+  display: block;
+  font-size: clamp(16px, 2.4vw, 19px);
+  color: var(--texto);
+  margin-top: 4px;
+}
+
+/* ── ASSINATURA ── */
+.assinatura-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.assin-col {
+  padding: 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-right: 1px solid var(--verde-claro);
+}
+.assin-col:last-child { border-right: none; }
+.assin-col label {
+  font-size: clamp(12px, 1.8vw, 14px);
+  font-weight: 700;
+  color: var(--verde);
+}
+.assin-col input {
+  border: none;
+  border-bottom: 2px solid var(--verde-linha);
+  background: transparent;
+  font-size: clamp(17px, 2.6vw, 21px);
+  font-family: inherit;
+  color: var(--texto);
+  outline: none;
+  padding: 6px 0;
+}
+.assin-col input:focus { border-bottom-color: var(--verde); }
+.assin-col input.readonly {
+  pointer-events: none;
+  cursor: default;
+  color: var(--verde);
+}
+
+/* ── REVISÕES ── */
+.revisao-item {
+  padding: 18px 18px;
+  border-bottom: 1px solid var(--verde-claro);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.revisao-item:last-child { border-bottom: none; }
+.revisao-topo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.revisao-check {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border: 3px solid var(--verde-claro);
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: transparent;
+  transition: all .2s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  flex-shrink: 0;
+}
+.revisao-check:hover { border-color: var(--verde); background: var(--verde-bg); }
+.revisao-check:active { transform: scale(.94); }
+.revisao-check.checked {
+  background: var(--verde);
+  border-color: var(--verde);
+  color: #fff;
+}
+.revisao-titulo {
+  font-size: clamp(16px, 2.4vw, 19px);
+  font-weight: 700;
+  color: var(--texto);
+  flex: 1;
+}
+.revisao-data-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.revisao-data-wrap label {
+  font-size: clamp(13px, 1.8vw, 15px);
+  color: var(--sub);
+  white-space: nowrap;
+}
+.revisao-data-wrap input {
+  border: none;
+  border-bottom: 2px solid var(--verde-linha);
+  background: transparent;
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: var(--texto);
+  outline: none;
+  padding: 4px 4px;
+  font-family: inherit;
+  width: 130px;
+}
+.revisao-data-wrap input:focus { border-bottom-color: var(--verde); }
+.revisao-pergunta {
+  font-size: clamp(13px, 1.8vw, 15px);
+  color: #888;
+  font-style: italic;
+}
+.revisao-obs textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid var(--verde-claro);
+  background: transparent;
+  font-size: clamp(14px, 2vw, 17px);
+  font-family: inherit;
+  color: var(--texto);
+  outline: none;
+  resize: vertical;
+  min-height: 50px;
+  line-height: 1.6;
+  padding: 4px 0;
+}
+.revisao-obs textarea:focus { border-bottom-color: var(--verde); }
+.revisao-obs textarea::placeholder {
+  font-style: italic;
+  font-size: clamp(12px, 1.6vw, 14px);
+  color: #aaa;
+}
+
+/* ── EXEMPLO ── */
+.exemplo-card {
+  background: var(--verde-leve);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--verde-claro);
+  overflow: hidden;
+  page-break-inside: avoid;
+}
+.exemplo-header {
+  background: var(--verde-claro);
+  padding: 12px 18px;
+  font-size: clamp(13px, 2vw, 16px);
+  font-weight: 700;
+  color: var(--verde);
+  border-bottom: 1px solid var(--verde-linha);
+}
+.exemplo-body { padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+.exemplo-decl {
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: var(--texto);
+  line-height: 1.7;
+}
+.exemplo-decl strong { color: var(--verde); }
+.exemplo-pergunta {
+  font-size: clamp(14px, 2vw, 17px);
+  color: var(--sub);
+  border-top: 1px dashed var(--verde-claro);
+  padding-top: 12px;
+}
+.exemplo-pergunta strong {
+  color: var(--texto);
+  display: block;
+  margin-top: 4px;
+  font-style: italic;
+}
+.exemplo-revisoes {
+  font-size: clamp(13px, 1.8vw, 16px);
+  color: var(--sub);
+  border-top: 1px dashed var(--verde-claro);
+  padding-top: 12px;
+}
+.exemplo-nota {
+  font-size: clamp(13px, 1.8vw, 16px);
+  color: #666;
+  font-style: italic;
+  border-top: 1px solid var(--verde-claro);
+  padding: 12px 18px;
+  line-height: 1.6;
+}
+.exemplo-nota em { display: block; margin-top: 6px; }
+
+.footer-note {
+  text-align: center;
+  font-size: clamp(11px, 1.5vw, 14px);
+  color: #888;
+  padding: 8px;
+}
+
+/* ── MOBILE (≤480px) ── */
+@media (max-width: 480px) {
+  .toolbar { padding: 10px 12px; gap: 8px; }
+  .toolbar button { padding: 8px 12px; font-size: 13px; }
+  .dados-grid { grid-template-columns: 1fr; gap: 12px; }
+  .dados-grid .campo.full { grid-column: 1; }
+  .tres-numeros { grid-template-columns: 1fr; }
+  .num-bloco {
+    border-right: none;
+    border-bottom: 1px solid var(--verde-claro);
+    padding: 14px;
+  }
+  .num-bloco:last-child { border-bottom: none; }
+  .assinatura-grid { grid-template-columns: 1fr; }
+  .assin-col {
+    border-right: none;
+    border-bottom: 1px solid var(--verde-claro);
+  }
+  .assin-col:last-child { border-bottom: none; }
+  .decl-linha { flex-direction: column; gap: 4px; align-items: stretch; }
+  .decl-fixo { white-space: normal; }
+  .decl-input.large { max-width: 100%; }
+  .revisao-topo { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .revisao-data-wrap { width: 100%; }
+  .revisao-data-wrap input { flex: 1; width: auto; }
+  .revisao-check { width: 48px; height: 48px; min-width: 48px; font-size: 28px; }
+  .card-body { padding: 12px; }
+  .header-card { padding: 16px 12px; }
+  .container { padding: 0 10px; gap: 12px; }
+  .compromisso-body { padding: 12px 14px; }
+}
+
+/* ── TABLET (481px a 768px) ── */
+@media (min-width: 481px) and (max-width: 768px) {
+  .tres-numeros { 
+    grid-template-columns: 1fr 1fr 1fr; 
+  }
+  .num-bloco {
+    padding: 14px 10px;
+  }
+  .num-bloco .num-titulo { font-size: 12px; }
+  .num-bloco .val-input { font-size: 16px; }
+}
+
+/* ── IMPRESSÃO A4 ── */
+@media print {
+  @page {
+    size: A4;
+    margin: 8mm 10mm;
+  }
+
+  body { background: none; padding: 0; }
+  .toolbar { display: none !important; }
+
+  .container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    gap: 6px;
+  }
+
+  /* Remove qualquer quebra de página */
+  .page-break-before {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+  }
+
+  /* Nunca quebrar dentro de cards/seções */
+  .card, .declaracao-texto, .compromisso-card, .exemplo-card, .header-card {
+    page-break-inside: avoid;
+  }
+
+  .header-card {
+    border-radius: 3px;
+    padding: 8px 10px 6px;
+    border-width: 1px;
+    background: var(--verde-bg) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .header-card .marca { font-size: 8px; letter-spacing: 2px; }
+  .header-card h1 { font-size: 18px; }
+  .header-card .sub { font-size: 9px; margin-bottom: 4px; }
+  .citacao-header {
+    font-size: 10px;
+    padding: 6px 10px;
+    border-radius: 3px;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .citacao-header .autor { font-size: 8.5px; margin-top: 2px; }
+
+  .card { border-radius: 3px; border-width: 1px; }
+  .card-header {
+    font-size: 10px;
+    padding: 6px 10px;
+    background: var(--verde-claro) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .card-body { padding: 8px 10px; gap: 6px; }
+
+  .dados-grid {
+    padding: 8px 10px;
+    gap: 6px 12px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .campo label { font-size: 8px; }
+  .campo input, .campo textarea { font-size: 10px; border-bottom-width: 1px; padding: 3px 0; }
+
+  .tres-numeros { grid-template-columns: 1fr 1fr 1fr; }
+  .num-bloco {
+    padding: 6px 8px;
+    border-right-width: 1px;
+  }
+  .num-bloco.verde { background: var(--verde-bg) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .num-bloco.ouro  { background: var(--ouro-bg) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .num-bloco.roxo  { background: var(--roxo-bg) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .num-titulo { font-size: 8px; }
+  .num-sub { font-size: 6.5px; }
+  .val-input { font-size: 11px; }
+  .input-prefix { font-size: 8px; }
+  .input-wrap { border-bottom-width: 1px; padding-bottom: 2px; margin-top: 3px; }
+
+  .declaracao-texto {
+    border-radius: 3px;
+    padding: 8px 10px;
+    gap: 6px;
+    border-width: 1px;
+    background: var(--verde-bg) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .declaracao-texto .decl-titulo { font-size: 10px; }
+  .decl-fixo { font-size: 9px; }
+  .decl-input { font-size: 10px; border-bottom-width: 1px; padding: 2px 4px; }
+  .decl-input.large { font-size: 12px; max-width: 140px; }
+  .decl-bloco label { font-size: 8px; }
+  .decl-bloco textarea { font-size: 9px; min-height: 20px; border-bottom-width: 1px; padding: 3px 0; }
+  .decl-escudo { font-size: 8.5px; padding: 5px 8px; border-left-width: 3px; }
+
+  .compromisso-card { border-radius: 3px; border-width: 1px; }
+  .compromisso-header { font-size: 9px; padding: 5px 8px; background: var(--verde-claro) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .compromisso-body { padding: 5px 8px; gap: 4px; }
+  .comp-item {
+    padding: 5px 8px;
+    font-size: 8px;
+    border-left-width: 3px;
+    border-radius: 3px;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .comp-item strong { font-size: 9px; margin-top: 1px; }
+
+  .assinatura-grid { grid-template-columns: 1fr 1fr; }
+  .assin-col { padding: 6px 8px; }
+  .assin-col label { font-size: 7.5px; }
+  .assin-col input { font-size: 10px; border-bottom-width: 1px; padding: 3px 0; }
+
+  .revisao-item { padding: 6px 8px; gap: 4px; }
+  .revisao-check {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 4px;
+    font-size: 12px;
+    border-width: 1.5px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .revisao-check.checked {
+    background: var(--verde) !important;
+    border-color: var(--verde) !important;
+    color: #fff !important;
+  }
+  .revisao-titulo { font-size: 9px; }
+  .revisao-data-wrap label { font-size: 7px; }
+  .revisao-data-wrap input { font-size: 8.5px; width: 80px; border-bottom-width: 1px; }
+  .revisao-pergunta { font-size: 7.5px; }
+  .revisao-obs textarea { font-size: 8px; min-height: 16px; border-bottom-width: 1px; padding: 2px 0; }
+
+  .exemplo-card { border-radius: 3px; border-width: 1px; }
+  .exemplo-header { font-size: 8.5px; padding: 4px 8px; background: var(--verde-claro) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .exemplo-body { padding: 6px 8px; gap: 4px; }
+  .exemplo-decl { font-size: 8.5px; }
+  .exemplo-pergunta { font-size: 8px; padding-top: 6px; }
+  .exemplo-revisoes { font-size: 8px; padding-top: 6px; }
+  .exemplo-nota { font-size: 8px; padding: 6px 8px; }
+
+  .footer-note { font-size: 7px; padding: 3px; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-title">
+    Declaração do Suficiente
+    <small>Preencha com honestidade</small>
+  </div>
+  <button class="btn-inicio" onclick="window.location.href='../index-principal.html'">🏠 Início</button>
+  <button class="btn-limpar" onclick="limparTudo()">🗑️ Limpar</button>
+  <button class="btn-pdf" onclick="gerarPDF()">📄 Salvar PDF</button>
+</div>
+
+<div class="container">
+
+  <!-- ============================================================ -->
+  <!-- PÁGINA ÚNICA: TODOS OS CONTEÚDOS NA MESMA PÁGINA -->
+  <!-- ============================================================ -->
+  <div id="pagina1">
+
+    <!-- CABEÇALHO -->
+    <div class="header-card">
+      <div class="marca">Domínio do Dinheiro</div>
+      <h1>A Declaração do Suficiente</h1>
+      <div class="sub">O documento mais importante deste guia. Preencha com honestidade.</div>
+      <div class="citacao-header">
+        "Riqueza não está em ter grandes posses, mas em ter poucos desejos."
+        <span class="autor">— Epicteto</span>
+      </div>
+    </div>
+
+    <!-- DADOS PESSOAIS -->
+    <div class="card">
+      <div class="card-header">📋 Dados Pessoais</div>
+      <div class="dados-grid">
+        <div class="campo">
+          <label>Nome</label>
+          <input type="text" id="nomeUsuario" placeholder="Seu nome completo" oninput="atualizarNome()">
+        </div>
+        <div class="campo">
+          <label>Data</label>
+          <input type="text" class="data-mask" id="dataUsuario" placeholder="dd/mm/aaaa" maxlength="10" oninput="atualizarData()">
+        </div>
+        <div class="campo">
+          <label>Cidade / Estado</label>
+          <input type="text" placeholder="Ex: Juiz de Fora, MG">
+        </div>
+        <div class="campo">
+          <label>Renda mensal líquida</label>
+          <div class="input-wrap">
+            <span class="input-prefix">R$</span>
+            <input class="val-input" type="number" min="0" step="0.01" placeholder="0,00">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESUMO 3 NÚMEROS -->
+    <div class="card">
+      <div class="card-header">Resumo dos seus três números — das Perguntas 1,2,e 3</div>
+      <div class="tres-numeros">
+        <div class="num-bloco verde">
+          <div class="num-titulo">Necessidades Reais</div>
+          <div class="num-sub">Total da Pergunta 1</div>
+          <div class="input-wrap">
+            <span class="input-prefix">R$</span>
+            <input class="val-input" id="v-necessidades" type="number" min="0" step="0.01" placeholder="0,00" oninput="calcularSuficiente()">
+          </div>
+        </div>
+        <div class="num-bloco ouro">
+          <div class="num-titulo">Alegrias Reais</div>
+          <div class="num-sub">Total da Pergunta 2</div>
+          <div class="input-wrap">
+            <span class="input-prefix">R$</span>
+            <input class="val-input" id="v-alegrias" type="number" min="0" step="0.01" placeholder="0,00" oninput="calcularSuficiente()">
+          </div>
+        </div>
+        <div class="num-bloco roxo">
+          <div class="num-titulo">Número de Segurança Base</div>
+          <div class="num-sub">Total da Pergunta 3</div>
+          <div class="input-wrap">
+            <span class="input-prefix" style="color:var(--roxo);">R$</span>
+            <input class="val-input" id="v-seguranca" type="number" min="0" step="0.01" placeholder="0,00" oninput="calcularSuficiente()" style="color:var(--roxo);">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECLARAÇÃO ESCRITA -->
+    <div class="declaracao-texto">
+      <div class="decl-titulo">✍️ Minha Declaração Escrita</div>
+
+      <div class="decl-linha">
+        <span class="decl-fixo">Eu,</span>
+        <input class="decl-input" id="nomeDeclaracao" type="text" placeholder="seu nome" readonly>
+      </div>
+
+      <div class="decl-linha" style="flex-wrap:wrap; gap:6px;">
+        <span class="decl-fixo">declaro que meu suficiente é</span>
+        <div class="input-wrap" style="max-width:200px; flex:none; border-bottom: none; pointer-events: none;">
+          <span class="input-prefix" style="color:var(--verde);">R$</span>
+          <input class="val-input decl-input large readonly" id="v-suficiente" type="text" value="0,00" readonly style="pointer-events:none; cursor:default; color:var(--verde);">
+        </div>
+        <span class="decl-fixo">por mês. Com esse valor, consigo:</span>
+      </div>
+
+      <div class="decl-bloco">
+        <label>O que você consegue fazer com esse valor? (seja específico)</label>
+        <textarea placeholder="Ex: pagar minha moradia com dignidade, alimentar bem minha família, cuidar da nossa saúde, me locomover, ter momentos de alegria real com as pessoas que amo."></textarea>
+      </div>
+
+      <div class="decl-bloco">
+        <label>Quando eu sentir vontade de gastar além desse número, vou me perguntar:</label>
+        <textarea placeholder='Ex: "Isso serve à minha vida ou serve ao medo de ficar para trás?"' style="min-height:50px;"></textarea>
+      </div>
+
+      <div class="decl-escudo">
+        "Este é meu escudo contra a comparação, o barulho do marketing e a ansiedade do nunca suficiente."
+      </div>
+    </div>
+
+    <!-- COMPROMISSO -->
+    <div class="compromisso-card">
+      <div class="compromisso-header">🤝 Meu Compromisso</div>
+      <div class="compromisso-body">
+        <div class="comp-item">
+          Ao enfrentar decisões de gasto, vou perguntar:
+          <strong>"Isso serve ao meu Suficiente?"</strong>
+        </div>
+        <div class="comp-item">
+          Ao me comparar com outros, vou lembrar:
+          <strong>"Eu já tenho o suficiente."</strong>
+        </div>
+        <div class="comp-item">
+          Quando surgir ansiedade sobre dinheiro, vou retornar a:
+          <strong>"Minhas necessidades de segurança são claras."</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASSINATURA -->
+    <div class="card">
+      <div class="card-header">✒️ Assinatura</div>
+      <div class="assinatura-grid">
+        <div class="assin-col">
+          <label>Assinatura</label>
+          <input type="text" id="assinaturaNome" placeholder="Assine com seu nome" readonly class="readonly">
+        </div>
+        <div class="assin-col">
+          <label>Data</label>
+          <input type="text" id="assinaturaData" placeholder="dd/mm/aaaa" readonly class="readonly">
+        </div>
+      </div>
+    </div>
+
+    <!-- DATAS DE REVISÃO -->
+    <div class="card">
+      <div class="card-header">📅 Datas de Revisão — Esta Declaração é um Documento Vivo</div>
+
+      <div class="revisao-item">
+        <div class="revisao-topo">
+          <div class="revisao-check" id="rev1" onclick="toggleRevisao(1)">✓</div>
+          <div class="revisao-titulo">Revisão de 3 meses</div>
+          <div class="revisao-data-wrap">
+            <label>Data:</label>
+            <input type="text" class="data-mask" placeholder="dd/mm/aaaa" maxlength="10">
+          </div>
+        </div>
+        <div class="revisao-pergunta">Algum ajuste necessário? Os valores ainda refletem minha realidade?</div>
+        <div class="revisao-obs"><textarea placeholder="O que mudou? O que ajustar?"></textarea></div>
+      </div>
+
+      <div class="revisao-item">
+        <div class="revisao-topo">
+          <div class="revisao-check" id="rev2" onclick="toggleRevisao(2)">✓</div>
+          <div class="revisao-titulo">Revisão de 6 meses</div>
+          <div class="revisao-data-wrap">
+            <label>Data:</label>
+            <input type="text" class="data-mask" placeholder="dd/mm/aaaa" maxlength="10">
+          </div>
+        </div>
+        <div class="revisao-pergunta">Ainda me sinto alinhado com o que declarei? O que mudou?</div>
+        <div class="revisao-obs"><textarea placeholder="O que mudou? O que ajustar?"></textarea></div>
+      </div>
+
+      <div class="revisao-item">
+        <div class="revisao-topo">
+          <div class="revisao-check" id="rev3" onclick="toggleRevisao(3)">✓</div>
+          <div class="revisao-titulo">Revisão Anual</div>
+          <div class="revisao-data-wrap">
+            <label>Data:</label>
+            <input type="text" class="data-mask" placeholder="dd/mm/aaaa" maxlength="10">
+          </div>
+        </div>
+        <div class="revisao-pergunta">Como essa declaração me guiou este ano? O que quero ajustar?</div>
+        <div class="revisao-obs"><textarea placeholder="O que mudou? O que ajustar?"></textarea></div>
+      </div>
+    </div>
+
+    <!-- EXEMPLO -->
+    <div class="exemplo-card">
+      <div class="exemplo-header">📖 Exemplo preenchido — Renata, Juiz de Fora, MG</div>
+      <div class="exemplo-body">
+        <div class="exemplo-decl">
+          Eu, <strong>Renata</strong>, declaro que meu <strong>Número de Segurança Base</strong> é de <strong>R$ 3.360</strong> por mês. Com esse valor, consigo <strong>pagar minha moradia com dignidade, alimentar bem meus filhos, cuidar da nossa saúde, me locomover, ter momentos de alegria real com as pessoas que amo.</strong>
+        </div>
+        <div class="exemplo-pergunta">
+          Quando eu sentir vontade de gastar além desse número, vou me perguntar:
+          <strong>"Isso serve à minha vida ou serve ao medo de ficar para trás?"</strong>
+        </div>
+        <div class="exemplo-revisoes">
+          Próxima revisão de 3 meses: <strong>junho de 2026</strong> &nbsp;|&nbsp; Revisão semestral: <strong>setembro de 2026</strong>
+        </div>
+      </div>
+      <div class="exemplo-nota">
+        "Esta declaração é meu escudo contra a comparação. Eu já tenho o suficiente." — Assinatura: Renata M. S. Data: março de 2026
+        <em>"Eu sabia que estava endividada. O que eu não sabia era que já ganhava o suficiente. O problema não era renda. Era para onde o dinheiro ia sem eu perceber."</em>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      Domínio do Dinheiro — O Guia Estoico para Quitar Dívidas e Ter Paz com o Dinheiro
+    </div>
+
+  </div><!-- /pagina1 -->
+
+</div><!-- /container -->
+
+<script>
+  // ============================
+  // GERAR PDF
+  // ============================
+  function gerarPDF() {
+    window.print();
+  }
+
+  // ============================
+  // ATUALIZAR NOME NA DECLARAÇÃO E ASSINATURA
+  // ============================
+  function atualizarNome() {
+    const nome = document.getElementById('nomeUsuario').value;
+    document.getElementById('nomeDeclaracao').value = nome;
+    document.getElementById('assinaturaNome').value = nome;
+  }
+
+  // ============================
+  // ATUALIZAR DATA NA ASSINATURA
+  // ============================
+  function atualizarData() {
+    const data = document.getElementById('dataUsuario').value;
+    document.getElementById('assinaturaData').value = data;
+  }
+
+  // ============================
+  // CALCULAR SUFICIENTE (Soma dos 3 campos)
+  // ============================
+  function calcularSuficiente() {
+    const nec = parseFloat(document.getElementById('v-necessidades').value) || 0;
+    const ale = parseFloat(document.getElementById('v-alegrias').value) || 0;
+    const seg = parseFloat(document.getElementById('v-seguranca').value) || 0;
+    
+    const total = nec + ale + seg;
+    
+    // Formatar como moeda brasileira
+    const formattedTotal = total.toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    
+    document.getElementById('v-suficiente').value = formattedTotal;
+  }
+
+  // ============================
+  // CHECKBOXES DE REVISÃO
+  // ============================
+  function toggleRevisao(n) {
+    const el = document.getElementById('rev' + n);
+    el.classList.toggle('checked');
+  }
+
+  // ============================
+  // MÁSCARA dd/mm/aaaa
+  // ============================
+  function aplicarMascara(e) {
+    let v = e.target.value.replace(/\D/g, '').slice(0, 8);
+    if (v.length >= 5)      v = v.slice(0,2) + '/' + v.slice(2,4) + '/' + v.slice(4);
+    else if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
+    e.target.value = v;
+  }
+
+  // Aplicar máscara a todos os campos com classe .data-mask
+  document.querySelectorAll('.data-mask').forEach(el => {
+    el.addEventListener('input', aplicarMascara);
+    el.addEventListener('keydown', function(e) {
+      if ([8, 9, 37, 38, 39, 40, 46].includes(e.keyCode)) return;
+      if (!/[0-9]/.test(e.key)) e.preventDefault();
+    });
+  });
+
+  // ============================
+  // LIMPAR TUDO
+  // ============================
+  function limparTudo() {
+    if (!confirm('Limpar todo o preenchimento?')) return;
+    document.querySelectorAll('input[type=text], input[type=number], textarea').forEach(el => el.value = '');
+    [1, 2, 3].forEach(n => document.getElementById('rev' + n).classList.remove('checked'));
+    // Limpar também os campos sincronizados
+    document.getElementById('nomeDeclaracao').value = '';
+    document.getElementById('assinaturaNome').value = '';
+    document.getElementById('assinaturaData').value = '';
+    calcularSuficiente();
+  }
+
+  // ============================
+  // INICIALIZAR
+  // ============================
+  // Executar cálculo inicial
+  calcularSuficiente();
+
+  // Inicializar máscaras para campos já existentes
+  document.querySelectorAll('.data-mask').forEach(el => {
+    if (el.value) aplicarMascara({ target: el });
+  });
+</script>
+</body>
+</html>
