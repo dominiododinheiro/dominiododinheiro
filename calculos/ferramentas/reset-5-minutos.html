@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Reset de 5 Minutos — Domínio do Dinheiro</title>
+    <style>
+        /* ============================================
+           CONFIGURAÇÕES GERAIS
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            padding: 48px 40px 40px;
+            position: relative;
+        }
+
+        /* ============================================
+           BOTÕES TOPO
+           ============================================ */
+        .top-actions {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .top-actions button {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .top-actions .btn-inicio {
+            background: #2e7d32;
+            color: #fff;
+        }
+
+        .top-actions .btn-inicio:hover {
+            background: #1b5e20;
+            transform: translateY(-1px);
+        }
+
+        .top-actions .btn-limpar {
+            background: #e0e0e0;
+            color: #555;
+        }
+
+        .top-actions .btn-limpar:hover {
+            background: #d0d0d0;
+            transform: translateY(-1px);
+        }
+
+        .top-actions .btn-pdf {
+            background: #1a237e;
+            color: #fff;
+        }
+
+        .top-actions .btn-pdf:hover {
+            background: #0d1555;
+            transform: translateY(-1px);
+        }
+
+        /* ============================================
+           CABEÇALHO
+           ============================================ */
+        .header {
+            text-align: center;
+            border-bottom: 4px solid #1a237e;
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+            padding-right: 160px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding-right: 0;
+                padding-top: 50px;
+            }
+            .top-actions {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: flex-end;
+                margin-bottom: 16px;
+                padding-top: 8px;
+            }
+        }
+
+        .header .brand {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a237e;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 8px;
+        }
+
+        .header .subtitle {
+            font-size: 16px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .header .citacao {
+            font-size: 13px;
+            color: #777;
+            margin-top: 6px;
+        }
+
+        .header .citacao .autor {
+            font-weight: 600;
+            color: #1a237e;
+        }
+
+        /* ============================================
+           DESCRIÇÃO
+           ============================================ */
+        .description {
+            background: #f8f9fa;
+            border-left: 4px solid #1a237e;
+            padding: 16px 20px;
+            border-radius: 6px;
+            margin-bottom: 28px;
+        }
+
+        .description p {
+            font-size: 15px;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        .description p:last-child {
+            margin-bottom: 0;
+        }
+
+        .description .destaque {
+            font-weight: 600;
+            color: #1a237e;
+        }
+
+        /* ============================================
+           PASSOS
+           ============================================ */
+        .passo {
+            background: #fff;
+            border-radius: 12px;
+            border: 1.5px solid #e0e0e0;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .passo:hover {
+            border-color: #1a237e;
+        }
+
+        .passo-header {
+            background: #e8eaf6;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .passo-num {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            background: #1a237e;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .passo-titulo {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a237e;
+        }
+
+        .passo-tempo {
+            margin-left: auto;
+            font-size: 13px;
+            color: #888;
+            font-weight: 600;
+            background: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .passo-body {
+            padding: 18px 22px;
+        }
+
+        .passo-body .instrucao {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .passo-body .instrucao strong {
+            color: #1a237e;
+        }
+
+        /* ============================================
+           TEXTAREA
+           ============================================ */
+        .passo-body textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            resize: none;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: #fafafa;
+            line-height: 1.6;
+        }
+
+        .passo-body textarea:focus {
+            outline: none;
+            border-color: #1a237e;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        }
+
+        .passo-body textarea::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        .passo-body .exemplo {
+            font-size: 13px;
+            color: #888;
+            background: #f5f5f5;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-top: 8px;
+            border-left: 3px solid #1a237e;
+        }
+
+        .passo-body .exemplo strong {
+            color: #1a237e;
+        }
+
+        /* Passo 1 - respiração */
+        .passo-respiracao .passo-body {
+            text-align: center;
+        }
+
+        .passo-respiracao .respirar-btn {
+            padding: 14px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #1a237e;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+            margin: 8px 0;
+        }
+
+        .passo-respiracao .respirar-btn:hover {
+            transform: scale(1.05);
+            background: #0d1555;
+        }
+
+        .passo-respiracao .respirar-btn:active {
+            transform: scale(0.95);
+        }
+
+        .passo-respiracao .respirar-btn .contador {
+            display: block;
+            font-size: 32px;
+            margin-top: 4px;
+        }
+
+        .passo-respiracao .timer-text {
+            font-size: 14px;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        /* Passo 3 - círculo de controle */
+        .circulo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .circulo-grid .coluna {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 14px 16px;
+            border: 1.5px solid #e0e0e0;
+        }
+
+        .circulo-grid .coluna .label {
+            font-weight: 700;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .circulo-grid .coluna .label.verde {
+            color: #2e7d32;
+        }
+
+        .circulo-grid .coluna .label.vermelho {
+            color: #c62828;
+        }
+
+        .circulo-grid .coluna textarea {
+            min-height: 100px;
+            border-color: #ddd;
+            background: #fff;
+        }
+
+        .circulo-grid .coluna textarea:focus {
+            border-color: #1a237e;
+        }
+
+        /* ============================================
+           RODAPÉ
+           ============================================ */
+        .footer-citacao {
+            text-align: center;
+            padding: 20px 0 0;
+            border-top: 2px solid #e0e0e0;
+            margin-top: 8px;
+        }
+
+        .footer-citacao p {
+            font-size: 15px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .footer-citacao .autor {
+            font-weight: 600;
+            color: #1a237e;
+            font-style: normal;
+        }
+
+        .footer-citacao .marca {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+            font-style: normal;
+        }
+
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .header {
+                padding-right: 0;
+                padding-top: 50px;
+            }
+
+            .top-actions {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: flex-end;
+                margin-bottom: 16px;
+                padding-top: 8px;
+            }
+
+            .top-actions button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .passo-header {
+                flex-wrap: wrap;
+                gap: 8px;
+                padding: 12px 16px;
+            }
+
+            .passo-titulo {
+                font-size: 16px;
+            }
+
+            .passo-tempo {
+                font-size: 11px;
+                padding: 2px 10px;
+            }
+
+            .passo-body {
+                padding: 14px 16px;
+            }
+
+            .passo-body textarea {
+                min-height: 60px;
+                font-size: 13px;
+            }
+
+            .circulo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .passo-respiracao .respirar-btn {
+                font-size: 16px;
+                padding: 12px 30px;
+            }
+
+            .passo-respiracao .respirar-btn .contador {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px 10px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .passo-num {
+                width: 32px;
+                height: 32px;
+                min-width: 32px;
+                font-size: 14px;
+            }
+
+            .passo-titulo {
+                font-size: 14px;
+            }
+
+            .passo-body textarea {
+                min-height: 50px;
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+
+            .circulo-grid .coluna textarea {
+                min-height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="conteudoPDF">
+
+        <!-- ==========================================
+        BOTÕES TOPO
+        ========================================== -->
+        <div class="top-actions" id="botoesTopo">
+            <button class="btn-inicio" onclick="window.location.href='../index-principal.html'">🏠 Início</button>
+            <button class="btn-limpar" onclick="limparTudo()">🗑️ Limpar</button>
+            <button class="btn-pdf" onclick="gerarPDF()">📄 Salvar PDF</button>
+        </div>
+
+        <!-- ==========================================
+        CABEÇALHO
+        ========================================== -->
+        <div class="header">
+            <div class="brand">Domínio do Dinheiro</div>
+            <h1>🧘 Reset de 5 Minutos</h1>
+            <div class="subtitle">A Caixa de Primeiros Socorros para a Ansiedade Financeira</div>
+            <div class="citacao">"O obstáculo é o caminho." — <span class="autor">Marco Aurélio</span></div>
+        </div>
+
+        <!-- ==========================================
+        DESCRIÇÃO
+        ========================================== -->
+        <div class="description">
+            <p>O <span class="destaque">Reset de 5 Minutos</span> foi criado para quebrar o ciclo de pânico antes que ele tome conta.</p>
+            <p>Não é meditação. Não é motivação. É um <span class="destaque">protocolo de primeiros socorros mentais</span> para usar exatamente no momento em que você mais precisa.</p>
+        </div>
+
+        <!-- ==========================================
+        PASSO 1
+        ========================================== -->
+        <div class="passo passo-respiracao">
+            <div class="passo-header">
+                <div class="passo-num">1</div>
+                <div class="passo-titulo">Pare a Espiral</div>
+                <div class="passo-tempo">⏱️ 10 segundos</div>
+            </div>
+            <div class="passo-body">
+                <div class="instrucao">
+                    Feche os olhos se puder. Respire fundo três vezes, devagar, enchendo o pulmão completamente e soltando o ar sem pressa.
+                </div>
+                <button class="respirar-btn" id="btnRespirar" onclick="iniciarRespiração()">
+                    🌬️ Respire Agora
+                    <span class="contador" id="contadorResp">10</span>
+                </button>
+                <div class="timer-text" id="timerText">Clique no botão para começar</div>
+                <textarea id="passo1" placeholder="Escreva como você se sente agora..."></textarea>
+            </div>
+        </div>
+
+        <!-- ==========================================
+        PASSO 2
+        ========================================== -->
+        <div class="passo">
+            <div class="passo-header">
+                <div class="passo-num">2</div>
+                <div class="passo-titulo">Só os Fatos</div>
+                <div class="passo-tempo">⏱️ 60 segundos</div>
+            </div>
+            <div class="passo-body">
+                <div class="instrucao">
+                    Escreva <strong>APENAS os fatos</strong> da situação. Sem emoção, sem história, sem julgamento. Só números e datas.
+                </div>
+                <textarea id="passo2" placeholder="Ex: Devo R$ 4.800 no cartão. Taxa: 312% ao ano. Parcela mínima: R$ 280. Vencimento: dia 15."></textarea>
+                <div class="exemplo">
+                    💡 <strong>Exemplo:</strong> "Devo R$ 3.200 no cartão. Taxa: 312% ao ano. Parcela mínima: R$ 280. Vencimento: dia 10."
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+        PASSO 3
+        ========================================== -->
+        <div class="passo">
+            <div class="passo-header">
+                <div class="passo-num">3</div>
+                <div class="passo-titulo">Círculo de Controle</div>
+                <div class="passo-tempo">⏱️ 60 segundos</div>
+            </div>
+            <div class="passo-body">
+                <div class="instrucao">
+                    Desenhe um círculo na sua mente. Dentro do círculo: o que <strong>VOCÊ</strong> pode fazer <strong>AGORA</strong>. Fora do círculo: o que <strong>NÃO</strong> está no seu controle.
+                </div>
+                <div class="circulo-grid">
+                    <div class="coluna">
+                        <span class="label verde">✅ DENTRO do círculo (o que posso fazer AGORA)</span>
+                        <textarea id="passo3_dentro" placeholder="Ex: Ligar para o banco amanhã, acessar o Serasa Limpa Nome, cancelar uma assinatura..."></textarea>
+                    </div>
+                    <div class="coluna">
+                        <span class="label vermelho">❌ FORA do círculo (o que NÃO controlo)</span>
+                        <textarea id="passo3_fora" placeholder="Ex: Os juros que já correram, o que aconteceu no passado, a taxa Selic..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+        PASSO 4
+        ========================================== -->
+        <div class="passo">
+            <div class="passo-header">
+                <div class="passo-num">4</div>
+                <div class="passo-titulo">Uma Ação</div>
+                <div class="passo-tempo">⏱️ 60 segundos</div>
+            </div>
+            <div class="passo-body">
+                <div class="instrucao">
+                    Escolha <strong>UMA</strong> coisa do seu círculo de controle e anote aqui. Pode ser pequena. Pode ser simples. O importante é ser agora.
+                </div>
+                <textarea id="passo4" placeholder="Ex: Vou ligar para o banco amanhã cedo e pedir renegociação."></textarea>
+                <div class="exemplo">
+                    💡 <strong>Exemplos:</strong> "Vou ligar para o banco amanhã." — "Vou acessar o Serasa Limpa Nome hoje." — "Vou cancelar uma assinatura agora."
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+        PASSO 5
+        ========================================== -->
+        <div class="passo passo-respiracao">
+            <div class="passo-header">
+                <div class="passo-num">5</div>
+                <div class="passo-titulo">Retorne à Respiração</div>
+                <div class="passo-tempo">⏱️ 30 segundos</div>
+            </div>
+            <div class="passo-body">
+                <div class="instrucao">
+                    Respire fundo uma vez. Diga para si mesmo:
+                    <br>
+                    <strong style="font-size:18px;color:#1a237e;">"Não posso controlar tudo. Mas posso controlar minha próxima escolha. E eu já fiz uma escolha."</strong>
+                    <br><br>
+                    Pronto. <strong>Reset completo!</strong> 🧘
+                </div>
+                <textarea id="passo5" placeholder="Como você se sente agora? O que mudou?"></textarea>
+            </div>
+        </div>
+
+        <!-- ==========================================
+        CITAÇÃO FINAL
+        ========================================== -->
+        <div class="footer-citacao">
+            <p>"Não explique a sua filosofia. Encarne-a."</p>
+            <p class="autor">— Epicteto</p>
+            <p class="marca">Domínio do Dinheiro — O Guia Estoico para Quitar Dívidas e Ter Paz com o Dinheiro</p>
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+    ÁUDIO
+    ========================================== -->
+    <audio id="somFinal" src="sininho.mp3" preload="auto"></audio>
+
+    <!-- ==========================================
+    JAVASCRIPT
+    ========================================== -->
+    <script>
+        // ============================
+        // MARCAR COMO CONCLUÍDO
+        // ============================
+        function marcarConcluido() {
+            const id = 'reset';
+            try {
+                const progresso = JSON.parse(localStorage.getItem('dominio_dinheiro_progresso') || '{}');
+                progresso[id] = true;
+                localStorage.setItem('dominio_dinheiro_progresso', JSON.stringify(progresso));
+            } catch (e) {
+                console.warn('Erro ao salvar progresso:', e);
+            }
+        }
+
+        // ============================
+        // SOM
+        // ============================
+        function tocarSomSino() {
+            const audio = document.getElementById('somFinal');
+            
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play().then(function() {
+                    console.log('🔔 Som tocado com sucesso');
+                }).catch(function(err) {
+                    console.warn('Não foi possível reproduzir o som:', err);
+                    if (navigator.vibrate) {
+                        navigator.vibrate(100);
+                    }
+                });
+            }
+        }
+
+        // ============================
+        // AUTO-RESIZE
+        // ============================
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        function configurarAutoResize() {
+            const textareas = document.querySelectorAll('textarea');
+            
+            textareas.forEach(function(textarea) {
+                autoResize(textarea);
+                
+                textarea.addEventListener('input', function() {
+                    autoResize(this);
+                });
+                
+                textarea.addEventListener('focus', function() {
+                    autoResize(this);
+                });
+            });
+        }
+
+        // ============================
+        // RESPIRAÇÃO GUIADA
+        // ============================
+        let timerResp = null;
+        let respiracaoAtiva = false;
+
+        function iniciarRespiração() {
+            if (respiracaoAtiva) return;
+
+            respiracaoAtiva = true;
+            const btn = document.getElementById('btnRespirar');
+            const contador = document.getElementById('contadorResp');
+            const timerText = document.getElementById('timerText');
+
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            btn.textContent = '⏳ Respirando...';
+
+            const fases = [
+                { texto: '🧘 Inspire...', duracao: 4 },
+                { texto: '😌 Segure...', duracao: 3 },
+                { texto: '🌬️ Expire...', duracao: 3 }
+            ];
+
+            let faseAtual = 0;
+            let tempoRestante = fases[faseAtual].duracao;
+            
+            timerText.textContent = fases[faseAtual].texto + ' (' + tempoRestante + 's)';
+            contador.textContent = tempoRestante;
+
+            timerResp = setInterval(function() {
+                tempoRestante--;
+                contador.textContent = tempoRestante;
+                timerText.textContent = fases[faseAtual].texto + ' (' + tempoRestante + 's)';
+
+                if (tempoRestante <= 0) {
+                    faseAtual++;
+                    
+                    if (faseAtual < fases.length) {
+                        tempoRestante = fases[faseAtual].duracao;
+                        timerText.textContent = fases[faseAtual].texto + ' (' + tempoRestante + 's)';
+                        contador.textContent = tempoRestante;
+                    } else {
+                        clearInterval(timerResp);
+                        timerText.textContent = '✅ Respiração completa! Como você se sente?';
+                        contador.textContent = '✓';
+                        btn.disabled = false;
+                        btn.style.opacity = '1';
+                        respiracaoAtiva = false;
+                        btn.textContent = '🌬️ Respirar Novamente';
+
+                        tocarSomSino();
+                        document.getElementById('passo1').focus();
+                    }
+                }
+            }, 1000);
+        }
+
+        // ============================
+        // LIMPAR TUDO
+        // ============================
+        function limparTudo() {
+            if (!confirm('Limpar todo o preenchimento?')) return;
+
+            document.querySelectorAll('textarea').forEach(function(el) {
+                el.value = '';
+                autoResize(el);
+            });
+
+            if (timerResp) {
+                clearInterval(timerResp);
+                timerResp = null;
+            }
+            respiracaoAtiva = false;
+            const btn = document.getElementById('btnRespirar');
+            const contador = document.getElementById('contadorResp');
+            const timerText = document.getElementById('timerText');
+
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            btn.textContent = '🌬️ Respire Agora';
+            contador.textContent = '10';
+            timerText.textContent = 'Clique no botão para começar';
+        }
+
+        // ============================
+        // GERAR PDF - SOLUÇÃO DEFINITIVA
+        // ============================
+        function gerarPDF() {
+            // Coleta os valores dos textareas
+            const passo1 = document.getElementById('passo1').value;
+            const passo2 = document.getElementById('passo2').value;
+            const passo3_dentro = document.getElementById('passo3_dentro').value;
+            const passo3_fora = document.getElementById('passo3_fora').value;
+            const passo4 = document.getElementById('passo4').value;
+            const passo5 = document.getElementById('passo5').value;
+
+            // Função para escapar HTML e preservar quebras de linha
+            function escaparHTML(texto) {
+                if (!texto) return '';
+                return texto
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/\n/g, '<br>'); // Converte quebras de linha em <br>
+            }
+
+            // Cria a janela de impressão
+            const win = window.open('', '_blank', 'width=900,height=700');
+            
+            if (!win) {
+                alert('Por favor, permita pop-ups para gerar o PDF.');
+                return;
+            }
+
+            // Constrói o HTML - SUBSTITUINDO TEXTAREAS POR DIVS COM O TEXTO
+            const html = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset de 5 Minutos — Domínio do Dinheiro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fff;
+            padding: 30px 35px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            padding: 30px 35px;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 4px solid #1a237e;
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .header .brand {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a237e;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 8px;
+        }
+        
+        .header .subtitle {
+            font-size: 16px;
+            color: #555;
+            font-style: italic;
+        }
+        
+        .header .citacao {
+            font-size: 13px;
+            color: #777;
+            margin-top: 6px;
+        }
+        
+        .header .citacao .autor {
+            font-weight: 600;
+            color: #1a237e;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            border-left: 4px solid #1a237e;
+            padding: 16px 20px;
+            border-radius: 6px;
+            margin-bottom: 28px;
+        }
+        
+        .description p {
+            font-size: 15px;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+        
+        .description p:last-child { margin-bottom: 0; }
+        .description .destaque { font-weight: 600; color: #1a237e; }
+        
+        .passo {
+            background: #fff;
+            border-radius: 12px;
+            border: 1.5px solid #e0e0e0;
+            margin-bottom: 20px;
+            overflow: hidden;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        
+        .passo-header {
+            background: #e8eaf6;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .passo-num {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            background: #1a237e;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .passo-titulo {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a237e;
+        }
+        
+        .passo-tempo {
+            margin-left: auto;
+            font-size: 13px;
+            color: #888;
+            font-weight: 600;
+            background: #fff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+        }
+        
+        .passo-body {
+            padding: 18px 22px;
+        }
+        
+        .passo-body .instrucao {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        .passo-body .instrucao strong {
+            color: #1a237e;
+        }
+        
+        /* ==========================================
+           ESTILO PARA OS TEXTOS (substituem textareas)
+           ========================================== */
+        .texto-resposta {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            background: #fafafa;
+            min-height: 50px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .texto-resposta.vazio {
+            color: #bbb;
+            font-style: italic;
+        }
+        
+        .passo-body .exemplo {
+            font-size: 13px;
+            color: #888;
+            background: #f5f5f5;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-top: 8px;
+            border-left: 3px solid #1a237e;
+        }
+        
+        .passo-body .exemplo strong { color: #1a237e; }
+        
+        .circulo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .circulo-grid .coluna {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 14px 16px;
+            border: 1.5px solid #e0e0e0;
+        }
+        
+        .circulo-grid .coluna .label {
+            font-weight: 700;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        
+        .circulo-grid .coluna .label.verde { color: #2e7d32; }
+        .circulo-grid .coluna .label.vermelho { color: #c62828; }
+        
+        .footer-citacao {
+            text-align: center;
+            padding: 20px 0 0;
+            border-top: 2px solid #e0e0e0;
+            margin-top: 8px;
+        }
+        
+        .footer-citacao p {
+            font-size: 15px;
+            color: #555;
+            font-style: italic;
+        }
+        
+        .footer-citacao .autor {
+            font-weight: 600;
+            color: #1a237e;
+            font-style: normal;
+        }
+        
+        .footer-citacao .marca {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+            font-style: normal;
+        }
+        
+        .passo-respiracao .respirar-btn {
+            display: none !important;
+        }
+        
+        .timer-text {
+            display: none !important;
+        }
+        
+        @media print {
+            .passo-respiracao .respirar-btn { display: none !important; }
+            .timer-text { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- CABEÇALHO -->
+        <div class="header">
+            <div class="brand">Domínio do Dinheiro</div>
+            <h1>🧘 Reset de 5 Minutos</h1>
+            <div class="subtitle">A Caixa de Primeiros Socorros para a Ansiedade Financeira</div>
+            <div class="citacao">"O obstáculo é o caminho." — <span class="autor">Marco Aurélio</span></div>
+        </div>
+
+        <!-- DESCRIÇÃO -->
+        <div class="description">
+            <p>O <span class="destaque">Reset de 5 Minutos</span> foi criado para quebrar o ciclo de pânico antes que ele tome conta.</p>
+            <p>Não é meditação. Não é motivação. É um <span class="destaque">protocolo de primeiros socorros mentais</span> para usar exatamente no momento em que você mais precisa.</p>
+        </div>
+
+        <!-- PASSO 1 -->
+        <div class="passo passo-respiracao">
+            <div class="passo-header">
+                <div class="passo-num">1</div>
+                <div class="passo-titulo">Pare a Espiral</div>
+                <div class="passo-tempo">⏱️ 10 segundos</div>
+            </div>
+            <div class="passo-body">
+                <div class="instrucao">
+                    Feche os olhos se puder. Respire fundo três vezes, devagar, enchendo o pulmão completamente e soltando o ar sem pressa.
+                </div>
+                <div class="texto-resposta ${passo1 ? '' : 'vazio'}">${passo1 ? escaparHTML(passo1) : '(Nada escrito)'}</div>
+            </div>
+        </div>
+
+        <!-- PASSO 2 -->
+        <div class="passo">
+            <div class="passo-header">
+                <div class="passo-num">2</div>
+                <div class="passo-titulo">Só os Fatos</div>
+                <div class="passo-tempo">⏱️ 60 segundos</div>
+            </div>
+            <div class="passo-body">
+                <div class="instrucao">
+                    Escreva <strong>APENAS os fatos</strong> da situação. Sem emoção, sem história, sem julgamento. Só números e datas.
+                </div>
+                <div class="texto-resposta ${passo2 ? '' : 'vazio'}">${passo2 ? escaparHTML(passo2) : '(Nada escrito)'}</div>
+                <div class="exemplo">
+                    💡 <strong>Exemplo:</strong> "Devo R$ 3.200 no cartão. Taxa: 312% ao ano. Parcela mínima: R$ 280. Vencimento: dia 10."
+                </div>
+            </div>
+        </div>
+
+        <!-- PASSO 3 -->
+        <div class="passo">
+            <div class="passo-header">
+                <div class="passo-num">3</div>
+                <div class="passo-titulo">Círculo de Controle</div>
+                <div class="passo-tempo">⏱️ 60 segundos</div>
+            </div>
+            <div class="passo-body">
+                <div class="instrucao">
+                    Desenhe um círculo na sua mente. Dentro do círculo: o que <strong>VOCÊ</strong> pode fazer <strong>AGORA</strong>. Fora do círculo: o que <strong>NÃO</strong> está no seu controle.
+                </div>
+                <div class="circulo-grid">
+                    <div class="coluna">
+                        <span class="label verde">✅ DENTRO do círculo</span>
+                        <div class="texto-resposta ${passo3_dentro ? '' : 'vazio'}">${passo3_dentro ? escaparHTML(passo3_dentro) : '(Nada escrito)'}</div>
+                    </div>
+                    <div class="coluna">
+                        <span class="label vermelho">❌ FORA do círculo</span>
+                        <div class="texto-resposta ${passo3_fora ? '' : 'vazio'}">${passo3_fora ? escaparHTML(passo3_fora) : '(Nada escrito)'}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PASSO 4 -->
+        <div class="passo">
+            <div class="passo-header">
+                <div class="passo-num">4</div>
+                <div class="passo-titulo">Uma Ação</div>
+                <div class="passo-tempo">⏱️ 60 segundos</div>
+            </div>
+            <div class="passo-body">
+                <div class="instrucao">
+                    Escolha <strong>UMA</strong> coisa do seu círculo de controle e anote aqui. Pode ser pequena. Pode ser simples. O importante é ser agora.
+                </div>
+                <div class="texto-resposta ${passo4 ? '' : 'vazio'}">${passo4 ? escaparHTML(passo4) : '(Nada escrito)'}</div>
+                <div class="exemplo">
+                    💡 <strong>Exemplos:</strong> "Vou ligar para o banco amanhã." — "Vou acessar o Serasa Limpa Nome hoje." — "Vou cancelar uma assinatura agora."
+                </div>
+            </div>
+        </div>
+
+        <!-- PASSO 5 -->
+        <div class="passo passo-respiracao">
+            <div class="passo-header">
+                <div class="passo-num">5</div>
+                <div class="passo-titulo">Retorne à Respiração</div>
+                <div class="passo-tempo">⏱️ 30 segundos</div>
+            </div>
+            <div class="passo-body">
+                <div class="instrucao">
+                    Respire fundo uma vez. Diga para si mesmo:
+                    <br>
+                    <strong style="font-size:18px;color:#1a237e;">"Não posso controlar tudo. Mas posso controlar minha próxima escolha. E eu já fiz uma escolha."</strong>
+                    <br><br>
+                    Pronto. <strong>Reset completo!</strong> 🧘
+                </div>
+                <div class="texto-resposta ${passo5 ? '' : 'vazio'}">${passo5 ? escaparHTML(passo5) : '(Nada escrito)'}</div>
+            </div>
+        </div>
+
+        <!-- RODAPÉ -->
+        <div class="footer-citacao">
+            <p>"Não explique a sua filosofia. Encarne-a."</p>
+            <p class="autor">— Epicteto</p>
+            <p class="marca">Domínio do Dinheiro — O Guia Estoico para Quitar Dívidas e Ter Paz com o Dinheiro</p>
+        </div>
+    </div>
+</body>
+</html>`;
+
+            // Escreve na nova janela
+            win.document.write(html);
+            win.document.close();
+
+            // Aguarda e imprime
+            win.onload = function() {
+                setTimeout(function() {
+                    win.print();
+                }, 500);
+            };
+        }
+
+        // ============================
+        // INICIALIZAR
+        // ============================
+        document.addEventListener('DOMContentLoaded', function() {
+            marcarConcluido();
+            configurarAutoResize();
+        });
+    </script>
+
+</body>
+</html>
