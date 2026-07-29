@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento Semanal — Domínio do Dinheiro</title>
+    <style>
+        /* ============================================
+           CONFIGURAÇÕES GERAIS
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            padding: 48px 40px 40px;
+            position: relative;
+        }
+
+        /* ============================================
+           BOTÕES TOPO
+           ============================================ */
+        .top-actions {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .top-actions button {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .top-actions .btn-inicio {
+            background: #2e7d32;
+            color: #fff;
+        }
+        .top-actions .btn-inicio:hover {
+            background: #1b5e20;
+            transform: translateY(-1px);
+        }
+        .top-actions .btn-limpar {
+            background: #e0e0e0;
+            color: #555;
+        }
+        .top-actions .btn-limpar:hover {
+            background: #d0d0d0;
+            transform: translateY(-1px);
+        }
+        .top-actions .btn-pdf {
+            background: #1a237e;
+            color: #fff;
+        }
+        .top-actions .btn-pdf:hover {
+            background: #0d1555;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding-right: 0;
+                padding-top: 50px;
+            }
+            .top-actions {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: flex-end;
+                margin-bottom: 16px;
+                padding-top: 8px;
+            }
+        }
+
+        /* ============================================
+           CABEÇALHO
+           ============================================ */
+        .header {
+            text-align: center;
+            border-bottom: 4px solid #1a237e;
+            padding-bottom: 24px;
+            margin-bottom: 28px;
+            padding-right: 160px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding-right: 0;
+                padding-top: 0;
+            }
+        }
+
+        .header .brand {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a237e;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 8px;
+        }
+
+        .header .subtitle {
+            font-size: 15px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .header .citacao {
+            font-size: 13px;
+            color: #777;
+            margin-top: 6px;
+        }
+
+        .header .citacao .autor {
+            font-weight: 600;
+            color: #1a237e;
+        }
+
+        /* ============================================
+           SEMANA
+           ============================================ */
+        .semana-box {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #f8f9fa;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .semana-box label {
+            font-weight: 600;
+            color: #1a237e;
+            font-size: 15px;
+        }
+
+        .semana-box input {
+            border: 2px solid #c5cae9;
+            border-radius: 6px;
+            padding: 8px 14px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a237e;
+            background: #fff;
+            transition: border-color 0.3s;
+            width: 160px;
+        }
+
+        .semana-box input:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+
+        .semana-box input::placeholder {
+            color: #aaa;
+            font-weight: 400;
+        }
+
+        /* ============================================
+           INTENÇÃO DA SEMANA
+           ============================================ */
+        .intencao-box {
+            background: #e8eaf6;
+            border-radius: 10px;
+            padding: 18px 24px;
+            margin-bottom: 28px;
+        }
+
+        .intencao-box .titulo {
+            font-weight: 700;
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .intencao-box .virtudes {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .intencao-box .virtudes .virtude {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: #fff;
+            border: 2px solid #c5cae9;
+            transition: all 0.3s;
+        }
+
+        .intencao-box .virtudes .virtude:hover {
+            border-color: #1a237e;
+        }
+
+        .intencao-box .virtudes .virtude input[type="radio"] {
+            accent-color: #1a237e;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .intencao-box .virtudes .virtude.selecionada {
+            border-color: #1a237e;
+            background: #e8eaf6;
+        }
+
+        .intencao-box textarea {
+            width: 100%;
+            min-height: 50px;
+            padding: 10px 14px;
+            border: 2px solid #c5cae9;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            resize: vertical;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: #fff;
+        }
+
+        .intencao-box textarea:focus {
+            outline: none;
+            border-color: #1a237e;
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        }
+
+        .intencao-box textarea::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        /* ============================================
+           NÚMEROS DA SEMANA
+           ============================================ */
+        .numeros-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 18px 24px;
+            margin-bottom: 28px;
+        }
+
+        .numeros-box .campo {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .numeros-box .campo label {
+            font-weight: 600;
+            color: #1a237e;
+            font-size: 13px;
+        }
+
+        .numeros-box .campo .sub {
+            font-weight: 400;
+            color: #777;
+            font-size: 11px;
+        }
+
+        .numeros-box .campo input {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            text-align: right;
+            background: #fff;
+            transition: border-color 0.3s;
+        }
+
+        .numeros-box .campo input:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+
+        .numeros-box .campo input::placeholder {
+            color: #bbb;
+            font-weight: 400;
+        }
+
+        .numeros-box .campo .resultado {
+            padding: 8px 12px;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            text-align: right;
+            border-radius: 6px;
+            background: #e8eaf6;
+            min-height: 38px;
+            font-size: 15px;
+        }
+
+        .numeros-box .campo .resultado.positivo {
+            color: #2e7d32;
+        }
+
+        .numeros-box .campo .resultado.negativo {
+            color: #c62828;
+        }
+
+        .numeros-box .campo .resultado.zero {
+            color: #f9a825;
+        }
+
+        /* ============================================
+           ALERTA / ANÁLISE SEMANAL
+           ============================================ */
+        .alerta-box {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1a237e;
+        }
+
+        .alerta-box .titulo {
+            font-weight: 700;
+            color: #1a237e;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .alerta-box .mensagem {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .alerta-box .mensagem .destaque {
+            font-weight: 700;
+        }
+
+        .alerta-box.sucesso {
+            border-left-color: #2e7d32;
+            background: #e8f5e9;
+        }
+        .alerta-box.sucesso .titulo {
+            color: #2e7d32;
+        }
+
+        .alerta-box.atencao {
+            border-left-color: #f9a825;
+            background: #fff8e1;
+        }
+        .alerta-box.atencao .titulo {
+            color: #e65100;
+        }
+
+        .alerta-box.perigo {
+            border-left-color: #c62828;
+            background: #ffebee;
+        }
+        .alerta-box.perigo .titulo {
+            color: #c62828;
+        }
+
+        /* ============================================
+           ACOMPANHAMENTO DIÁRIO
+           ============================================ */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 28px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead th {
+            background: #1a237e;
+            color: #fff;
+            font-weight: 600;
+            padding: 12px 16px;
+            text-align: left;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        thead th:last-child {
+            border-right: none;
+        }
+
+        thead th .cat-icon {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        thead th .cat-label {
+            display: block;
+            font-size: 13px;
+        }
+
+        tbody td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #eee;
+            color: #333;
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        .col-dia {
+            font-weight: 600;
+            color: #1a237e;
+            min-width: 80px;
+        }
+
+        .col-valor input {
+            width: 100%;
+            min-width: 100px;
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            text-align: right;
+            background: #fafafa;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .col-valor input:focus {
+            outline: none;
+            border-color: #1a237e;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        }
+
+        .col-valor input::placeholder {
+            color: #bbb;
+            font-weight: 400;
+        }
+
+        .col-onde input {
+            width: 100%;
+            min-width: 120px;
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            background: #fafafa;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .col-onde input:focus {
+            outline: none;
+            border-color: #1a237e;
+            background: #fff;
+        }
+
+        .col-onde input::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        .col-valor .resultado {
+            display: inline-block;
+            width: 100%;
+            padding: 6px 10px;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            text-align: right;
+            border-radius: 4px;
+            min-height: 32px;
+        }
+
+        .col-valor .resultado.positivo {
+            color: #2e7d32;
+        }
+
+        .col-valor .resultado.negativo {
+            color: #c62828;
+        }
+
+        .col-valor .resultado.zero {
+            color: #f9a825;
+        }
+
+        tfoot td {
+            padding: 10px 12px;
+            background: #e8eaf6;
+            font-weight: 700;
+            border-top: 2px solid #1a237e;
+        }
+
+        tfoot .col-valor .resultado {
+            font-size: 15px;
+        }
+
+        .linha-diferenca td {
+            background: #fff8e1;
+            border-top: 2px solid #f9a825;
+            font-weight: 700;
+        }
+
+        .linha-diferenca .col-valor .resultado {
+            font-size: 15px;
+        }
+
+        /* ============================================
+           OBSTÁCULOS
+           ============================================ */
+        .obstaculos-box {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 18px 24px;
+            margin-bottom: 28px;
+        }
+
+        .obstaculos-box .titulo {
+            font-weight: 700;
+            color: #1a237e;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .obstaculos-box .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .obstaculos-box .grid .campo {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .obstaculos-box .grid .campo label {
+            font-weight: 600;
+            color: #1a237e;
+            font-size: 13px;
+        }
+
+        .obstaculos-box .grid .campo input,
+        .obstaculos-box .grid .campo textarea {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fff;
+            transition: border-color 0.3s;
+            resize: vertical;
+        }
+
+        .obstaculos-box .grid .campo input:focus,
+        .obstaculos-box .grid .campo textarea:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+
+        .obstaculos-box .grid .campo input::placeholder,
+        .obstaculos-box .grid .campo textarea::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        .obstaculos-box .grid .campo textarea {
+            min-height: 40px;
+        }
+
+        /* ============================================
+           REFLEXÃO DE DOMINGO
+           ============================================ */
+        .reflexao-box {
+            background: #fff8e1;
+            border-radius: 10px;
+            padding: 18px 24px;
+            margin-bottom: 28px;
+            border-left: 4px solid #f9a825;
+        }
+
+        .reflexao-box .titulo {
+            font-weight: 700;
+            color: #e65100;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .reflexao-box .campo {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 6px 0;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+
+        .reflexao-box .campo:last-child {
+            border-bottom: none;
+        }
+
+        .reflexao-box .campo label {
+            font-weight: 600;
+            color: #1a237e;
+            font-size: 13px;
+        }
+
+        .reflexao-box .campo textarea {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #fff;
+            transition: border-color 0.3s;
+            resize: vertical;
+            min-height: 40px;
+        }
+
+        .reflexao-box .campo textarea:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+
+        .reflexao-box .campo textarea::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        .reflexao-box .campo .linha-sobra {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .reflexao-box .campo .linha-sobra input {
+            flex: 1;
+            min-width: 120px;
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            text-align: right;
+            background: #fff;
+            transition: border-color 0.3s;
+        }
+
+        .reflexao-box .campo .linha-sobra input:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+
+        .reflexao-box .campo .linha-sobra input::placeholder {
+            color: #bbb;
+            font-weight: 400;
+        }
+
+        .reflexao-box .campo .linha-sobra .destino {
+            flex: 1;
+            min-width: 120px;
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fff;
+            transition: border-color 0.3s;
+        }
+
+        .reflexao-box .campo .linha-sobra .destino:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+
+        .reflexao-box .campo .linha-sobra .destino::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        .reflexao-box .gratidoes {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .reflexao-box .gratidoes input {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fff;
+            transition: border-color 0.3s;
+        }
+
+        .reflexao-box .gratidoes input:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+
+        .reflexao-box .gratidoes input::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        /* ============================================
+           RODAPÉ
+           ============================================ */
+        .footer-citacao {
+            text-align: center;
+            padding: 20px 0 0;
+            border-top: 2px solid #e0e0e0;
+            margin-top: 8px;
+        }
+
+        .footer-citacao p {
+            font-size: 15px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .footer-citacao .autor {
+            font-weight: 600;
+            color: #1a237e;
+            font-style: normal;
+        }
+
+        .footer-citacao .marca {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+            font-style: normal;
+        }
+
+        /* ============================================
+           IMPRESSÃO
+           ============================================ */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+                margin: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 20px 25px;
+                max-width: 100%;
+            }
+
+            .top-actions {
+                display: none !important;
+            }
+
+            .header {
+                padding-right: 0;
+                border-bottom: 3px solid #1a237e;
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+            .header .subtitle {
+                font-size: 12px;
+            }
+            .header .citacao {
+                font-size: 10px;
+            }
+            .header .brand {
+                font-size: 11px;
+            }
+
+            .semana-box {
+                background: #f8f9fa !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                page-break-after: avoid;
+                break-after: avoid;
+                padding: 8px 14px !important;
+            }
+            .semana-box label {
+                font-size: 11px !important;
+            }
+            .semana-box input {
+                font-size: 11px !important;
+                padding: 4px 10px !important;
+                width: 120px !important;
+            }
+
+            .intencao-box {
+                background: #e8eaf6 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                padding: 10px 14px !important;
+            }
+            .intencao-box .titulo {
+                font-size: 12px !important;
+                margin-bottom: 6px !important;
+            }
+            .intencao-box .virtudes .virtude {
+                font-size: 10px !important;
+                padding: 2px 8px !important;
+            }
+            .intencao-box textarea {
+                font-size: 10px !important;
+                min-height: 30px !important;
+                padding: 4px 8px !important;
+            }
+
+            .numeros-box {
+                background: #f5f5f5 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                padding: 10px 14px !important;
+                gap: 8px !important;
+            }
+            .numeros-box .campo label {
+                font-size: 10px !important;
+            }
+            .numeros-box .campo .sub {
+                font-size: 8px !important;
+            }
+            .numeros-box .campo input {
+                font-size: 10px !important;
+                padding: 4px 8px !important;
+            }
+            .numeros-box .campo .resultado {
+                font-size: 11px !important;
+                padding: 4px 8px !important;
+                min-height: 28px !important;
+            }
+
+            .alerta-box {
+                padding: 8px 12px !important;
+                margin-bottom: 12px !important;
+            }
+            .alerta-box .titulo {
+                font-size: 11px !important;
+                margin-bottom: 2px !important;
+            }
+            .alerta-box .mensagem {
+                font-size: 10px !important;
+            }
+
+            .table-wrapper {
+                border: 1px solid #ccc;
+                border-radius: 0;
+            }
+
+            table {
+                page-break-inside: auto;
+                break-inside: auto;
+                width: 100%;
+            }
+
+            thead {
+                display: table-header-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+
+            tbody tr {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            thead th {
+                background: #1a237e !important;
+                color: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 6px 10px !important;
+                font-size: 10px !important;
+            }
+            thead th .cat-label {
+                font-size: 10px !important;
+            }
+
+            tbody td {
+                padding: 4px 8px !important;
+                font-size: 10px !important;
+            }
+
+            .col-dia {
+                font-size: 10px !important;
+                min-width: 60px !important;
+            }
+
+            .col-valor input {
+                font-size: 10px !important;
+                padding: 3px 6px !important;
+                min-width: 60px !important;
+            }
+
+            .col-onde input {
+                font-size: 10px !important;
+                padding: 3px 6px !important;
+                min-width: 80px !important;
+            }
+
+            .col-valor .resultado {
+                font-size: 10px !important;
+                padding: 3px 6px !important;
+                min-height: 20px !important;
+            }
+
+            tfoot td {
+                padding: 4px 8px !important;
+                font-size: 10px !important;
+                background: #e8eaf6 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            tfoot .col-valor .resultado {
+                font-size: 11px !important;
+            }
+
+            .linha-diferenca td {
+                background: #fff8e1 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .obstaculos-box {
+                background: #f5f5f5 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                padding: 10px 14px !important;
+            }
+            .obstaculos-box .titulo {
+                font-size: 12px !important;
+                margin-bottom: 6px !important;
+            }
+            .obstaculos-box .grid .campo label {
+                font-size: 10px !important;
+            }
+            .obstaculos-box .grid .campo input,
+            .obstaculos-box .grid .campo textarea {
+                font-size: 10px !important;
+                padding: 4px 8px !important;
+                min-height: 24px !important;
+            }
+
+            .reflexao-box {
+                background: #fff8e1 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                border-left: 4px solid #f9a825;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                padding: 10px 14px !important;
+            }
+            .reflexao-box .titulo {
+                font-size: 12px !important;
+                margin-bottom: 6px !important;
+            }
+            .reflexao-box .campo label {
+                font-size: 10px !important;
+            }
+            .reflexao-box .campo textarea {
+                font-size: 10px !important;
+                min-height: 24px !important;
+                padding: 4px 8px !important;
+            }
+            .reflexao-box .campo .linha-sobra input {
+                font-size: 10px !important;
+                padding: 4px 8px !important;
+            }
+            .reflexao-box .campo .linha-sobra .destino {
+                font-size: 10px !important;
+                padding: 4px 8px !important;
+            }
+            .reflexao-box .gratidoes input {
+                font-size: 10px !important;
+                padding: 4px 8px !important;
+            }
+
+            .footer-citacao {
+                padding: 10px 0 0 !important;
+                border-top: 2px solid #e0e0e0 !important;
+            }
+            .footer-citacao p {
+                font-size: 11px !important;
+            }
+            .footer-citacao .marca {
+                font-size: 9px !important;
+            }
+
+            input,
+            textarea {
+                border: 1px solid #ccc !important;
+                background: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .resultado.positivo {
+                color: #2e7d32 !important;
+            }
+            .resultado.negativo {
+                color: #c62828 !important;
+            }
+            .resultado.zero {
+                color: #f9a825 !important;
+            }
+
+            .alerta-box.sucesso {
+                background: #e8f5e9 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .alerta-box.atencao {
+                background: #fff8e1 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .alerta-box.perigo {
+                background: #ffebee !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .header {
+                padding-right: 0;
+                padding-top: 0;
+            }
+
+            .top-actions {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: flex-end;
+                margin-bottom: 16px;
+                padding-top: 8px;
+            }
+
+            .semana-box {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .semana-box input {
+                width: 100%;
+            }
+
+            .numeros-box {
+                grid-template-columns: 1fr;
+            }
+
+            .obstaculos-box .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reflexao-box .gratidoes {
+                grid-template-columns: 1fr;
+            }
+
+            .reflexao-box .campo .linha-sobra {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            thead th,
+            tbody td,
+            tfoot td {
+                padding: 6px 8px;
+                font-size: 12px;
+            }
+
+            .col-valor input {
+                min-width: 60px;
+                font-size: 12px;
+                padding: 4px 6px;
+            }
+
+            .col-onde input {
+                min-width: 80px;
+                font-size: 12px;
+                padding: 4px 6px;
+            }
+
+            .intencao-box .virtudes {
+                gap: 8px;
+            }
+
+            .intencao-box .virtudes .virtude {
+                font-size: 12px;
+                padding: 2px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="conteudoPDF">
+
+        <!-- ==========================================
+        BOTÕES TOPO
+        ========================================== -->
+        <div class="top-actions" id="botoesTopo">
+            <button class="btn-inicio" onclick="window.location.href='../index-principal.html'">🏠 Início</button>
+            <button class="btn-limpar" onclick="limparTudo()">🗑️ Limpar</button>
+            <button class="btn-pdf" onclick="gerarPDF()">📄 Salvar PDF</button>
+        </div>
+
+        <!-- ==========================================
+        CABEÇALHO
+        ========================================== -->
+        <div class="header">
+            <div class="brand">Domínio do Dinheiro</div>
+            <h1>Orçamento Semanal</h1>
+            <div class="subtitle">Sem necessidade de matemática complexa — só consciência</div>
+            <div class="citacao">"Confine-se ao presente. Cada semana é um recomeço." — <span class="autor">Marco Aurélio</span></div>
+        </div>
+
+        <!-- ==========================================
+        SEMANA
+        ========================================== -->
+        <div class="semana-box">
+            <label>📅 Semana de:</label>
+            <input type="text" id="semanaInicio" placeholder="dd/mm/aaaa" maxlength="10" oninput="mascaraData(this)">
+            <label>a</label>
+            <input type="text" id="semanaFim" placeholder="dd/mm/aaaa" maxlength="10" oninput="mascaraData(this)">
+        </div>
+
+        <!-- ==========================================
+        INTENÇÃO DA SEMANA
+        ========================================== -->
+        <div class="intencao-box">
+            <div class="titulo">🎯 Intenção da Semana</div>
+            <div class="virtudes" id="virtudesContainer">
+                <label class="virtude" onclick="selecionarVirtude(this)">
+                    <input type="radio" name="virtude" value="Sabedoria"> 🧠 Sabedoria
+                </label>
+                <label class="virtude" onclick="selecionarVirtude(this)">
+                    <input type="radio" name="virtude" value="Coragem"> 🦁 Coragem
+                </label>
+                <label class="virtude" onclick="selecionarVirtude(this)">
+                    <input type="radio" name="virtude" value="Justiça"> ⚖️ Justiça
+                </label>
+                <label class="virtude" onclick="selecionarVirtude(this)">
+                    <input type="radio" name="virtude" value="Temperança"> 🌿 Temperança
+                </label>
+            </div>
+            <textarea id="intencao" placeholder="Minha intenção financeira principal esta semana..."></textarea>
+        </div>
+
+        <!-- ==========================================
+        NÚMEROS DA SEMANA
+        ========================================== -->
+        <div class="numeros-box">
+            <div class="campo">
+                <label>💰 Renda disponível esta semana <span class="sub">salário ÷ 4 semanas + renda extra</span></label>
+                <input type="number" id="rendaDisponivel" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()">
+            </div>
+            <div class="campo">
+                <label>📋 Despesas fixas desta semana <span class="sub">parcelas / contas que vencem esta semana</span></label>
+                <input type="number" id="despesasFixas" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()">
+            </div>
+            <div class="campo">
+                <label>📊 Orçamento livre para gastos variáveis</label>
+                <span class="resultado" id="orcamentoLivre">R$ 0,00</span>
+            </div>
+            <div class="campo">
+                <label>🎯 Meta de poupança / pagamento de dívida</label>
+                <input type="number" id="metaPoupanca" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()">
+            </div>
+        </div>
+
+        <!-- ==========================================
+        ALERTA / ANÁLISE SEMANAL
+        ========================================== -->
+        <div id="alertaContainer"></div>
+
+        <!-- ==========================================
+        ACOMPANHAMENTO DIÁRIO
+        ========================================== -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="min-width:80px;">
+                            <span class="cat-icon">📅</span>
+                            <span class="cat-label">Dia</span>
+                        </th>
+                        <th style="min-width:120px;">
+                            <span class="cat-icon">💰</span>
+                            <span class="cat-label">Valor gasto</span>
+                            <span class="cat-sub" style="display:block;font-size:11px;font-weight:400;opacity:0.8;">(R$)</span>
+                        </th>
+                        <th style="min-width:150px;">
+                            <span class="cat-icon">📍</span>
+                            <span class="cat-label">Onde / Em quê</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-dia">Segunda</td>
+                        <td class="col-valor"><input type="number" class="gasto" id="gasto_seg" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-onde"><input type="text" id="onde_seg" placeholder="Ex: Supermercado"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-dia">Terça</td>
+                        <td class="col-valor"><input type="number" class="gasto" id="gasto_ter" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-onde"><input type="text" id="onde_ter" placeholder="Ex: Transporte"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-dia">Quarta</td>
+                        <td class="col-valor"><input type="number" class="gasto" id="gasto_qua" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-onde"><input type="text" id="onde_qua" placeholder="Ex: Alimentação"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-dia">Quinta</td>
+                        <td class="col-valor"><input type="number" class="gasto" id="gasto_qui" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-onde"><input type="text" id="onde_qui" placeholder="Ex: Delivery"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-dia">Sexta</td>
+                        <td class="col-valor"><input type="number" class="gasto" id="gasto_sex" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-onde"><input type="text" id="onde_sex" placeholder="Ex: Lazer"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-dia">Sábado</td>
+                        <td class="col-valor"><input type="number" class="gasto" id="gasto_sab" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-onde"><input type="text" id="onde_sab" placeholder="Ex: Compras"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-dia">Domingo</td>
+                        <td class="col-valor"><input type="number" class="gasto" id="gasto_dom" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-onde"><input type="text" id="onde_dom" placeholder="Ex: Descanso"></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><strong>TOTAL GASTO</strong></td>
+                        <td class="col-valor"><span class="resultado" id="totalGasto">R$ 0,00</span></td>
+                        <td class="col-onde">—</td>
+                    </tr>
+                    <tr class="linha-diferenca">
+                        <td><strong>Diferença em relação ao orçamento livre</strong></td>
+                        <td class="col-valor"><span class="resultado" id="diferenca">R$ 0,00</span></td>
+                        <td class="col-onde"><span id="statusDiferenca" style="font-weight:600;font-size:13px;">( ) dentro ( ) acima</span></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <!-- ==========================================
+        OBSTÁCULOS
+        ========================================== -->
+        <div class="obstaculos-box">
+            <div class="titulo">🚧 Obstáculos Antecipados e Respostas Planejadas</div>
+            <div class="grid">
+                <div class="campo">
+                    <label>Obstáculo 1</label>
+                    <input type="text" id="obstaculo1" placeholder="Ex: Festa de aniversário no sábado">
+                </div>
+                <div class="campo">
+                    <label>Minha resposta planejada</label>
+                    <textarea id="resposta1" placeholder="Ex: Presente artesanal com materiais de casa" rows="2"></textarea>
+                </div>
+                <div class="campo">
+                    <label>Obstáculo 2</label>
+                    <input type="text" id="obstaculo2" placeholder="Ex: Almoço com colegas na sexta">
+                </div>
+                <div class="campo">
+                    <label>Minha resposta planejada</label>
+                    <textarea id="resposta2" placeholder="Ex: Vou, mas já separei o valor no orçamento" rows="2"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+        REFLEXÃO DE DOMINGO
+        ========================================== -->
+        <div class="reflexao-box">
+            <div class="titulo">🔄 Reset do Fim de Semana — Reflexão de Domingo</div>
+
+            <div class="campo">
+                <label>🏆 Vitória financeira desta semana (grande ou pequena):</label>
+                <textarea id="vitoria" placeholder="Ex: Não pedi delivery nenhum dia!" rows="2"></textarea>
+            </div>
+
+            <div class="campo">
+                <label>📉 Onde me afastei do meu orçamento? O que aprendi?</label>
+                <textarea id="aprendizado" placeholder="Ex: Estourei no delivery na quinta. Preciso de uma lasanha congelada para dias difíceis." rows="2"></textarea>
+            </div>
+
+            <div class="campo">
+                <label>💰 Sobra da semana (vai para dívida ou reserva):</label>
+                <div class="linha-sobra">
+                    <input type="number" id="sobra" placeholder="0,00" step="0.01" min="0" oninput="atualizarSobra()">
+                    <span style="font-weight:600;color:#1a237e;">→ destino:</span>
+                    <input type="text" class="destino" id="destinoSobra" placeholder="Ex: Reserva de emergência">
+                </div>
+            </div>
+
+            <div class="campo" style="border-bottom:none;">
+                <label>🙏 3 gratidões desta semana:</label>
+                <div class="gratidoes">
+                    <input type="text" id="gratidao1" placeholder="1. Ex: Tenho trabalho">
+                    <input type="text" id="gratidao2" placeholder="2. Ex: Saúde em dia">
+                    <input type="text" id="gratidao3" placeholder="3. Ex: Família unida">
+                </div>
+            </div>
+
+            <div class="campo" style="border-bottom:none;margin-top:6px;">
+                <label>🎯 Intenção para a próxima semana:</label>
+                <textarea id="intencaoProxima" placeholder="Ex: Manter o foco na temperança e reduzir delivery" rows="2"></textarea>
+            </div>
+        </div>
+
+        <!-- ==========================================
+        CITAÇÃO FINAL
+        ========================================== -->
+        <div class="footer-citacao">
+            <p>"Não explique a sua filosofia. Encarne-a."</p>
+            <p class="autor">— Epicteto</p>
+            <p class="marca">Domínio do Dinheiro — O Guia Estoico para Quitar Dívidas e Ter Paz com o Dinheiro</p>
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+    JAVASCRIPT
+    ========================================== -->
+    <script>
+        // ============================
+        // MÁSCARA PARA DATA (dd/mm/aaaa)
+        // ============================
+        function mascaraData(input) {
+            let valor = input.value.replace(/\D/g, '');
+            if (valor.length > 8) {
+                valor = valor.substring(0, 8);
+            }
+            if (valor.length > 4) {
+                valor = valor.substring(0, 2) + '/' + valor.substring(2, 4) + '/' + valor.substring(4, 8);
+            } else if (valor.length > 2) {
+                valor = valor.substring(0, 2) + '/' + valor.substring(2, 4);
+            }
+            input.value = valor;
+        }
+
+        // ============================
+        // SELECIONAR VIRTUDE
+        // ============================
+        function selecionarVirtude(el) {
+            document.querySelectorAll('.virtude').forEach(v => v.classList.remove('selecionada'));
+            el.classList.add('selecionada');
+            const radio = el.querySelector('input[type="radio"]');
+            if (radio) radio.checked = true;
+        }
+
+        // ============================
+        // CALCULAR TUDO
+        // ============================
+        function calcularTudo() {
+            // RENDA E DESPESAS FIXAS
+            const renda = parseFloat(document.getElementById('rendaDisponivel').value) || 0;
+            const fixas = parseFloat(document.getElementById('despesasFixas').value) || 0;
+            const meta = parseFloat(document.getElementById('metaPoupanca').value) || 0;
+
+            const orcamentoLivre = renda - fixas;
+            const orcamentoLivreEl = document.getElementById('orcamentoLivre');
+            orcamentoLivreEl.textContent = 'R$ ' + orcamentoLivre.toFixed(2).replace('.', ',');
+            orcamentoLivreEl.className = 'resultado';
+            if (orcamentoLivre > 0) orcamentoLivreEl.classList.add('positivo');
+            else if (orcamentoLivre < 0) orcamentoLivreEl.classList.add('negativo');
+            else orcamentoLivreEl.classList.add('zero');
+
+            // GASTOS DIÁRIOS
+            const gastos = [
+                'gasto_seg', 'gasto_ter', 'gasto_qua',
+                'gasto_qui', 'gasto_sex', 'gasto_sab', 'gasto_dom'
+            ];
+
+            let totalGasto = 0;
+            gastos.forEach(id => {
+                const val = parseFloat(document.getElementById(id).value) || 0;
+                totalGasto += val;
+            });
+
+            const totalGastoEl = document.getElementById('totalGasto');
+            totalGastoEl.textContent = 'R$ ' + totalGasto.toFixed(2).replace('.', ',');
+            totalGastoEl.className = 'resultado';
+            if (totalGasto > orcamentoLivre) totalGastoEl.classList.add('negativo');
+            else if (totalGasto < orcamentoLivre) totalGastoEl.classList.add('positivo');
+            else totalGastoEl.classList.add('zero');
+
+            // DIFERENÇA
+            const diferenca = orcamentoLivre - totalGasto;
+            const diferencaEl = document.getElementById('diferenca');
+            diferencaEl.textContent = (diferenca >= 0 ? '+' : '') + 'R$ ' + diferenca.toFixed(2).replace('.', ',');
+            diferencaEl.className = 'resultado';
+            if (diferenca > 0) diferencaEl.classList.add('positivo');
+            else if (diferenca < 0) diferencaEl.classList.add('negativo');
+            else diferencaEl.classList.add('zero');
+
+            // STATUS DA DIFERENÇA
+            const statusEl = document.getElementById('statusDiferenca');
+            if (diferenca >= 0) {
+                statusEl.textContent = '✅ dentro do orçamento';
+                statusEl.style.color = '#2e7d32';
+            } else {
+                statusEl.textContent = '⚠️ acima do orçamento';
+                statusEl.style.color = '#c62828';
+            }
+
+            // ATUALIZAR SOBRA
+            atualizarSobra();
+
+            // GERAR ALERTA
+            gerarAlerta(orcamentoLivre, totalGasto, diferenca);
+        }
+
+        // ============================
+        // ATUALIZAR SOBRA
+        // ============================
+        function atualizarSobra() {
+            const sobraInput = document.getElementById('sobra');
+            const diferenca = parseFloat(document.getElementById('diferenca').textContent.replace(/[^0-9,\-]/g, '').replace(',', '.')) || 0;
+
+            // Se a diferença for positiva e o campo de sobra estiver vazio, sugere o valor
+            if (diferenca > 0 && sobraInput.value === '') {
+                sobraInput.placeholder = 'Sugestão: ' + diferenca.toFixed(2).replace('.', ',');
+            } else if (diferenca <= 0 && sobraInput.value === '') {
+                sobraInput.placeholder = 'Não há sobra esta semana';
+            }
+        }
+
+        // ============================
+        // GERAR ALERTA
+        // ============================
+        function gerarAlerta(orcamento, gasto, diferenca) {
+            const container = document.getElementById('alertaContainer');
+            let html = '';
+
+            if (orcamento === 0 && gasto === 0) {
+                html = `
+                    <div class="alerta-box atencao">
+                        <div class="titulo">💡 Preencha seus dados</div>
+                        <div class="mensagem">Preencha a renda e as despesas fixas para ver sua análise semanal.</div>
+                    </div>
+                `;
+            } else if (diferenca > 0) {
+                html = `
+                    <div class="alerta-box sucesso">
+                        <div class="titulo">✅ Semana DENTRO do orçamento!</div>
+                        <div class="mensagem">
+                            Você tem <span class="destaque">R$ ${diferenca.toFixed(2).replace('.', ',')}</span> de sobra nesta semana.
+                            ${diferenca > 50 ? 'Isso é excelente! Você está no caminho certo.' : 'Continue assim, cada real economizado conta.'}
+                            <br><br>
+                            <span class="destaque">Pergunta estoica:</span> "Essa sobra pode servir ao meu Suficiente?" — <span style="font-style:italic;">O Suficiente</span>
+                        </div>
+                    </div>
+                `;
+            } else if (diferenca < 0) {
+                const deficit = Math.abs(diferenca);
+                html = `
+                    <div class="alerta-box perigo">
+                        <div class="titulo">🚨 Semana ACIMA do orçamento!</div>
+                        <div class="mensagem">
+                            Você gastou <span class="destaque">R$ ${deficit.toFixed(2).replace('.', ',')}</span> a mais do que planejou.
+                            ${deficit > 100 ? 'Este é um alerta sério. Identifique onde pode cortar.' : 'Identifique onde pode ajustar e reduza na próxima semana.'}
+                            <br><br>
+                            <span class="destaque">Pergunta estoica:</span> "O que posso eliminar que não serve à minha vida?" — <span style="font-style:italic;">O Suficiente</span>
+                        </div>
+                    </div>
+                `;
+            } else if (diferenca === 0 && orcamento > 0) {
+                html = `
+                    <div class="alerta-box atencao">
+                        <div class="titulo">🟡 Semana NO LIMITE</div>
+                        <div class="mensagem">
+                            Você gastou exatamente o que planejou. Qualquer imprevisto pode comprometer o orçamento.
+                            <br><br>
+                            <span class="destaque">Dica:</span> Tente reduzir em 5-10% uma categoria de gasto na próxima semana.
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ============================
+        // LIMPAR TUDO
+        // ============================
+        function limparTudo() {
+            if (!confirm('Limpar todo o preenchimento?')) return;
+            document.querySelectorAll('input[type="text"]').forEach(el => el.value = '');
+            document.querySelectorAll('input[type="number"]').forEach(el => el.value = '');
+            document.querySelectorAll('textarea').forEach(el => el.value = '');
+            document.querySelectorAll('.virtude').forEach(v => v.classList.remove('selecionada'));
+            document.querySelectorAll('input[name="virtude"]').forEach(el => el.checked = false);
+            calcularTudo();
+        }
+
+        // ============================
+        // GERAR PDF
+        // ============================
+        function gerarPDF() {
+            window.print();
+        }
+
+        // ============================
+        // INICIALIZAR
+        // ============================
+        document.addEventListener('DOMContentLoaded', function() {
+            calcularTudo();
+
+            document.querySelectorAll('input[type="number"]').forEach(el => {
+                el.addEventListener('input', calcularTudo);
+            });
+
+            document.querySelectorAll('input[type="text"]').forEach(el => {
+                if (el.id === 'semanaInicio' || el.id === 'semanaFim') {
+                    el.addEventListener('input', function() {
+                        mascaraData(this);
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
