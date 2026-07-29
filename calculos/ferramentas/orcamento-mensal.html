@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento Mensal — Domínio do Dinheiro</title>
+    <style>
+        /* ============================================
+           CONFIGURAÇÕES GERAIS
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            padding: 48px 40px 40px;
+            position: relative;
+        }
+
+        /* ============================================
+           BOTÕES TOPO
+           ============================================ */
+        .top-actions {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .top-actions button {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .top-actions .btn-inicio {
+            background: #2e7d32;
+            color: #fff;
+        }
+        .top-actions .btn-inicio:hover {
+            background: #1b5e20;
+            transform: translateY(-1px);
+        }
+        .top-actions .btn-limpar {
+            background: #e0e0e0;
+            color: #555;
+        }
+        .top-actions .btn-limpar:hover {
+            background: #d0d0d0;
+            transform: translateY(-1px);
+        }
+        .top-actions .btn-pdf {
+            background: #1a237e;
+            color: #fff;
+        }
+        .top-actions .btn-pdf:hover {
+            background: #0d1555;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding-right: 0;
+                padding-top: 50px;
+            }
+            .top-actions {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: flex-end;
+                margin-bottom: 16px;
+                padding-top: 8px;
+            }
+        }
+
+        /* ============================================
+           CABEÇALHO
+           ============================================ */
+        .header {
+            text-align: center;
+            border-bottom: 4px solid #1a237e;
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+            padding-right: 160px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding-right: 0;
+                padding-top: 0;
+            }
+        }
+
+        .header .brand {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a237e;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 8px;
+        }
+
+        .header .subtitle {
+            font-size: 16px;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* ============================================
+           MÊS E ANO
+           ============================================ */
+        .mes-ano {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #f8f9fa;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .mes-ano label {
+            font-weight: 600;
+            color: #1a237e;
+            font-size: 15px;
+        }
+
+        .mes-ano input {
+            border: 2px solid #c5cae9;
+            border-radius: 6px;
+            padding: 8px 14px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a237e;
+            background: #fff;
+            transition: border-color 0.3s;
+            width: 160px;
+        }
+
+        .mes-ano input:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+
+        .mes-ano input::placeholder {
+            color: #aaa;
+            font-weight: 400;
+        }
+
+        /* ============================================
+           TABELA
+           ============================================ */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 28px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead th {
+            background: #1a237e;
+            color: #fff;
+            font-weight: 600;
+            padding: 12px 16px;
+            text-align: left;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        thead th:last-child {
+            border-right: none;
+        }
+
+        thead th .cat-icon {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        thead th .cat-label {
+            display: block;
+            font-size: 13px;
+        }
+
+        thead th .cat-sub {
+            display: block;
+            font-size: 11px;
+            font-weight: 400;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        tbody td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #eee;
+            color: #333;
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        .col-categoria {
+            font-weight: 600;
+            color: #1a237e;
+            min-width: 180px;
+        }
+
+        .col-categoria .sub {
+            font-weight: 400;
+            color: #777;
+            font-size: 12px;
+            display: block;
+        }
+
+        .col-valor input {
+            width: 100%;
+            min-width: 100px;
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            text-align: right;
+            background: #fafafa;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .col-valor input:focus {
+            outline: none;
+            border-color: #1a237e;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        }
+
+        .col-valor input::placeholder {
+            color: #bbb;
+            font-weight: 400;
+        }
+
+        .col-valor .resultado {
+            display: inline-block;
+            width: 100%;
+            padding: 6px 10px;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            text-align: right;
+            border-radius: 4px;
+            min-height: 32px;
+        }
+
+        /* CORES CORRETAS DA CARTILHA */
+        .col-valor .resultado.positivo {
+            color: #2e7d32;  /* VERDE = sobra, bom */
+        }
+
+        .col-valor .resultado.negativo {
+            color: #c62828;  /* VERMELHO = déficit, alerta */
+        }
+
+        .col-valor .resultado.zero {
+            color: #f9a825;  /* AMARELO = neutro */
+        }
+
+        /* Linhas de total */
+        tfoot td {
+            padding: 10px 12px;
+            background: #e8eaf6;
+            font-weight: 700;
+            border-top: 2px solid #1a237e;
+        }
+
+        tfoot .col-valor .resultado {
+            font-size: 15px;
+        }
+
+        .linha-destaque td {
+            background: #fff8e1;
+            border-top: 2px solid #f9a825;
+            font-weight: 700;
+        }
+
+        .linha-destaque .col-valor .resultado {
+            font-size: 16px;
+        }
+
+        /* ============================================
+           ALERTAS / ANÁLISE
+           ============================================ */
+        .alerta-box {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1a237e;
+        }
+
+        .alerta-box .titulo {
+            font-weight: 700;
+            color: #1a237e;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .alerta-box .mensagem {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .alerta-box .mensagem .destaque {
+            font-weight: 700;
+        }
+
+        .alerta-box.sucesso {
+            border-left-color: #2e7d32;
+            background: #e8f5e9;
+        }
+        .alerta-box.sucesso .titulo {
+            color: #2e7d32;
+        }
+
+        .alerta-box.atencao {
+            border-left-color: #f9a825;
+            background: #fff8e1;
+        }
+        .alerta-box.atencao .titulo {
+            color: #e65100;
+        }
+
+        .alerta-box.perigo {
+            border-left-color: #c62828;
+            background: #ffebee;
+        }
+        .alerta-box.perigo .titulo {
+            color: #c62828;
+        }
+
+        /* ============================================
+           REFLEXÕES (rodapé)
+           ============================================ */
+        .reflexoes-box {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-top: 20px;
+            margin-bottom: 28px;
+        }
+
+        .reflexoes-box .lembrete {
+            font-style: italic;
+            color: #555;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+            margin-bottom: 14px;
+        }
+
+        .reflexoes-box .lembrete .destaque {
+            color: #1a237e;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        .reflexoes-box .campo {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .reflexoes-box .campo:last-child {
+            border-bottom: none;
+        }
+
+        .reflexoes-box .campo label {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+            min-width: 220px;
+            flex-shrink: 0;
+            padding-top: 4px;
+        }
+
+        .reflexoes-box .campo textarea {
+            flex: 1;
+            min-height: 40px;
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            resize: vertical;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: #fafafa;
+        }
+
+        .reflexoes-box .campo textarea:focus {
+            outline: none;
+            border-color: #1a237e;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        }
+
+        .reflexoes-box .campo textarea::placeholder {
+            color: #bbb;
+            font-style: italic;
+        }
+
+        /* ============================================
+           RODAPÉ
+           ============================================ */
+        .footer-citacao {
+            text-align: center;
+            padding: 20px 0 0;
+            border-top: 2px solid #e0e0e0;
+            margin-top: 8px;
+        }
+
+        .footer-citacao p {
+            font-size: 15px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .footer-citacao .autor {
+            font-weight: 600;
+            color: #1a237e;
+            font-style: normal;
+        }
+
+        .footer-citacao .marca {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+            font-style: normal;
+        }
+
+        /* ============================================
+           IMPRESSÃO
+           ============================================ */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+                margin: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 20px 25px;
+                max-width: 100%;
+            }
+
+            .top-actions {
+                display: none !important;
+            }
+
+            .header {
+                padding-right: 0;
+                border-bottom: 3px solid #1a237e;
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+            .header .subtitle {
+                font-size: 12px;
+            }
+            .header .brand {
+                font-size: 11px;
+            }
+
+            .mes-ano {
+                background: #f8f9fa !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                page-break-after: avoid;
+                break-after: avoid;
+                padding: 8px 14px !important;
+            }
+            .mes-ano label {
+                font-size: 11px !important;
+            }
+            .mes-ano input {
+                font-size: 11px !important;
+                padding: 4px 10px !important;
+                width: 120px !important;
+            }
+
+            .table-wrapper {
+                border: 1px solid #ccc;
+                border-radius: 0;
+            }
+
+            table {
+                page-break-inside: auto;
+                break-inside: auto;
+                width: 100%;
+            }
+
+            thead {
+                display: table-header-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+
+            tbody tr {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            thead th {
+                background: #1a237e !important;
+                color: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 6px 10px !important;
+                font-size: 10px !important;
+            }
+            thead th .cat-label {
+                font-size: 10px !important;
+            }
+            thead th .cat-sub {
+                font-size: 8px !important;
+            }
+            thead th .cat-icon {
+                font-size: 14px !important;
+            }
+
+            tbody td {
+                padding: 4px 8px !important;
+                font-size: 10px !important;
+            }
+
+            .col-categoria {
+                font-size: 10px !important;
+                min-width: 120px !important;
+            }
+            .col-categoria .sub {
+                font-size: 9px !important;
+            }
+
+            .col-valor input {
+                font-size: 10px !important;
+                padding: 3px 6px !important;
+                min-width: 60px !important;
+            }
+
+            .col-valor .resultado {
+                font-size: 10px !important;
+                padding: 3px 6px !important;
+                min-height: 18px !important;
+            }
+
+            tfoot td {
+                padding: 4px 8px !important;
+                font-size: 10px !important;
+                background: #e8eaf6 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            tfoot .col-valor .resultado {
+                font-size: 11px !important;
+            }
+
+            .linha-destaque td {
+                background: #fff8e1 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .alerta-box {
+                padding: 8px 12px !important;
+                margin-bottom: 12px !important;
+            }
+            .alerta-box .titulo {
+                font-size: 11px !important;
+                margin-bottom: 2px !important;
+            }
+            .alerta-box .mensagem {
+                font-size: 10px !important;
+            }
+
+            .reflexoes-box {
+                padding: 10px 14px !important;
+                margin-top: 12px !important;
+                margin-bottom: 12px !important;
+                background: #f5f5f5 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .reflexoes-box .lembrete {
+                font-size: 10px !important;
+                padding: 4px 0 !important;
+                margin-bottom: 8px !important;
+            }
+            .reflexoes-box .campo label {
+                font-size: 10px !important;
+                min-width: 140px !important;
+            }
+            .reflexoes-box .campo textarea {
+                font-size: 10px !important;
+                min-height: 24px !important;
+                padding: 4px 8px !important;
+                border-width: 1px !important;
+            }
+
+            .footer-citacao {
+                padding: 10px 0 0 !important;
+                border-top: 2px solid #e0e0e0 !important;
+            }
+            .footer-citacao p {
+                font-size: 11px !important;
+            }
+            .footer-citacao .marca {
+                font-size: 9px !important;
+            }
+
+            input {
+                border: 1px solid #ccc !important;
+                background: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            textarea {
+                border: 1px solid #ccc !important;
+                background: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .resultado.positivo {
+                color: #2e7d32 !important;
+            }
+            .resultado.negativo {
+                color: #c62828 !important;
+            }
+            .resultado.zero {
+                color: #f9a825 !important;
+            }
+
+            .alerta-box.sucesso {
+                background: #e8f5e9 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .alerta-box.atencao {
+                background: #fff8e1 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .alerta-box.perigo {
+                background: #ffebee !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* ============================================
+           RESPONSIVO
+           ============================================ */
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .header {
+                padding-right: 0;
+                padding-top: 0;
+            }
+
+            .top-actions {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: flex-end;
+                margin-bottom: 16px;
+                padding-top: 8px;
+            }
+
+            .mes-ano {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .mes-ano input {
+                width: 100%;
+            }
+
+            thead th,
+            tbody td,
+            tfoot td {
+                padding: 6px 8px;
+                font-size: 12px;
+            }
+
+            .col-categoria {
+                min-width: 120px;
+                font-size: 12px;
+            }
+
+            .col-valor input {
+                min-width: 70px;
+                font-size: 12px;
+                padding: 4px 6px;
+            }
+
+            .reflexoes-box .campo {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+            }
+
+            .reflexoes-box .campo label {
+                min-width: unset;
+                font-size: 13px;
+            }
+
+            .reflexoes-box .campo textarea {
+                min-height: 30px;
+                font-size: 13px;
+            }
+
+            .alerta-box .mensagem {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="conteudoPDF">
+
+        <!-- ==========================================
+        BOTÕES TOPO
+        ========================================== -->
+        <div class="top-actions" id="botoesTopo">
+            <button class="btn-inicio" onclick="window.location.href='../index-principal.html'">🏠 Início</button>
+            <button class="btn-limpar" onclick="limparTudo()">🗑️ Limpar</button>
+            <button class="btn-pdf" onclick="gerarPDF()">📄 Salvar PDF</button>
+        </div>
+
+        <!-- ==========================================
+        CABEÇALHO
+        ========================================== -->
+        <div class="header">
+            <div class="brand">Domínio do Dinheiro</div>
+            <h1>Orçamento Mensal</h1>
+            <div class="subtitle">Planeje e acompanhe seus gastos mês a mês</div>
+        </div>
+
+        <!-- ==========================================
+        MÊS E ANO
+        ========================================== -->
+        <div class="mes-ano">
+            <label>📅 Mês / Ano:</label>
+            <input type="text" id="mesAno" placeholder="Ex: Janeiro / 2026" oninput="atualizarTitulo()">
+        </div>
+
+        <!-- ==========================================
+        TABELA PRINCIPAL
+        ========================================== -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="min-width:200px;">
+                            <span class="cat-icon">📂</span>
+                            <span class="cat-label">Categoria</span>
+                        </th>
+                        <th style="min-width:130px;">
+                            <span class="cat-icon">📋</span>
+                            <span class="cat-label">Previsto</span>
+                            <span class="cat-sub">(R$)</span>
+                        </th>
+                        <th style="min-width:130px;">
+                            <span class="cat-icon">📌</span>
+                            <span class="cat-label">Real</span>
+                            <span class="cat-sub">(R$)</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ===================== -->
+                    <!-- ENTRADAS -->
+                    <!-- ===================== -->
+                    <tr>
+                        <td colspan="3" style="background:#e8eaf6;font-weight:700;color:#1a237e;padding:10px 12px;">
+                            💰 ENTRADAS
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">
+                            Salário / Renda principal líquida
+                            <span class="sub">já descontado INSS, IR e outros</span>
+                        </td>
+                        <td class="col-valor"><input type="number" class="previsto" id="entrada_1" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="entrada_real_1" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">
+                            Vale-alimentação / Vale-refeição
+                            <span class="sub">se uso vinculado ao mercado, anote e explique</span>
+                        </td>
+                        <td class="col-valor"><input type="number" class="previsto" id="entrada_2" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="entrada_real_2" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">
+                            Renda extra
+                            <span class="sub">freelance / bico / aluguel / vendas</span>
+                        </td>
+                        <td class="col-valor"><input type="number" class="previsto" id="entrada_3" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="entrada_real_3" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">
+                            Outros
+                            <span class="sub">pensão / benefícios / 13º / bônus</span>
+                        </td>
+                        <td class="col-valor"><input type="number" class="previsto" id="entrada_4" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="entrada_real_4" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria"><strong>TOTAL DE ENTRADAS</strong></td>
+                        <td class="col-valor"><span class="resultado" id="totalEntradasPrev">R$ 0,00</span></td>
+                        <td class="col-valor"><span class="resultado" id="totalEntradasReal">R$ 0,00</span></td>
+                    </tr>
+
+                    <!-- ===================== -->
+                    <!-- SAÍDAS FIXAS -->
+                    <!-- ===================== -->
+                    <tr>
+                        <td colspan="3" style="background:#e8eaf6;font-weight:700;color:#1a237e;padding:10px 12px;border-top:2px solid #1a237e;">
+                            🏠 SAÍDAS FIXAS
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">
+                            Aluguel / Financiamento imobiliário
+                            <span class="sub">incluindo condomínio e IPTU</span>
+                        </td>
+                        <td class="col-valor"><input type="number" class="previsto" id="fixa_1" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="fixa_real_1" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Energia elétrica</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="fixa_2" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="fixa_real_2" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Água e esgoto</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="fixa_3" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="fixa_real_3" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Gás encanado / botijão</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="fixa_4" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="fixa_real_4" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Internet + celular</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="fixa_5" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="fixa_real_5" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Plano de saúde</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="fixa_6" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="fixa_real_6" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Parcelas de dívidas (total)</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="fixa_7" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="fixa_real_7" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Financiamento de veículo</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="fixa_8" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="fixa_real_8" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Escola / Faculdade / Cursos</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="fixa_9" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="fixa_real_9" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Seguro (carro / vida / residencial)</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="fixa_10" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="fixa_real_10" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria"><strong>TOTAL DE SAÍDAS FIXAS</strong></td>
+                        <td class="col-valor"><span class="resultado" id="totalFixasPrev">R$ 0,00</span></td>
+                        <td class="col-valor"><span class="resultado" id="totalFixasReal">R$ 0,00</span></td>
+                    </tr>
+
+                    <!-- ===================== -->
+                    <!-- SAÍDAS VARIÁVEIS -->
+                    <!-- ===================== -->
+                    <tr>
+                        <td colspan="3" style="background:#e8eaf6;font-weight:700;color:#1a237e;padding:10px 12px;border-top:2px solid #1a237e;">
+                            🛒 SAÍDAS VARIÁVEIS
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Alimentação — mercado / cozinha em casa</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_1" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_1" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Alimentação fora / restaurantes</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_2" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_2" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Delivery (iFood, Rappi, outros)</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_3" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_3" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Transporte — combustível / pedágio / estacionamento</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_4" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_4" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Transporte — aplicativo / ônibus / metrô</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_5" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_5" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Saúde — consultas / remédios / exames</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_6" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_6" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Higiene e beleza — salão / barbearia / produtos</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_7" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_7" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Vestuário</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_8" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_8" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Assinaturas — streaming / academia / apps</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_9" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_9" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Lazer e entretenimento</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_10" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_10" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Presentes e datas comemorativas</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_11" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_11" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Pets — ração / veterinário / banho</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_12" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_12" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Gastos imprevistos (reserva do mês)</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="var_13" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="var_real_13" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria"><strong>TOTAL DE SAÍDAS VARIÁVEIS</strong></td>
+                        <td class="col-valor"><span class="resultado" id="totalVariaveisPrev">R$ 0,00</span></td>
+                        <td class="col-valor"><span class="resultado" id="totalVariaveisReal">R$ 0,00</span></td>
+                    </tr>
+
+                    <!-- ===================== -->
+                    <!-- POUPANÇA E INVESTIMENTO -->
+                    <!-- ===================== -->
+                    <tr>
+                        <td colspan="3" style="background:#e8eaf6;font-weight:700;color:#1a237e;padding:10px 12px;border-top:2px solid #1a237e;">
+                            📈 POUPANÇA E INVESTIMENTO
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Reserva de emergência</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="poup_1" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="poup_real_1" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Pagamento extra de dívidas</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="poup_2" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="poup_real_2" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Investimento — médio prazo</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="poup_3" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="poup_real_3" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria">Previdência privada / longo prazo</td>
+                        <td class="col-valor"><input type="number" class="previsto" id="poup_4" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                        <td class="col-valor"><input type="number" class="real" id="poup_real_4" placeholder="0,00" step="0.01" min="0" oninput="calcularTudo()"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-categoria"><strong>TOTAL DE POUPANÇA</strong></td>
+                        <td class="col-valor"><span class="resultado" id="totalPoupPrev">R$ 0,00</span></td>
+                        <td class="col-valor"><span class="resultado" id="totalPoupReal">R$ 0,00</span></td>
+                    </tr>
+
+                    <!-- ===================== -->
+                    <!-- TOTAIS GERAIS E SALDO -->
+                    <!-- ===================== -->
+                    <tr class="linha-destaque">
+                        <td class="col-categoria"><strong>TOTAL DE SAÍDAS + POUPANÇA</strong></td>
+                        <td class="col-valor"><span class="resultado" id="totalSaidasPoupPrev">R$ 0,00</span></td>
+                        <td class="col-valor"><span class="resultado" id="totalSaidasPoupReal">R$ 0,00</span></td>
+                    </tr>
+                    <tr class="linha-destaque" style="border-bottom:2px solid #f9a825;">
+                        <td class="col-categoria"><strong>📊 SALDO DO MÊS</strong></td>
+                        <td class="col-valor"><span class="resultado" id="saldoPrev">R$ 0,00</span></td>
+                        <td class="col-valor"><span class="resultado" id="saldoReal">R$ 0,00</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ==========================================
+        ALERTA / ANÁLISE AUTOMÁTICA
+        ========================================== -->
+        <div id="alertaContainer"></div>
+
+        <!-- ==========================================
+        REFLEXÕES
+        ========================================== -->
+        <div class="reflexoes-box">
+            <div class="lembrete">
+                💡 <span class="destaque">Lembrete estoico:</span> "O suficiente não é uma quantidade, é uma atitude." — O Suficiente
+            </div>
+
+            <div class="campo">
+                <label>Meus gastos este mês refletiram minha Declaração do Suficiente?</label>
+                <textarea id="reflexao1" placeholder="Ex: Sim, consegui manter os gastos dentro do planejado..." rows="2"></textarea>
+            </div>
+            <div class="campo">
+                <label>O que vou ajustar no próximo mês?</label>
+                <textarea id="reflexao2" placeholder="Ex: Reduzir delivery e aumentar aporte na reserva..." rows="2"></textarea>
+            </div>
+        </div>
+
+        <!-- ==========================================
+        CITAÇÃO FINAL
+        ========================================== -->
+        <div class="footer-citacao">
+            <p>“Confine-se ao presente. Cada mês é um recomeço.”</p>
+            <p class="autor">— Marco Aurélio</p>
+            <p class="marca">Domínio do Dinheiro — O Guia Estoico para Quitar Dívidas e Ter Paz com o Dinheiro</p>
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+    JAVASCRIPT
+    ========================================== -->
+    <script>
+        // ============================
+        // CALCULAR TUDO
+        // ============================
+        function calcularTudo() {
+            // ---- ENTRADAS ----
+            const entradas = [
+                { prev: 'entrada_1', real: 'entrada_real_1' },
+                { prev: 'entrada_2', real: 'entrada_real_2' },
+                { prev: 'entrada_3', real: 'entrada_real_3' },
+                { prev: 'entrada_4', real: 'entrada_real_4' }
+            ];
+
+            let totalEntPrev = 0,
+                totalEntReal = 0;
+            entradas.forEach(e => {
+                const p = parseFloat(document.getElementById(e.prev).value) || 0;
+                const r = parseFloat(document.getElementById(e.real).value) || 0;
+                totalEntPrev += p;
+                totalEntReal += r;
+            });
+
+            document.getElementById('totalEntradasPrev').textContent = 'R$ ' + totalEntPrev.toFixed(2).replace('.', ',');
+            document.getElementById('totalEntradasReal').textContent = 'R$ ' + totalEntReal.toFixed(2).replace('.', ',');
+
+            // ---- SAÍDAS FIXAS ----
+            const fixas = [
+                { prev: 'fixa_1', real: 'fixa_real_1' },
+                { prev: 'fixa_2', real: 'fixa_real_2' },
+                { prev: 'fixa_3', real: 'fixa_real_3' },
+                { prev: 'fixa_4', real: 'fixa_real_4' },
+                { prev: 'fixa_5', real: 'fixa_real_5' },
+                { prev: 'fixa_6', real: 'fixa_real_6' },
+                { prev: 'fixa_7', real: 'fixa_real_7' },
+                { prev: 'fixa_8', real: 'fixa_real_8' },
+                { prev: 'fixa_9', real: 'fixa_real_9' },
+                { prev: 'fixa_10', real: 'fixa_real_10' }
+            ];
+
+            let totalFixPrev = 0,
+                totalFixReal = 0;
+            fixas.forEach(e => {
+                const p = parseFloat(document.getElementById(e.prev).value) || 0;
+                const r = parseFloat(document.getElementById(e.real).value) || 0;
+                totalFixPrev += p;
+                totalFixReal += r;
+            });
+
+            document.getElementById('totalFixasPrev').textContent = 'R$ ' + totalFixPrev.toFixed(2).replace('.', ',');
+            document.getElementById('totalFixasReal').textContent = 'R$ ' + totalFixReal.toFixed(2).replace('.', ',');
+
+            // ---- SAÍDAS VARIÁVEIS ----
+            const variaveis = [
+                { prev: 'var_1', real: 'var_real_1' },
+                { prev: 'var_2', real: 'var_real_2' },
+                { prev: 'var_3', real: 'var_real_3' },
+                { prev: 'var_4', real: 'var_real_4' },
+                { prev: 'var_5', real: 'var_real_5' },
+                { prev: 'var_6', real: 'var_real_6' },
+                { prev: 'var_7', real: 'var_real_7' },
+                { prev: 'var_8', real: 'var_real_8' },
+                { prev: 'var_9', real: 'var_real_9' },
+                { prev: 'var_10', real: 'var_real_10' },
+                { prev: 'var_11', real: 'var_real_11' },
+                { prev: 'var_12', real: 'var_real_12' },
+                { prev: 'var_13', real: 'var_real_13' }
+            ];
+
+            let totalVarPrev = 0,
+                totalVarReal = 0;
+            variaveis.forEach(e => {
+                const p = parseFloat(document.getElementById(e.prev).value) || 0;
+                const r = parseFloat(document.getElementById(e.real).value) || 0;
+                totalVarPrev += p;
+                totalVarReal += r;
+            });
+
+            document.getElementById('totalVariaveisPrev').textContent = 'R$ ' + totalVarPrev.toFixed(2).replace('.', ',');
+            document.getElementById('totalVariaveisReal').textContent = 'R$ ' + totalVarReal.toFixed(2).replace('.', ',');
+
+            // ---- POUPANÇA ----
+            const poups = [
+                { prev: 'poup_1', real: 'poup_real_1' },
+                { prev: 'poup_2', real: 'poup_real_2' },
+                { prev: 'poup_3', real: 'poup_real_3' },
+                { prev: 'poup_4', real: 'poup_real_4' }
+            ];
+
+            let totalPoupPrev = 0,
+                totalPoupReal = 0;
+            poups.forEach(e => {
+                const p = parseFloat(document.getElementById(e.prev).value) || 0;
+                const r = parseFloat(document.getElementById(e.real).value) || 0;
+                totalPoupPrev += p;
+                totalPoupReal += r;
+            });
+
+            document.getElementById('totalPoupPrev').textContent = 'R$ ' + totalPoupPrev.toFixed(2).replace('.', ',');
+            document.getElementById('totalPoupReal').textContent = 'R$ ' + totalPoupReal.toFixed(2).replace('.', ',');
+
+            // ---- TOTAIS GERAIS ----
+            const totalSaidasPrev = totalFixPrev + totalVarPrev + totalPoupPrev;
+            const totalSaidasReal = totalFixReal + totalVarReal + totalPoupReal;
+
+            document.getElementById('totalSaidasPoupPrev').textContent = 'R$ ' + totalSaidasPrev.toFixed(2).replace('.', ',');
+            document.getElementById('totalSaidasPoupReal').textContent = 'R$ ' + totalSaidasReal.toFixed(2).replace('.', ',');
+
+            // ---- SALDO ----
+            const saldoPrev = totalEntPrev - totalSaidasPrev;
+            const saldoReal = totalEntReal - totalSaidasReal;
+
+            const saldoPrevEl = document.getElementById('saldoPrev');
+            const saldoRealEl = document.getElementById('saldoReal');
+
+            saldoPrevEl.textContent = (saldoPrev >= 0 ? '+' : '') + 'R$ ' + saldoPrev.toFixed(2).replace('.', ',');
+            saldoRealEl.textContent = (saldoReal >= 0 ? '+' : '') + 'R$ ' + saldoReal.toFixed(2).replace('.', ',');
+
+            // CORES CORRETAS: Verde = positivo (bom), Vermelho = negativo (alerta)
+            saldoPrevEl.className = 'resultado';
+            if (saldoPrev > 0) saldoPrevEl.classList.add('positivo');
+            else if (saldoPrev < 0) saldoPrevEl.classList.add('negativo');
+            else saldoPrevEl.classList.add('zero');
+
+            saldoRealEl.className = 'resultado';
+            if (saldoReal > 0) saldoRealEl.classList.add('positivo');
+            else if (saldoReal < 0) saldoRealEl.classList.add('negativo');
+            else saldoRealEl.classList.add('zero');
+
+            // ---- CORES DOS TOTAIS DE SAÍDAS ----
+            const totalSaidasPoupPrevEl = document.getElementById('totalSaidasPoupPrev');
+            const totalSaidasPoupRealEl = document.getElementById('totalSaidasPoupReal');
+
+            totalSaidasPoupPrevEl.className = 'resultado';
+            if (totalSaidasPrev > totalEntPrev) totalSaidasPoupPrevEl.classList.add('negativo');
+            else if (totalSaidasPrev < totalEntPrev) totalSaidasPoupPrevEl.classList.add('positivo');
+            else totalSaidasPoupPrevEl.classList.add('zero');
+
+            totalSaidasPoupRealEl.className = 'resultado';
+            if (totalSaidasReal > totalEntReal) totalSaidasPoupRealEl.classList.add('negativo');
+            else if (totalSaidasReal < totalEntReal) totalSaidasPoupRealEl.classList.add('positivo');
+            else totalSaidasPoupRealEl.classList.add('zero');
+
+            // ---- ALERTA ----
+            gerarAlerta(totalEntReal, totalSaidasReal, saldoReal);
+        }
+
+        // ============================
+        // GERAR ALERTA (alinhado com a cartilha)
+        // ============================
+        function gerarAlerta(entradas, saidas, saldo) {
+            const container = document.getElementById('alertaContainer');
+            let html = '';
+
+            if (entradas === 0 && saidas === 0) {
+                html = `
+                    <div class="alerta-box atencao">
+                        <div class="titulo">💡 Preencha seus dados</div>
+                        <div class="mensagem">Preencha as entradas e saídas para ver sua análise personalizada.</div>
+                    </div>
+                `;
+            } else if (saldo > 0) {
+                html = `
+                    <div class="alerta-box sucesso">
+                        <div class="titulo">✅ Saldo POSITIVO — você está no caminho certo!</div>
+                        <div class="mensagem">
+                            Você terminou o mês com <span class="destaque">R$ ${saldo.toFixed(2).replace('.', ',')}</span> de sobra.
+                            ${saldo > 500 ? 'Isso é excelente!' : 'Continue assim, cada real economizado é um passo em direção à sua liberdade financeira.'}
+                            <br><br>
+                            <span class="destaque">Lembre-se estoico:</span> "O suficiente não é uma quantidade, é uma atitude." — O Suficiente
+                        </div>
+                    </div>
+                `;
+            } else if (saldo < 0) {
+                const deficit = Math.abs(saldo);
+                html = `
+                    <div class="alerta-box perigo">
+                        <div class="titulo">🚨 Saldo NEGATIVO — atenção!</div>
+                        <div class="mensagem">
+                            Você gastou <span class="destaque">R$ ${deficit.toFixed(2).replace('.', ',')}</span> a mais do que ganhou neste mês.
+                            ${deficit > 1000 ? 'Este é um alerta sério. Revise seus gastos com urgência.' : 'Identifique onde pode cortar e ajuste no próximo mês.'}
+                            <br><br>
+                            <span class="destaque">Pergunta estoica:</span> "O que posso eliminar que não serve à minha vida?"
+                        </div>
+                    </div>
+                `;
+            } else if (saldo === 0 && entradas > 0) {
+                html = `
+                    <div class="alerta-box atencao">
+                        <div class="titulo">🟡 Saldo ZERO — no limite</div>
+                        <div class="mensagem">
+                            Você gastou exatamente o que ganhou. Qualquer imprevisto pode comprometer seu orçamento.
+                            <br><br>
+                            <span class="destaque">Dica:</span> Tente reduzir em 5-10% uma categoria de gasto para começar a construir sua reserva.
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ============================
+        // ATUALIZAR TÍTULO
+        // ============================
+        function atualizarTitulo() {
+            // Apenas para manter a funcionalidade
+        }
+
+        // ============================
+        // LIMPAR TUDO
+        // ============================
+        function limparTudo() {
+            if (!confirm('Limpar todo o preenchimento?')) return;
+            document.querySelectorAll('input[type="number"]').forEach(el => el.value = '');
+            document.querySelectorAll('textarea').forEach(el => el.value = '');
+            document.getElementById('mesAno').value = '';
+            calcularTudo();
+        }
+
+        // ============================
+        // GERAR PDF
+        // ============================
+        function gerarPDF() {
+            window.print();
+        }
+
+        // ============================
+        // INICIALIZAR
+        // ============================
+        document.addEventListener('DOMContentLoaded', function() {
+            calcularTudo();
+
+            document.querySelectorAll('input[type="number"]').forEach(el => {
+                el.addEventListener('input', calcularTudo);
+            });
+        });
+    </script>
+
+</body>
+</html>
