@@ -184,8 +184,14 @@
       transition: 0.2s;
       white-space: nowrap;
       flex-shrink: 0;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
     }
     .audio-save:hover { background: #F1F5F9; }
+    .audio-save.saved {
+      color: #0F172A;
+    }
 
     /* BOTÕES CTA */
     .btn {
@@ -328,37 +334,37 @@
   <!-- ÁUDIO 1 -->
   <div class="audio-card">
     <div class="audio-left">
-      <button class="audio-btn" aria-label="Play Áudio 1">▶</button>
+      <button class="audio-btn" onclick="playAudio(this, 'https://www.evergreenscribe.com/kit-reset-5/Audio_1_Acalmar.mp3')">▶</button>
       <div class="audio-info">
         <span class="label">Áudio 1 - Para acalmar na hora (1 min)</span>
         <span class="sublabel">ITENS 1 e 2 · Respiração + Botão Âncora</span>
       </div>
     </div>
-    <button class="audio-save" onclick="salvarAudio(this, '#')">SALVAR →</button>
+    <a href="https://www.evergreenscribe.com/kit-reset-5/Audio_1_Acalmar.mp3" download="Audio1_Reset5_Acalmar.mp3" class="audio-save" onclick="salvarAudio(event)">SALVAR →</a>
   </div>
 
   <!-- ÁUDIO 2 -->
   <div class="audio-card">
     <div class="audio-left">
-      <button class="audio-btn" aria-label="Play Áudio 2">▶</button>
+      <button class="audio-btn" onclick="playAudio(this, 'https://www.evergreenscribe.com/kit-reset-5/Audio_2_Organizar_a_Mente.mp3')">▶</button>
       <div class="audio-info">
         <span class="label">Áudio 2 - Para organizar a cabeça</span>
         <span class="sublabel">ITENS 3 e 4 · Frase em 3ª pessoa + Tela de Cinema</span>
       </div>
     </div>
-    <button class="audio-save" onclick="salvarAudio(this, '#')">SALVAR →</button>
+    <a href="https://www.evergreenscribe.com/kit-reset-5/Audio_2_Organizar_a_Mente.mp3" download="Audio2_Reset5_Organizar.mp3" class="audio-save" onclick="salvarAudio(event)">SALVAR →</a>
   </div>
 
   <!-- ÁUDIO 3 -->
   <div class="audio-card">
     <div class="audio-left">
-      <button class="audio-btn" aria-label="Play Áudio 3">▶</button>
+      <button class="audio-btn" onclick="playAudio(this, 'https://www.evergreenscribe.com/kit-reset-5/Audio_3_Voltar_a_Dormir.mp3')">▶</button>
       <div class="audio-info">
         <span class="label">Áudio 3 - Para voltar a dormir</span>
         <span class="sublabel">ITEM 5 · Escreva e Solte + Permissão</span>
       </div>
     </div>
-    <button class="audio-save" onclick="salvarAudio(this, '#')">SALVAR →</button>
+    <a href="https://www.evergreenscribe.com/kit-reset-5/Audio_3_Voltar_a_Dormir.mp3" download="Audio3_Reset5_Dormir.mp3" class="audio-save" onclick="salvarAudio(event)">SALVAR →</a>
   </div>
 
   <h2>💻 Seu Reset de 5 minutos (Modo Dia)</h2>
@@ -454,33 +460,67 @@
 </div>
 
 <script>
-  // Função para simular "Salvar" com feedback
-  function salvarAudio(btn, link) {
-    const original = btn.textContent;
-    btn.textContent = '✓ SALVO';
-    btn.style.color = '#0F172A';
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.style.color = '#7F3040';
-    }, 2000);
-    // Aqui você pode redirecionar ou abrir o link real
-    // window.open(link, '_blank');
+  // PLAY ÁUDIO com reprodução real
+  let audioAtual = null;
+
+  function playAudio(btn, url) {
+    if (audioAtual && audioAtual.src === url) {
+      if (audioAtual.paused) {
+        audioAtual.play();
+        btn.classList.add('playing');
+        btn.textContent = '⏸';
+      } else {
+        audioAtual.pause();
+        btn.classList.remove('playing');
+        btn.textContent = '▶';
+      }
+      return;
+    }
+
+    // Para o áudio anterior se houver
+    if (audioAtual) {
+      audioAtual.pause();
+      audioAtual.currentTime = 0;
+      document.querySelectorAll('.audio-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.textContent = '▶';
+      });
+    }
+
+    const audio = new Audio(url);
+    audioAtual = audio;
+    audio.play();
+    btn.classList.add('playing');
+    btn.textContent = '⏸';
+
+    audio.onended = () => {
+      btn.classList.remove('playing');
+      btn.textContent = '▶';
+      audioAtual = null;
+    };
+
+    audio.onerror = () => {
+      btn.classList.remove('playing');
+      btn.textContent = '▶';
+      audioAtual = null;
+      alert('Erro ao carregar o áudio. Verifique sua conexão.');
+    };
   }
 
-  // Toggle play nos botões de áudio (efeito visual)
-  document.querySelectorAll('.audio-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const isPlaying = this.classList.toggle('playing');
-      this.textContent = isPlaying ? '⏸' : '▶';
-      // Simula áudio tocando
-      if (isPlaying) {
-        setTimeout(() => {
-          this.classList.remove('playing');
-          this.textContent = '▶';
-        }, 2000);
-      }
-    });
-  });
+  // SALVAR ÁUDIO (download real com feedback)
+  function salvarAudio(event) {
+    // O download já é feito pelo atributo download do <a>
+    // Só mostramos feedback visual
+    const btn = event.target;
+    const original = btn.textContent;
+    btn.textContent = '✓ SALVO';
+    btn.classList.add('saved');
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove('saved');
+    }, 3000);
+    // Não impede o download
+  }
 </script>
 
 </body>
