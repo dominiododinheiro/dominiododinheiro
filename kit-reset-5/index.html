@@ -1,194 +1,487 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kit Reset 5 - Por Onde Começar</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#F1F5F9;color:#1E293B;display:flex;justify-content:center;padding:20px;line-height:1.7}
-.page{width:210mm;background:#FFF;padding:32px 36px;border-radius:16px;border:1px solid #E2E8F0}
-h1{font-family:'Fraunces',serif;font-size:30px;color:#0F172A;line-height:1.1;margin-bottom:6px}
-h1 span{color:#7F3040}
-.sub{font-size:14px;color:#64748B;margin-bottom:20px}
-.alerta{background:#0F172A;color:#FFF;border-radius:12px;padding:16px 18px;margin-bottom:20px}
-.alerta h3{color:#D4AF37;font-size:14px;margin-bottom:6px;letter-spacing:0.5px}
-.alerta p{font-size:14px;line-height:1.6;color:#E2E8F0}
-h2{font-family:'Fraunces',serif;font-size:20px;color:#0F172A;margin:22px 0 10px}
-h3{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;color:#7F3040;margin-bottom:8px}
-.box{border-radius:12px;padding:16px 18px;margin-bottom:14px;border:1px solid #E2E8F0}
-.box-claro{background:#F8FAFC}
-.box-verde{background:#F0FDF4;border-color:#BBF7D0}
-.box-roxo{background:#F5F3FF;border-color:#DDD6FE}
-.box-nao-fazer{background:#FEF2F2;border:1.5px solid #FECACA;border-radius:12px;padding:18px 20px;margin-bottom:14px}
-.box-nao-fazer h3{color:#991B1B;font-size:14px;margin-bottom:12px;letter-spacing:0.5px}
-.lista-nao-fazer{list-style:none;padding:0;margin:0}
-.lista-nao-fazer li{display:flex;gap:10px;margin-bottom:12px;font-size:14px;line-height:1.5;color:#334155}
-.lista-nao-fazer li:last-child{margin-bottom:0}
-.lista-nao-fazer .icone{width:24px;min-width:24px;height:24px;background:#FEE2E2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px}
-.etapa{margin-bottom:18px;padding:14px 16px;border-radius:10px;border:1px solid #E2E8F0;background:#FFF}
-.etapa-num{width:32px;height:32px;background:#7F3040;color:#FFF;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;margin-right:8px}
-.etapa-titulo{font-size:14.5px;font-weight:800;color:#0F172A;margin-bottom:6px;display:flex;align-items:center}
-.etapa-desc{font-size:13.5px;color:#334155;line-height:1.6;padding-left:40px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px;margin:8px 0}
-.btn-preto{background:#0F172A;color:#FFF}
-.btn-borda{background:#FFF;color:#0F172A;border:2px solid #0F172A}
-.btn-audio{display:flex;align-items:center;justify-content:space-between;background:#FFF;border:1.5px solid #E2E8F0;border-radius:10px;padding:12px 14px;margin-bottom:8px;text-decoration:none;color:#0F172A}
-.btn-audio .left{display:flex;align-items:center;gap:10px}
-.btn-audio .icon{width:32px;height:32px;background:#7F3040;color:#FFF;border-radius:50%;display:inline-flex;align-items:center;justify-content:center}
-.btn-audio .label{font-weight:700;font-size:13px}
-.btn-audio .sublabel{font-size:11px;color:#64748B}
-.regra{text-align:center;padding:18px;background:#0F172A;color:#FFF;border-radius:12px;margin-top:20px}
-.regra strong{color:#D4AF37}
-.footer{margin-top:18px;text-align:center;font-size:8.5px;color:#94A3B8;text-transform:uppercase;letter-spacing:0.5px;border-top:1px solid #E2E8F0;padding-top:10px;line-height:1.4}
-.cut-border{border:2px dashed #CBD5E1;border-radius:20px;padding:28px 26px;display:flex;flex-direction:column;margin-top:10px;position:relative;background:#FFF}
-.prehead{color:#A68A2D;font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px}
-.plano-title{font-family:'Fraunces',serif;font-size:44px;line-height:0.9;color:#0F172A;margin-bottom:6px}
-.plano-title span{color:#A68A2D}
-.subtitle{font-size:13px;color:#475569;margin-bottom:16px;line-height:1.5}
-.audio-tag{font-size:11px;font-weight:800;background:#0F172A;color:#D4AF37;padding:6px 12px;border-radius:20px;display:inline-block;margin-bottom:14px;letter-spacing:0.5px}
-.steps{display:flex;flex-direction:column;gap:10px}
-.step{display:flex;gap:14px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:14px 16px}
-.checkbox{width:26px;height:26px;min-width:26px;border:2px solid #A68A2D;border-radius:6px;background:#FFF;margin-top:2px}
-.step-content h3{font-size:12px;font-weight:800;color:#0F172A;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
-.step-content p{font-size:12.5px;line-height:1.5;color:#334155}
-.phrase{background:#FFFBEB;border-left:3px solid #D4AF37;padding:8px 12px;border-radius:0 8px 8px 0;margin-top:8px;font-weight:600;color:#422006;font-size:12.5px;line-height:1.4}
-.pnl{font-size:10px;color:#7F3040;background:#FFF1F2;border:1px solid #FECACA;padding:2px 6px;border-radius:4px;margin-left:6px;font-weight:700}
-.group-label{font-size:11px;font-weight:800;color:#FFF;background:#1E293B;padding:6px 12px;border-radius:20px;align-self:flex-start;margin-top:10px;margin-bottom:2px;letter-spacing:0.6px}
-.footer-box{margin-top:18px;background:#0F172A;color:#FFF;text-align:center;padding:14px 18px;border-radius:10px;font-weight:700;font-size:13px;line-height:1.35}
-.small-footer{text-align:center;margin-top:12px;font-size:9px;color:#94A3B8;text-transform:uppercase;letter-spacing:0.5px}
-.scissors{position:absolute;top:-10px;left:24px;background:#FFF;padding:0 8px;font-size:11px;color:#94A3B8}
-.ultima-pagina{break-before:page;page-break-before:always;break-inside:avoid;page-break-inside:avoid;margin-top:30px}
-@media print{@page{size:A4;margin:10mm}body{background:#FFF;padding:0}.page{width:100%;border:none;border-radius:0;padding:0}.no-print{display:none}.ultima-pagina{margin-top:0}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Kit Reset 5 · Guia de Uso</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F1F5F9;
+      color: #1E293B;
+      display: flex;
+      justify-content: center;
+      padding: 16px 12px 40px;
+      line-height: 1.6;
+    }
+    .page {
+      max-width: 210mm;
+      width: 100%;
+      background: #FFF;
+      padding: 24px 20px 32px;
+      border-radius: 16px;
+      border: 1px solid #E2E8F0;
+    }
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(26px, 6vw, 32px);
+      color: #0F172A;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    h1 span { color: #7F3040; }
+    .sub {
+      font-size: clamp(13px, 3vw, 15px);
+      color: #64748B;
+      margin-bottom: 16px;
+    }
+    .alerta {
+      background: #0F172A;
+      color: #FFF;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 20px;
+    }
+    .alerta h3 {
+      color: #D4AF37;
+      font-size: 14px;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+    .alerta p {
+      font-size: clamp(13px, 3vw, 14px);
+      line-height: 1.6;
+      color: #E2E8F0;
+    }
+    .alerta strong { color: #D4AF37; }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(20px, 4.5vw, 24px);
+      color: #0F172A;
+      margin: 24px 0 10px;
+    }
+    h3 {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #7F3040;
+      margin-bottom: 6px;
+    }
+
+    .box {
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      border: 1px solid #E2E8F0;
+    }
+    .box-claro { background: #F8FAFC; }
+    .box-verde { background: #F0FDF4; border-color: #BBF7D0; }
+    .box-roxo { background: #F5F3FF; border-color: #DDD6FE; }
+    .box-nao-fazer {
+      background: #FEF2F2;
+      border: 1.5px solid #FECACA;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+    }
+    .box-nao-fazer h3 { color: #991B1B; font-size: 14px; margin-bottom: 12px; }
+    .lista-nao-fazer {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .lista-nao-fazer li {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: clamp(13px, 3vw, 14px);
+      line-height: 1.5;
+      color: #334155;
+    }
+    .lista-nao-fazer li:last-child { margin-bottom: 0; }
+    .lista-nao-fazer .icone {
+      width: 24px;
+      min-width: 24px;
+      height: 24px;
+      background: #FEE2E2;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      margin-top: 1px;
+    }
+
+    /* ÁUDIOS - CARDS REFORMULADOS */
+    .audio-card {
+      background: #FFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: 0.2s;
+    }
+    .audio-card:hover { border-color: #7F3040; }
+    .audio-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+    .audio-btn {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      background: #7F3040;
+      color: #FFF;
+      border: none;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.2s;
+      flex-shrink: 0;
+    }
+    .audio-btn:hover { background: #5e1f2c; }
+    .audio-btn.playing { background: #1e293b; }
+    .audio-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .audio-info .label {
+      font-weight: 700;
+      font-size: clamp(13px, 3vw, 14px);
+      color: #0F172A;
+      display: block;
+      line-height: 1.3;
+    }
+    .audio-info .sublabel {
+      font-size: clamp(11px, 2.6vw, 12px);
+      color: #64748B;
+      display: block;
+      line-height: 1.3;
+    }
+    .audio-save {
+      font-size: 12px;
+      font-weight: 800;
+      color: #7F3040;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .audio-save:hover { background: #F1F5F9; }
+
+    /* BOTÕES CTA */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: clamp(13px, 3vw, 14px);
+      margin: 6px 0;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: center;
+      width: 100%;
+    }
+    .btn-preto {
+      background: #0F172A;
+      color: #FFF;
+    }
+    .btn-preto:hover { background: #1e293b; }
+    .btn-borda {
+      background: #FFF;
+      color: #0F172A;
+      border: 2px solid #0F172A;
+    }
+    .btn-borda:hover { background: #F8FAFC; }
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .etapa {
+      margin-bottom: 16px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid #E2E8F0;
+      background: #FFF;
+    }
+    .etapa-num {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      background: #7F3040;
+      color: #FFF;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 15px;
+      margin-right: 10px;
+    }
+    .etapa-titulo {
+      font-size: clamp(14px, 3.2vw, 15px);
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .etapa-desc {
+      font-size: clamp(13px, 3vw, 14px);
+      color: #334155;
+      line-height: 1.6;
+      padding-left: 42px;
+    }
+
+    .regra {
+      text-align: center;
+      padding: 18px;
+      background: #0F172A;
+      color: #FFF;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .regra strong { color: #D4AF37; }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      font-size: clamp(8px, 2vw, 9px);
+      color: #94A3B8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-top: 1px solid #E2E8F0;
+      padding-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 480px) {
+      body { padding: 10px 8px 30px; }
+      .page { padding: 16px 12px 24px; }
+      .audio-card { padding: 12px; flex-wrap: nowrap; }
+      .audio-btn { width: 38px; height: 38px; min-width: 38px; font-size: 15px; }
+      .audio-save { font-size: 11px; padding: 4px 8px; }
+      .etapa-desc { padding-left: 0; }
+      .etapa-titulo { flex-wrap: wrap; }
+    }
+    @media (min-width: 768px) {
+      .btn-group { flex-direction: row; }
+      .btn { width: auto; flex: 1; }
+    }
+  </style>
 </head>
 <body>
 <div class="page">
-<h1>Kit Reset 5: <span>Por Onde Começar?</span></h1>
-<p class="sub">Leva só alguns minutos para entender. Depois é só usar quando precisar. </p>
 
-<div class="alerta">
-<h3>⚠ SE VOCÊ ESTÁ EM PÂNICO AGORA</h3>
-<p>Não leia tudo agora. Faça só isso em 4 minutos:<br><br>
-<strong>1.</strong> Salve os 3 áudios no celular (botões abaixo)<br>
-<strong>2.</strong> Salve o Reset Online nos favoritos (botão abaixo).<br>
-<strong>3.</strong> Vá para a última página deste guia e imprima o Plano 3AM para colar na parede.<br><br>
-Pronto. Depois volte aqui com calma.</p>
+  <h1>Kit Reset 5: <span>Por Onde Começar?</span></h1>
+  <p class="sub">Leva só alguns minutos para entender. Depois é só usar quando precisar.</p>
+
+  <div class="alerta">
+    <h3>⚠ SE VOCÊ ESTÁ EM PÂNICO AGORA</h3>
+    <p>Não leia tudo agora. Faça só isso em 4 minutos:<br><br>
+    <strong>1.</strong> Salve os 3 áudios no celular (botões abaixo)<br>
+    <strong>2.</strong> Salve o Reset Online nos favoritos (botão abaixo).<br>
+    <strong>3.</strong> Vá para a última página deste guia e imprima o Plano 3AM para colar na parede.<br><br>
+    Pronto. Depois volte aqui com calma.</p>
+  </div>
+
+  <h2>📦 O Que Você Vai Usar</h2>
+  <div class="box box-claro">
+    <ul style="list-style:none;padding:0">
+      <li style="margin-bottom:8px">✅ <strong>3 Áudios Curtos</strong> - para usar de madrugada quando o pânico bater. É só dar play no celular.</li>
+      <li style="margin-bottom:8px">✅ <strong>Checklist Plano 3AM</strong> - Impresso e colado na parede ao lado da sua cama.</li>
+      <li style="margin-bottom:8px">✅ <strong>Reset Online e Cartilha PDF</strong> - para usar de dia, depois do café, com calma.</li>
+    </ul>
+  </div>
+
+  <h2>🔊 Seus 3 Áudios (Clique para Salvar no Celular ou Computador)</h2>
+  <p style="font-size:clamp(13px, 3vw, 14px);color:#475569;margin-bottom:12px;">Sequência Linear: Áudio 1 = Corpo (1 e 2) • Áudio 2 = Mente (3 e 4) • Áudio 3 = Pausa (5)</p>
+
+  <!-- ÁUDIO 1 -->
+  <div class="audio-card">
+    <div class="audio-left">
+      <button class="audio-btn" aria-label="Play Áudio 1">▶</button>
+      <div class="audio-info">
+        <span class="label">Áudio 1 - Para acalmar na hora (1 min)</span>
+        <span class="sublabel">ITENS 1 e 2 · Respiração + Botão Âncora</span>
+      </div>
+    </div>
+    <button class="audio-save" onclick="salvarAudio(this, '#')">SALVAR →</button>
+  </div>
+
+  <!-- ÁUDIO 2 -->
+  <div class="audio-card">
+    <div class="audio-left">
+      <button class="audio-btn" aria-label="Play Áudio 2">▶</button>
+      <div class="audio-info">
+        <span class="label">Áudio 2 - Para organizar a cabeça</span>
+        <span class="sublabel">ITENS 3 e 4 · Frase em 3ª pessoa + Tela de Cinema</span>
+      </div>
+    </div>
+    <button class="audio-save" onclick="salvarAudio(this, '#')">SALVAR →</button>
+  </div>
+
+  <!-- ÁUDIO 3 -->
+  <div class="audio-card">
+    <div class="audio-left">
+      <button class="audio-btn" aria-label="Play Áudio 3">▶</button>
+      <div class="audio-info">
+        <span class="label">Áudio 3 - Para voltar a dormir</span>
+        <span class="sublabel">ITEM 5 · Escreva e Solte + Permissão</span>
+      </div>
+    </div>
+    <button class="audio-save" onclick="salvarAudio(this, '#')">SALVAR →</button>
+  </div>
+
+  <h2>💻 Seu Reset de 5 minutos (Modo Dia)</h2>
+  <p style="font-size:clamp(13px, 3vw, 14px);color:#475569;margin-bottom:8px;">É uma página interativa que você abre no celular ou computador depois do café da manhã.</p>
+  <div class="btn-group">
+    <a class="btn btn-preto" href="#">→ ABRIR MEU RESET ONLINE AGORA</a>
+  </div>
+  <p style="font-size:11px;color:#94A3B8;margin-top:4px;">Dica: ao abrir, toque em "Adicionar aos favoritos". Você vai usar todo dia.</p>
+
+  <h2>📘 Sua Cartilha Completa</h2>
+  <p style="font-size:clamp(13px, 3vw, 14px);color:#475569;margin-bottom:8px;">Tem a explicação do método, o exemplo da Renata e os bônus práticos.</p>
+  <div class="btn-group">
+    <a class="btn btn-borda" href="#">→ ABRIR CARTILHA (20 páginas)</a>
+  </div>
+  <p style="font-size:12px;color:#7F3040;margin-top:4px;">Leia só depois de 2 noites dormindo melhor. Não precisa ler agora.</p>
+
+  <h2>Como usar nas próximas 48 horas - SEQUÊNCIA CORRIGIDA</h2>
+
+  <div class="etapa">
+    <div class="etapa-titulo"><span class="etapa-num">1</span> HOJE: Imprima o Plano 3AM (2 min)</div>
+    <div class="etapa-desc">
+      <strong>Imprima o Plano 3AM</strong> que você recebeu na Área de Membros. Recorte na linha tracejada e cole na parede ao lado da cama, na altura dos olhos. De madrugada você vai agradecer por não ter que procurar no celular.
+    </div>
+  </div>
+
+  <div class="etapa">
+    <div class="etapa-titulo"><span class="etapa-num">2</span> SE O PÂNICO BATER AGORA: Áudio 1 + Itens 1+2</div>
+    <div class="etapa-desc">
+      <strong>BLOCO CORPO:</strong> Ouça o <strong>Áudio 1 + Siga os Itens 1 e 2 do Plano 3AM na Parede</strong>.<br><br>
+      Ele dura só 1 minuto e vai te guiar: respiração 4-4-4 + pé no chão + apertar polegar e indicador por 3 segundos.<br><br>
+      <strong>Depois que acalmar:</strong> se for de dia, vá para o Reset Online. Se for de madrugada, volte a dormir. Não abra o app do banco agora.
+    </div>
+  </div>
+
+  <div class="etapa">
+    <div class="etapa-titulo"><span class="etapa-num">3</span> SE A MENTE NÃO PARA DE MADRUGADA: Áudio 2 + Itens 3+4</div>
+    <div class="etapa-desc">
+      <strong>BLOCO MENTE:</strong> Ouça o <strong>Áudio 2 + Siga os Itens 3 e 4 do Plano 3AM na Parede</strong>.<br><br>
+      <strong>Item 3:</strong> Frase de segurança em 3ª pessoa - diga seu nome como se estivesse falando de outra pessoa: "[Seu nome...] está sentindo pânico agora, mas pânico não é fato. Dinheiro tem solução."<br><br>
+      <strong>Item 4:</strong> Não abra o aplicativo + técnica da tela de cinema - imagine a fatura pequena, preto e branco, longe. Isso diminui a carga emocional.
+    </div>
+  </div>
+
+  <div class="etapa">
+    <div class="etapa-titulo"><span class="etapa-num">4</span> SE BATER CULPA E NÃO VOLTAR A DORMIR: Áudio 3 + Item 5</div>
+    <div class="etapa-desc">
+      <strong>BLOCO PAUSA:</strong> Ouça o <strong>Áudio 3 + siga o item 5 da parede</strong>.<br><br>
+      ESCREVA:<br> <strong>Linha 1:</strong> O que estou sentindo agora? (uma palavra)<br> <strong>Linha 2:</strong> O que farei amanhã às 10h? (uma ação).<br>
+      <strong>Finalize com o comando:</strong> "Eu me permito pausar a culpa até as 8h da manhã."
+    </div>
+  </div>
+
+  <div class="etapa">
+    <div class="etapa-titulo"><span class="etapa-num">5</span> DEPOIS DE 2 NOITES: Leia a cartilha</div>
+    <div class="etapa-desc">
+      <strong>Abra a Cartilha Reset-5.</strong> Lá tem o exemplo da Renata, o Conversor de Vergonha, os 3 mantras, o Template do Círculo de Controle e o Checklist de Ações. Leia com calma, durante o dia, depois do café.
+    </div>
+  </div>
+
+  <div class="box box-roxo">
+    <h3>💡 ENTENDA A DIFERENÇA DOS 2 MODOS</h3>
+    <p style="font-size:clamp(14px, 3.2vw, 15px);line-height:1.6;">O <strong>Plano 3AM + áudios (Modo Noite)</strong> é para voltar a dormir. Sequência 1+2 → 3+4 → 5. Não resolve dívida, só acalma o corpo.<br><br>
+    O <strong>Reset Online + Cartilha (Modo Dia)</strong> é para quebrar a paralisia de dia e ter coragem de agir.<br><br>
+    <strong>Você precisa dos dois.</strong> Um te ajuda a dormir. O outro te ajuda a agir no dia seguinte.</p>
+  </div>
+
+  <div class="box-nao-fazer">
+    <h3>🚫 O QUE NÃO FAZER - MUITO IMPORTANTE</h3>
+    <ul class="lista-nao-fazer">
+      <li><div class="icone">❌</div><div><strong>Não tente fazer o Modo Dia às 3h da manhã.</strong><br>Seu cérebro está em alerta total de madrugada. Se tentar fazer o círculo de controle, vai travar e aumentar o pânico. Use só o Plano 3AM da parede.</div></li>
+      <li><div class="icone">❌</div><div><strong>Não tome decisão financeira depois das 21h ou antes do café da manhã.</strong><br>Anote num papel e resolva no dia seguinte, com calma e à luz do dia.</div></li>
+      <li><div class="icone">❌</div><div><strong>Não abra o aplicativo do banco de madrugada para "conferir".</strong><br>Isso alimenta o pânico. Na dúvida, olhe para o Plano 3AM que está na parede.</div></li>
+      <li><div class="icone">❌</div><div><strong>Não deixe de imprimir o Plano 3AM.</strong><br>O que está na parede funciona quando o cérebro está em pânico. O que está no celular, não funciona. Imprima hoje!</div></li>
+    </ul>
+  </div>
+
+  <div class="box box-verde">
+    <h3>✅ ROTINA SIMPLES DEPOIS DOS 2 PRIMEIROS DIAS</h3>
+    <p style="font-size:clamp(14px, 3.2vw, 15px);line-height:1.6;">
+      <strong>Manhã (depois do café):</strong> 5 minutos do Reset Online<br>
+      <strong>Noite (antes de dormir):</strong> Áudio 2 para organizar a cabeça (itens 3+4).<br>
+      <strong>Madrugada (se acordar em pânico):</strong> Plano 3AM da parede + Áudio 1 (itens 1+2). Se a mente não parar, Áudio 2 (itens 3+4). Se bater culpa, Áudio 3 (item 5).
+    </p>
+  </div>
+
+  <div class="regra">
+    <div style="font-size:clamp(16px, 4vw, 18px);font-weight:700;margin-bottom:4px;">Regra de Ouro do Reset 5</div>
+    <div style="font-size:clamp(13px, 3vw, 14px);line-height:1.6;">3h da manhã é hora de fazer o reset, não de resolver problema de dinheiro.<br>Decisão financeira só depois do café da manhã, à luz do dia.<br><strong>Você não está quebrado(a). Você só está cansado(a).</strong></div>
+  </div>
+
+  <div class="footer">Sistema Domínio do Dinheiro • Kit Reset 5 Minutos<br>Conteúdo educativo com técnicas de respiração, aterramento e ancoragem. <br>Não substitui acompanhamento médico ou psicológico. Em crise intensa, ligue 188 (CVV).</div>
+
 </div>
 
-<h2>📦 O Que Você Vai Usar</h2>
-<div class="box box-claro">
-<ul style="list-style:none;padding:0">
-<li style="margin-bottom:8px">✅ <strong>3 Áudios Curtos</strong> - para usar de madrugada quando o pânico bater. É só dar play no celular.</li>
-<li style="margin-bottom:8px">✅ <strong>Checklist Plano 3AM</strong> - Impresso e colado na parede ao lado da sua cama.</li>
-<li style="margin-bottom:8px">✅ <strong>Reset Online e Cartilha PDF</strong> - para usar de dia, depois do café, com calma.</li>
-</ul>
-</div>
+<script>
+  // Função para simular "Salvar" com feedback
+  function salvarAudio(btn, link) {
+    const original = btn.textContent;
+    btn.textContent = '✓ SALVO';
+    btn.style.color = '#0F172A';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.color = '#7F3040';
+    }, 2000);
+    // Aqui você pode redirecionar ou abrir o link real
+    // window.open(link, '_blank');
+  }
 
-<h2>🔊 Seus 3 Áudios (Clique para Salvar no Celular ou Computador)</h2>
-<p style="font-size:14px;color:#475569;margin-bottom:10px">Sequência Linear: Áudio 1 = Corpo (1 e 2) • Áudio 2 = Mente (3 e 4) • Áudio 3 = Pausa (5)</p>
+  // Toggle play nos botões de áudio (efeito visual)
+  document.querySelectorAll('.audio-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const isPlaying = this.classList.toggle('playing');
+      this.textContent = isPlaying ? '⏸' : '▶';
+      // Simula áudio tocando
+      if (isPlaying) {
+        setTimeout(() => {
+          this.classList.remove('playing');
+          this.textContent = '▶';
+        }, 2000);
+      }
+    });
+  });
+</script>
 
-<a class="btn-audio" href="{{LINK_AUDIO_01}}">
-<div class="left"><div class="icon">▶</div><div><div class="label">Áudio 1 - Para acalmar na hora (1 min) - ITENS 1 e 2</div><div class="sublabel">Quando o peito aperta: Respiração + Botão Âncora</div></div></div>
-<div style="font-size:12px;color:#7F3040;font-weight:800">SALVAR →</div>
-</a>
-
-<a class="btn-audio" href="{{LINK_AUDIO_02}}">
-<div class="left"><div class="icon">▶</div><div><div class="label">Áudio 2 - Para organizar a cabeça - ITENS 3 e 4</div><div class="sublabel">Quando a cabeça não para: Frase em 3ª pessoa + Tela de Cinema</div></div></div>
-<div style="font-size:12px;color:#7F3040;font-weight:800">SALVAR →</div>
-</a>
-
-<a class="btn-audio" href="{{LINK_AUDIO_03}}">
-<div class="left"><div class="icon">▶</div><div><div class="label">Áudio 3 - Para voltar a dormir - ITEM 5</div><div class="sublabel">Quando bate culpa: Escreva e Solte + Permissão</div></div></div>
-<div style="font-size:12px;color:#7F3040;font-weight:800">SALVAR →</div>
-</a>
-
-<h2>💻 Seu Reset de 5 minutos (Modo Dia)</h2>
-<p style="font-size:13px;color:#475569;margin-bottom:8px">É uma página interativa que você abre no celular ou computador depois do café da manhã.</p>
-<a class="btn btn-preto" href="{{LINK_RESET_ONLINE}}">→ ABRIR MEU RESET ONLINE AGORA</a>
-<p style="font-size:11px;color:#94A3B8;margin-top:6px">Dica: ao abrir, toque em "Adicionar aos favoritos". Você vai usar todo dia.</p>
-
-<h2>📘 Sua Cartilha Completa</h2>
-<p style="font-size:13px;color:#475569;margin-bottom:8px">Tem a explicação do método, o exemplo da Renata e os bônus práticos.</p>
-<a class="btn btn-borda" href="{{LINK_CARTILHA}}">→ ABRIR CARTILHA (20 páginas)</a>
-<p style="font-size:12px;color:#7F3040;margin-top:6px">Leia só depois de 2 noites dormindo melhor. Não precisa ler agora.</p>
-
-<h2>Como usar nas próximas 48 horas - SEQUÊNCIA CORRIGIDA</h2>
-
-<div class="etapa">
-<div class="etapa-titulo"><span class="etapa-num">1</span> HOJE: Imprima o Plano 3AM que você recebeu na Área de Membros(2 min) 🖨</div>
-<div class="etapa-desc">
-<strong>Imprima o Plano 3AM</strong>. Recorte na linha tracejada e cole na parede ao lado da cama, na altura dos olhos. De madrugada você vai agradecer por não ter que procurar no celular.
-</div>
-</div>
-
-<div class="etapa">
-<div class="etapa-titulo"><span class="etapa-num">2</span> SE O PÂNICO BATER AGORA: Áudio 1 + Itens 1+2 🟡</div>
-<div class="etapa-desc">
-<strong>BLOCO CORPO:</strong> Ouça o <strong>Áudio 1 + Siga os Itens 1 e 2 do Plano 3AM na Parede</strong>.<br><br>
-Ele dura só 1 minuto e vai te guiar: respiração 4-4-4 + pé no chão + apertar polegar e indicador por 3 segundos).<br><br>
-<strong>Depois que acalmar:</strong> se for de dia, vá para o Reset Online. Se for de madrugada, volte a dormir. Não abra o app do banco agora.
-</div>
-</div>
-
-<div class="etapa">
-<div class="etapa-titulo"><span class="etapa-num">3</span> SE A MENTE NÃO PARA DE MADRUGADA 🌙: Áudio 2 + Itens 3+4 🔵</div>
-<div class="etapa-desc">
-<strong>BLOCO MENTE:</strong> Ouça o <strong>Áudio 2 + Siga os Itens 3 e 4 do Plano 3AM na Parede</strong>.<br><br>
-<strong>Item 3:</strong> Frase de segurança em 3ª pessoa - diga seu nome como se estivesse falando de outra pessoa: "[Seu nome...] está sentindo pânico agora, mas pânico não é fato. Dinheiro tem solução."<br><br>
-<strong>Item 4:</strong> Não abra o aplicativo + técnica da tela de cinema - imagine a fatura pequena, preto e branco, longe. Isso diminui a carga emocional.
-</div>
-</div>
-
-<div class="etapa">
-<div class="etapa-titulo"><span class="etapa-num">4</span> SE BATER CULPA E NÃO VOLTAR A DORMIR 🌙: Áudio 3 + Item 5 🟢</div>
-<div class="etapa-desc">
-<strong>BLOCO PAUSA:</strong> Ouça o <strong>Áudio 3 + siga o item 5 da parede</strong>.<br><br>
-ESCREVA:<br> <strong>Linha 1:</strong> O que estou sentindo agora? (uma palavra)<br> <strong>Linha 2:</strong> O que farei amanhã às 10h? (uma ação).<br>
-<strong>Finalize com o comando:</strong> "Eu me permito pausar a culpa até as 8h da manhã."
-</div>
-</div>
-
-<div class="etapa">
-<div class="etapa-titulo"><span class="etapa-num">5</span> DEPOIS DE 2 NOITES: Leia a cartilha 📘</div>
-<div class="etapa-desc">
-<strong>Abra a Cartilha Reset-5.</strong> Lá tem o exemplo da Renata, o Conversor de Vergonha, os 3 mantras, o Template do Círculo de Contorle e o Checklist de Ações. Leia com calma, durante o dia, depois do café.
-</div>
-</div>
-
-<div class="box box-roxo">
-<h3>💡 ENTENDA A DIFERENÇA DOS 2 MODOS</h3>
-<p style="font-size:14px;line-height:1.6">O <strong>Plano 3AM + áudios (Modo Noite)</strong> é para voltar a dormir. Sequência 1+2 → 3+4 → 5. Não resolve dívida, só acalma o corpo.<br><br>
-O <strong>Reset Online + Cartilha (Modo Dia)</strong> é para quebrar a paralisia de dia e ter coragem de agir.<br><br>
-<strong>Você precisa dos dois.</strong> Um te ajuda a dormir. O outro te ajuda a agir no dia seguinte.</p>
-</div>
-
-<div class="box-nao-fazer">
-<h3>🚫 O QUE NÃO FAZER - MUITO IMPORTANTE</h3>
-<ul class="lista-nao-fazer">
-<li><div class="icone">❌</div><div><strong>Não tente fazer o Modo Dia às 3h da manhã.</strong><br>Seu cérebro está em alerta total de madrugada. Se tentar fazer o círculo de controle, vai travar e aumentar o pânico. Use só o Plano 3AM da parede.</div></li>
-<li><div class="icone">❌</div><div><strong>Não tome decisão financeira depois das 21h ou antes do café da manhã.</strong><br>Anote num papel e resolva no dia seguinte, com calma e à luz do dia.</div></li>
-<li><div class="icone">❌</div><div><strong>Não abra o aplicativo do banco de madrugada para "conferir".</strong><br>Isso alimenta o pânico. Na dúvida, olhe para o Plano 3AM que está na parede.</div></li>
-<li><div class="icone">❌</div><div><strong>Não deixe de imprimir o Plano 3AM.</strong><br>O que está na parede funciona quando o cérebro está em pânico. O que está no celular, não funciona. Imprima hoje!</div></li>
-</ul>
-</div>
-
-<div class="box box-verde">
-<h3>✅ ROTINA SIMPLES DEPOIS DOS 2 PRIMEIROS DIAS</h3>
-<p style="font-size:15px;line-height:1.6">
-<strong>Manhã (depois do café):</strong> 5 minutos do Reset Online<br>
-<strong>Noite (antes de dormir):</strong> Áudio 2 para organizar a cabeça (itens 3+4).<br>
-<strong>Madrugada (se acordar em pânico):</strong> Plano 3AM da parede + Áudio 1 (itens 1+2). Se a mente não parar, Áudio 2 (itens 3+4). Se bater culpa, Áudio 3 (item 5).
-</p>
-</div>
-
-<div class="regra no-print">
-<div style="font-size:16px;font-weight:700;margin-bottom:4px">Regra de Ouro do Reset 5</div>
-<div style="font-size:13px;line-height:1.6">3h da manhã é hora de fazer o reset, não de resolver problema de dinheiro.<br>Decisão financeira só depois do café da manhã, à luz do dia.<br><strong>Você não está quebrado(a). Você só está cansado(a).</strong></div>
-</div>
-
-<div class="footer">Sistema Domínio do Dinheiro • Kit Reset 5 Minutos<br>Conteúdo educativo com técnicas de respiração, aterramento e ancoragem. <br>Não substitui acompanhamento médico ou psicológico. Em crise intensa, ligue 188 (CVV).</div>
-</div>
 </body>
 </html>
