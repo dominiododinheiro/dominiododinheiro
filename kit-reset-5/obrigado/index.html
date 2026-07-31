@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagamento Aprovado - Kit Reset 5</title>
+<style>
+body{background:#0F172A;color:#CBD5E1;font-family:Inter,sans-serif;display:flex;justify-content:center;padding:24px}
+.card{background:#FFF;border-radius:16px;padding:32px;max-width:560px;width:100%;color:#1E293B;text-align:center}
+.btn{display:block;background:#0F172A;color:#FFF;font-weight:800;padding:16px;border-radius:10px;text-decoration:none;margin:16px 0}
+.btn-gold{background:#D4AF37;color:#0F172A}
+.bump{margin-top:24px;border-radius:12px;padding:20px;text-align:left;display:none}
+.bump-nao{background:#FFFBEB;border:1px solid #FDE68A}
+.bump-sim{background:#F0FDF4;border:1px solid #BBF7D0}
+</style>
+</head>
+<body>
+<div class="card">
+<p style="color:#D4AF37;font-size:11px;font-weight:800;letter-spacing:1px;">PAGAMENTO APROVADO</p>
+<h1 style="font-family:Georgia,serif;font-size:26px;color:#0F172A;">Seu Kit Reset 5 está liberado.</h1>
+<p style="font-size:14px;color:#475569;margin-top:10px;">Login: seu e-mail | Senha: a que você criou na Kiwify.</p>
+<a href="https://kiwify.com.br/membros" class="btn">ACESSAR MINHA ÁREA DE MEMBROS →</a>
+<p style="font-size:12px;color:#94A3B8;">Lá dentro clique em COMECE AQUI - 3 minutos. Seu Plano 3AM em PDF já está lá.</p>
+
+<div id="bloco-desarme-venda" class="bump bump-nao">
+<h3 style="font-size:16px;color:#92400E;">Você resolveu a parte de dentro. Falta a parte de fora.</h3>
+<p style="font-size:13px;">O Reset 5 te acalma às 3h. Mas amanhã às 9h o cobrador liga de novo.</p>
+<p style="font-size:13px;"><strong>Você não pegou o Kit Desarme no checkout.</strong> Ainda está liberado por 15min por R$19.</p>
+<a href="SEU-LINK-DO-BUMP-KIWIFY" class="btn btn-gold">QUERO O KIT DESARME POR R$19 →</a>
+</div>
+
+<div id="bloco-desarme-ja-comprou" class="bump bump-sim">
+<h3 style="font-size:16px;color:#166534;">✅ Você já garantiu o Kit Desarme</h3>
+<p style="font-size:13px;">Ele já está na sua área de membros junto com o Reset 5.</p>
+<a href="https://kiwify.com.br/membros" class="btn" style="background:#166534;">ABRIR MEU KIT DESARME →</a>
+</div>
+
+<p style="font-size:11px;color:#94A3B8;margin-top:20px;">Regra de Ouro: 3h da manhã é hora de reset, não de resolver dinheiro.<br>Você não está quebrado. Você só está cansado.</p>
+</div>
+
+<script>
+(function(){
+  const bump = new URLSearchParams(window.location.search).get('bump');
+  const venda = document.getElementById('bloco-desarme-venda');
+  const ja = document.getElementById('bloco-desarme-ja-comprou');
+  if (bump === 'sim') { ja.style.display='block'; }
+  else { venda.style.display='block'; }
+})();
+</script>
+</body>
+</html>
