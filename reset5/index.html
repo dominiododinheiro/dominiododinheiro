@@ -15,7 +15,14 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--text-secondary);font-family:'Public Sans',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  body{
+    background:var(--bg);
+    color:var(--text-secondary);
+    font-family:'Public Sans',sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:100px
+  }
   h1,h2,h3,.serif{font-family:'Fraunces',serif;font-weight:700;letter-spacing:-0.02em;color:var(--white)}
   .wrap{max-width:680px;margin:0 auto;padding:0 24px}
   section{padding:80px 0;border-bottom:1px solid var(--line)}
@@ -36,7 +43,16 @@
   .faq-q{background:var(--bg-secondary);padding:20px;border-radius:12px;cursor:pointer;margin-bottom:8px;font-weight:600;color:var(--white);display:flex;justify-content:space-between;align-items:center}
   .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 20px;color:var(--text-secondary)}
   .faq-item.open .faq-a{max-height:400px;padding:20px}
-  .sticky{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);padding:16px;border-top:1px solid var(--line);z-index:9999}
+  .sticky{
+    position:fixed;
+    bottom:0;left:0;right:0;
+    background:var(--bg-secondary);
+    padding:16px;
+    border-top:1px solid var(--line);
+    z-index:9999;
+    transition:transform .3s ease
+  }
+  .sticky.hide{transform:translateY(100%)}
   .badge{display:inline-block;background:var(--gold-soft);border:1px solid var(--gold);color:var(--gold);font-size:11px;font-weight:800;letter-spacing:0.5px;padding:4px 10px;border-radius:20px;margin-bottom:8px;text-transform:uppercase}
   .price-old{color:var(--text-aux);text-decoration:line-through;font-size:16px}
   .price-new{color:var(--white);font-size:36px;font-weight:800}
@@ -50,6 +66,7 @@
     section{padding:60px 0}
     .sticky {padding:12px 16px}
     .sticky .btn {padding:14px 24px;font-size:14px}
+    body{padding-bottom:90px}
   }
 </style>
 </head>
@@ -60,7 +77,7 @@
   <div class="wrap">
     <div class="prehead">Se você trava quando a fatura chega...</div>
     <h1>Você acabou de descobrir que existe um <span class="hl">ciclo que prende milhares</span> de pessoas durante anos.</h1>
-    <p style="font-size:18px;color:var(--text);margin-bottom:32px">Não é sobre ganhar mais. É sobre parar de <span class="hl">decidir no pânico</span> quando a fatura chega.<br><br>
+    <p>Não é sobre ganhar mais. É sobre parar de <span class="hl">decidir no pânico</span> quando a fatura chega.<br><br>
     O <span class="hl">Reset 5 é o extintor</span> para os primeiros 5 minutos. Depois que você respira, aí sim dá pra resolver o resto.</p>
     <a href="#oferta" class="btn">GARANTIR MEU ACESSO AO RESET 5 - R$27</a>
     <p style="font-size:13px;color:var(--text-aux);margin-top:12px">Você receberá: 1 guia com o Plano 3AM para imprimir + 3 áudios curtos + protocolo online Reset-5 de 5 min + cartilha Reset-5 PDF com 4 bônus. <span class="hl">Acesso imediato na área de membros.</span></p>
@@ -212,7 +229,7 @@
     
     <div class="faq-item">
       <div class="faq-q">“Mas R$27 não vai resolver meu compromisso de R$14 mil” <span>+</span></div>
-      <div class="faq-a"><p>Não vai. E eu não tô prometendo isso. Isso aqui resolve os primeiros 5 minutos. <span class="hl">Resolve o travamento que te faz pagar taxas todo mês.</span> Depois que você respirar, aí sim você negocia. Mas primeiro você precisa parar de sofrer.</p></div>
+      <div class="faq-a"><p>Não vai. E eu não estou prometendo isso. Aqui resolvemos os primeiros 5 minutos. <span class="hl">Resolve o travamento que te faz pagar taxas todo mês.</span> Depois que você respirar, aí sim você negocia. Mas primeiro você precisa parar de sofrer.</p></div>
     </div>
 
     <div class="faq-item">
@@ -227,7 +244,7 @@
 
     <div class="faq-item">
       <div class="faq-q">“Onde estão os áudios?” <span>+</span></div>
-      <div class="faq-a"><p>Dentro do guia tem botão com link para salvar. Cada áudio tem um momento: Áudio 1 quando o peito aperta, Áudio 2 quando a cabeça não para, Áudio 3 quando bate culpa. <span class="hl">Um sintoma, um áudio.</span></p></div>
+      <div class="faq-a"><p>Dentro do guia tem botão com link para salvar e também na Área de Membros. Cada áudio tem um momento específico para ser usado.<span class="hl">Um sintoma, um áudio.</span></p></div>
     </div>
 
   </div>
@@ -258,17 +275,18 @@
   </div>
 </div>
 
-<!-- RODAPÉ COM LINKS LEGAIS - SUBSTITUI COOKIE BANNER -->
-<footer style="font-size:11px;color:#94A3B8;text-align:center;padding:40px 24px;border-top:1px solid rgba(255,255,255,0.08);background:var(--bg)">
-  <p>O Reset 5 é um produto digital de educação comportamental. Não é consultoria financeira, não substitui terapia e não promete eliminação de compromissos financeiros.</p>
+<!-- RODAPÉ COM LINKS LEGAIS -->
+<footer id="footer" style="font-size:11px;color:#94A3B8;text-align:center;padding:40px 24px;border-top:1px solid rgba(255,255,255,0.08);background:var(--bg)">
+  <p>O Reset 5 é um produto digital de educação comportamental. Não é consultoria financeira, não substitui terapia e não promete eliminação de compromissos financeiros. Resultados dependem da aplicação individual.</p>
   <p style="margin-top:12px">
-    <a href="/reset5/politica-privacidade" style="color:#D4AF37;text-decoration:none">Política de Privacidade</a> | 
-    <a href="/reset5/termos" style="color:#D4AF37;text-decoration:none">Termos de Uso</a>
+    <a href="/reset5/politica-privacidade">Política de Privacidade</a> | 
+    <a href="/reset5/termos-de-uso">Termos de Uso</a>
   </p>
-<p style="margin-top:8px">© 2026 Reset 5. Evergreen Scribe</p>
+  <p style="margin-top:8px">© 2026 Reset 5. Evergreen Scribe</p>
 </footer>
 
 <script>
+  // FAQ
   document.querySelectorAll('.faq-q').forEach(q => {
     q.addEventListener('click', () => {
       const item = q.parentElement;
@@ -276,6 +294,21 @@
       document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
       if (!isOpen) item.classList.add('open');
     });
+  });
+
+  // ESCONDE STICKY NO FOOTER
+  const sticky = document.getElementById('sticky');
+  const footer = document.getElementById('footer');
+  
+  window.addEventListener('scroll', () => {
+    const footerTop = footer.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+    
+    if (footerTop < windowHeight - 50) {
+      sticky.classList.add('hide');
+    } else {
+      sticky.classList.remove('hide');
+    }
   });
 </script>
 
