@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit Reset 5 - Protocolo do Pânico Financeiro | Respire em 5 Minutos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0F172A; --bg-secondary: #1E293B; --card-bg: #243447; --line: rgba(255,255,255,0.12);
+    --white: #FFFFFF; --text: #F1F5F9; --text-secondary: #CBD5E1; --text-aux: #94A3B8;
+    --gold: #D4AF37; --gold-hover: #E7C65A; --gold-soft: rgba(212,175,55,0.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text-secondary);font-family:'Public Sans',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.serif{font-family:'Fraunces',serif;font-weight:700;letter-spacing:-0.02em;color:var(--white)}
+  .wrap{max-width:680px;margin:0 auto;padding:0 24px}
+  section{padding:80px 0;border-bottom:1px solid var(--line)}
+  .hl{color:var(--gold)}
+  .hl-strike{text-decoration:line-through;color:var(--text-aux);font-weight:400}
+  .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--gold);color:#0F172A;font-weight:800;padding:18px 32px;border-radius:12px;text-decoration:none;text-transform:uppercase;letter-spacing:0.5px;box-shadow:0 8px 24px rgba(212,175,55,0.25);transition:all .2s}
+  .btn:hover{background:var(--gold-hover);transform:translateY(-2px)}
+  .card{background:var(--card-bg);border:1px solid var(--line);border-radius:16px;padding:28px;margin-bottom:16px}
+  .card-gold{border:1px dashed var(--gold);background:transparent}
+  .card-ironia{background:var(--bg-secondary);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:20px;margin-bottom:16px}
+  .card-ironia p{font-size:15px;color:var(--text-secondary);font-style:italic}
+  .prehead{color:var(--gold);font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
+  .hero h1{font-size:38px;line-height:1.1;margin-bottom:20px}
+  .hero p{font-size:18px;color:var(--text);margin-bottom:32px}
+  .historia{font-size:18px;color:var(--text)}
+  .historia strong{color:var(--white)}
+  .garantia{background:var(--gold-soft);border:1px solid var(--gold);text-align:center}
+  .faq-q{background:var(--bg-secondary);padding:20px;border-radius:12px;cursor:pointer;margin-bottom:8px;font-weight:600;color:var(--white);display:flex;justify-content:space-between;align-items:center}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 20px;color:var(--text-secondary)}
+  .faq-item.open .faq-a{max-height:400px;padding:20px}
+  .sticky{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);padding:16px;border-top:1px solid var(--line);z-index:9999}
+  .cookie-banner {position: fixed;bottom:80px;left:0;right:0;background:#1E293B;color:#CBD5E1;padding:12px 20px;font-size:14px;text-align:center;z-index:9998;border-top:1px solid rgba(255,255,255,0.12)}
+  .cookie-banner button {background:var(--gold);color:#0F172A;border:none;padding:8px 16px;border-radius:6px;font-weight:700;margin-left:12px;cursor:pointer}
+  .cookie-banner.hide { display: none; }
+  .badge{display:inline-block;background:var(--gold-soft);border:1px solid var(--gold);color:var(--gold);font-size:11px;font-weight:800;letter-spacing:0.5px;padding:4px 10px;border-radius:20px;margin-bottom:8px;text-transform:uppercase}
+  .price-old{color:var(--text-aux);text-decoration:line-through;font-size:16px}
+  .price-new{color:var(--white);font-size:36px;font-weight:800}
+  .ironia-box{background:var(--bg-secondary);border-radius:12px;padding:20px;margin:16px 0;border:1px solid var(--line)}
+  .ironia-box p{font-size:17px;color:var(--text);font-style:italic;text-align:center}
+  .ironia-box .autor{font-size:13px;color:var(--text-aux);margin-top:8px;font-style:normal}
+  @media (max-width:768px){
+    .hero h1{font-size:30px}
+    section{padding:60px 0}
+    .cookie-banner {font-size:12px;bottom:80px;padding:10px 16px;left:12px;right:12px;border-radius:12px}
+    .cookie-banner button {display:block;margin:8px auto 0;width:100%;max-width:200px}
+    .sticky {padding:12px 16px}
+    .sticky .btn {padding:14px 24px;font-size:14px}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO - AJUSTE: H1 CICLO + EXTINTOR -->
+<section class="hero">
+  <div class="wrap">
+    <div class="prehead">Se você trava quando a fatura chega...</div>
+    <h1>Você acabou de descobrir que existe um <span class="hl">ciclo que prende milhares</span> de pessoas durante anos.</h1>
+    <p style="font-size:18px;color:var(--text);margin-bottom:32px">Não é sobre ganhar mais. É sobre parar de <span class="hl">decidir no pânico</span> quando a fatura chega.<br><br>
+    O <span class="hl">Reset 5 é o extintor</span> para os primeiros 5 minutos. Depois que você respira, aí sim dá pra resolver o resto.</p>
+    <a href="#oferta" class="btn">GARANTIR MEU ACESSO AO RESET 5 - R$27</a>
+    <p style="font-size:13px;color:var(--text-aux);margin-top:12px">Você receberá: 1 guia com o Plano 3AM para imprimir + 3 áudios curtos + protocolo online Reset-5 de 5 min + cartilha Reset-5 PDF com 4 bônus. <span class="hl">Acesso imediato na área de membros.</span></p>
+  </div>
+</section>
+
+<!-- DOR COM IRONIA -->
+<section>
+  <div class="wrap">
+    <h2>A cena que você conhece de cor</h2>
+    
+    <div class="card-ironia">
+      <p>"A Renata, professora em Juiz de Fora, ganhava R$ 3.800. Tinha R$ 14.200 de compromisso no cartão. <span class="hl">Ela nem olhava mais.</span> O valor doía."</p>
+    </div>
+
+    <div class="card-ironia">
+      <p>"O Diego, motorista em Fortaleza, fazia R$ 3.200 em mês bom. Mês ruim, R$ 1.800. <span class="hl">O problema não era a renda.</span> Era não saber o que fazer quando a grana entrava."</p>
+    </div>
+
+    <div class="card-ironia">
+      <p>"A Mariana, gerente no Rio, tirava R$ 11 mil líquidos. Dia 25 ela já tava no limite da conta. <span class="hl">Não por falta de dinheiro. Por falta de direção.</span>"</p>
+    </div>
+
+    <div class="ironia-box">
+      <p>"Três pessoas. Três salários. <span class="hl">O mesmo pânico quando a fatura fecha.</span>"</p>
+      <p style="font-size:16px;color:var(--text);margin-top:12px">Talvez você já decorou o dia que a fatura fecha... e também o dia que finge que esqueceu de abrir o extrato.</p>
+    </div>
+
+    <div class="ironia-box" style="border-color:var(--gold);background:var(--gold-soft)">
+      <p style="font-size:16px;color:var(--text)">"Sabe o que é mais irônico? <span class="hl">Enquanto você se culpa, o banco comemora.</span>"</p>
+      <p class="autor">— É isso que eles não querem que você entenda</p>
+    </div>
+
+    <div class="historia" style="margin-top:24px">
+      <p><strong>Não há nada de errado com você.</strong> O que está errado é o silêncio. Ninguém nunca sentou com você pra explicar como o dinheiro funciona. <span class="hl">Nem a escola. Nem a família.</span> E muito menos um sistema que cobra taxas que não param de crescer quando você não entende.</p>
+    </div>
+  </div>
+</section>
+
+<!-- O PRODUTO -->
+<section>
+  <div class="wrap">
+    <h2>Por isso eu criei o <span class="hl">Reset 5</span> com 2 modos que se completam</h2>
+    <p style="font-size:18px;color:var(--text);margin:20px 0">Seu cérebro tem 2 estados. De madrugada ele está em modo sobrevivência — <span class="hl">não adianta planilha, não adianta lógica.</span> De dia ele está em modo lógica — aí sim dá pra organizar e agir.</p>
+    
+    <div class="card" style="margin-top:24px">
+      <div class="badge">MODO NOITE - PARA VOLTAR A DORMIR</div>
+      <h3 style="margin-bottom:8px">Plano 3AM + 3 áudios</h3>
+      <p style="font-size:15px">É o que fica colado na parede ao lado da cama. Quando acordar às 3h da manhã em pânico, você só segue o checklist da última página do guia. <span class="hl">Sem celular, sem lógica, só respiração.</span></p>
+      <p style="font-size:14px;margin-top:12px;color:var(--text-aux)">Áudio 1 para acalmar na hora (peito apertado) • Áudio 2 para organizar a cabeça (cabeça a mil) • Áudio 3 para voltar a dormir (culpa)</p>
+    </div>
+
+    <div class="card">
+      <div class="badge">MODO DIA - PARA QUEBRAR A PARALISIA</div>
+      <h3 style="margin-bottom:8px">Reset Online + Cartilha</h3>
+      <p style="font-size:15px">De manhã, depois do café, você abre seu protocolo de 5 minutos. É interativo e online. <span class="hl">Você simplesmente vai seguindo os passos e pronto: "Reset feito".</span></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section id="oferta">
+  <div class="wrap">
+    <div class="prehead">O que você vai receber</div>
+    <h2>Kit Reset 5 com as seguintes ferramentas:</h2>
+
+    <div class="card">
+      <h3>📄 01 - Guia Por Onde Começar (com Plano 3AM para imprimir)</h3>
+      <p style="font-size:15px;margin-bottom:8px">Leva 3 minutos para ler e contêm Plano 3AM recortável com borda tracejada para colar na parede ao lado da cama. <span class="hl">É o Modo Noite.</span></p>
+      <p style="font-size:13px;color:var(--text-aux)">Inclui: o que não fazer às 3h da manhã, rotina simples depois dos 2 primeiros dias e regra de ouro.</p>
+    </div>
+
+    <div class="card">
+      <h3>🔊 3 Áudios Curtos (Modo Noite)</h3>
+      <p style="font-size:15px;margin-bottom:12px">Um para cada sintoma. <span class="hl">Um sintoma, um áudio.</span> Não precisa ouvir todos de uma vez.</p>
+      <ul style="font-size:14px;list-style:none;padding:0">
+        <li style="margin-bottom:6px">▶ <strong style="color:var(--white)">Áudio 1 - Para acalmar na hora (1 minuto):</strong> Quando o peito aperta.</li>
+        <li style="margin-bottom:6px">▶ <strong style="color:var(--white)">Áudio 2 - Para organizar a cabeça:</strong> Quando a cabeça não para de pensar: "vou perder tudo".</li>
+        <li style="margin-bottom:6px">▶ <strong style="color:var(--white)">Áudio 3 - Para voltar a dormir:</strong> Quando bate culpa e sensação de fracasso.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>💻 05 - Reset Online - Seu protocolo online de 5 minutos (Modo Dia)</h3>
+      <p style="font-size:15px">Página interativa que você salva nos favoritos. Usa de manhã, depois do café, no celular ou computador. <span class="hl">5 passos, sem planilha e sem conta.</span></p>
+    </div>
+
+    <div class="card">
+  <h3>📘 06 - Cartilha Reset (25 páginas) com 4 bônus</h3>
+  <p style="font-size:15px;margin-bottom:12px">Explicação completa do Reset 5 + exemplo da Renata + bônus. <span class="hl">Leia só depois de 2 noites dormindo melhor:</span></p>
+  <ul style="font-size:14px;list-style:none;padding:0">
+    <li style="margin-bottom:6px">🎁 <strong style="color:var(--white)">Bônus 1 - Conversor de Vergonha (pág 19-21)</strong></li>
+    <li style="margin-bottom:6px">🎁 <strong style="color:var(--white)">Bônus 2 - 3 Regras de Ouro para Parar o Pânico (pág 22)</strong></li>
+    <li style="margin-bottom:6px">🎁 <strong style="color:var(--white)">Bônus 3 - Template Círculo de Controle (pág 23)</strong></li>
+    <li style="margin-bottom:6px">🎁 <strong style="color:var(--white)">Bônus 4 - Checklist Ações Imediatas (pág 24)</strong></li>
+  </ul>
+</div>
+
+    <div style="text-align:center;margin-top:32px">
+      <a href="#checkout" class="btn" style="font-size:18px">ACESSAR O RESET 5 AGORA - R$27</a>
+      <p style="font-size:14px;color:var(--text-aux);margin-top:16px">Chega no seu e-mail em 30 segundos. Daqui 5 min você já respira.<br><strong style="color:var(--white)">De R$97 por R$27 hoje.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- DE ONDE VEIO - AJUSTE: TEASER DOMÍNIO -->
+<section>
+  <div class="wrap">
+    <h2>De onde veio esse protocolo?</h2>
+    
+    <div class="ironia-box" style="border-color:var(--gold);background:var(--gold-soft);margin-bottom:24px">
+      <p style="font-size:16px;color:var(--text)">"O <span class="hl">Reset 5</span> é a ferramenta de emergência que abre a cartilha <span class="hl">Domínio do Dinheiro</span> — o mesmo método que a Renata, o Diego e a Mariana usaram pra parar de fugir."</p>
+    </div>
+
+    <p style="font-size:18px;color:var(--text)">Eles não começaram lendo 20 páginas. <span class="hl">Começaram com 5 minutos.</span> Começaram com o Reset.</p><br>
+
+    <div class="card-gold" style="margin-top:24px">
+      <div class="badge">DEPOIS QUE VOCÊ RESPIRAR</div>
+      <h3 style="margin-bottom:8px">O próximo passo: <span class="hl">Número de Segurança</span></h3>
+      <p style="font-size:15px">Dentro do <span class="hl">Domínio do Dinheiro</span> você descobre quanto realmente precisa para viver sem voltar ao vermelho. É o <span class="hl">Sistema de Manutenção</span> que impede o pânico de voltar todo mês.</p>
+      <p style="font-size:13px;color:var(--text-aux);margin-top:8px">Mas primeiro: respira. O extintor vem antes do sistema.</p>
+    </div>
+
+    <div class="ironia-box" style="border-color:var(--gold);background:var(--gold-soft);margin-top:24px">
+      <p style="font-size:18px;color:var(--text)">"Você não precisa da cartilha completa agora. <span class="hl">Precisa de ar.</span> Esse protocolo te dá ar em 5 minutos. Depois que respirar, aí sim você decide se encara o sistema completo."</p>
+      <p class="autor">— Primeiro a gente respira. Depois a gente resolve.</p>
+    </div>
+
+    <a href="#checkout" class="btn" style="margin-top:32px">GARANTIR MEU ACESSO POR R$27</a>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section>
+  <div class="wrap">
+    <div class="card garantia">
+      <h3>🛡 Garantia Incondicional de 7 Dias</h3>
+      <p style="color:var(--text)">Testa Reset 5 com os 3 áudios e o Plano 3AM da parede e aplique as orientações. Se você sentir que nada mudou, me manda um e-mail. Devolvo seus R$27. Sem perguntas. <strong style="color:var(--white)">O risco é todo meu. O alívio é todo seu.</strong></p>
+      <p style="font-size:14px;color:var(--text-aux);margin-top:12px">P.S.: Se você não gostar, você ainda fica com os áudios. Porque eu sei que você vai gostar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <h2>Perguntas Frequentes</h2>
+    
+    <div class="faq-item">
+      <div class="faq-q">“Mas R$27 não vai resolver meu compromisso de R$14 mil” <span>+</span></div>
+      <div class="faq-a"><p>Não vai. E eu não tô prometendo isso. Isso aqui resolve os primeiros 5 minutos. <span class="hl">Resolve o travamento que te faz pagar taxas todo mês.</span> Depois que você respirar, aí sim você negocia. Mas primeiro você precisa parar de sofrer.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">“É muita coisa para fazer?” <span>+</span></div>
+      <div class="faq-a"><p>Não. É enxuto de propósito. Você só precisa de 4 minutos hoje: imprimir a última página do guia (Plano 3AM) e salvar os 3 áudios no celular e o Reset Online nos favoritos. <span class="hl">Depois é só usar: de madrugada, Plano 3AM + Áudio 1. De manhã, Reset Online.</span></p></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">“Isso é só mais um PDF de educação financeira?” <span>+</span></div>
+      <div class="faq-a"><p>Não. Educação financeira te ensina a montar planilhas. <span class="hl">O Reset 5 te ensina o que fazer nos 5 minutos depois que você vê sua fatura do cartão e quer chorar.</span> É emergência, não aula.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">“Onde estão os áudios?” <span>+</span></div>
+      <div class="faq-a"><p>Dentro do guia tem botão com link para salvar. Cada áudio tem um momento: Áudio 1 quando o peito aperta, Áudio 2 quando a cabeça não para, Áudio 3 quando bate culpa. <span class="hl">Um sintoma, um áudio.</span></p></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CHECKOUT -->
+<section id="checkout">
+  <div class="wrap" style="text-align:center">
+    <h2>A fatura fecha todo mês.<br>As taxas rodam todo dia.</h2>
+    <p style="font-size:20px;color:var(--text);margin:24px 0">Quanto tempo você vai continuar fechando o app e fingindo que não viu?</p>
+    <p style="font-size:14px;color:var(--text-aux);margin-bottom:24px">Guia com Plano 3AM para imprimir + 3 áudios curtos + Reset Online de 5 min + Cartilha Reset 5 com 4 bônus</p>
+    <a href="SEU-LINK-KIWIFY" class="btn" style="font-size:20px;padding:24px 40px">ACESSAR O RESET 5 AGORA - R$27</a>
+    <p style="margin-top:16px;font-size:14px;color:var(--text-aux)">De R$97 por R$27 hoje. Pagamento único. <span class="hl">Acesso imediato na área de membros.</span> Garantia de 7 dias.</p>
+    
+    <div class="ironia-box" style="border-color:var(--gold);background:var(--gold-soft);margin-top:32px;border:2px solid var(--gold)">
+      <p style="font-size:18px;color:var(--text)"><strong>P.S.:</strong> Se você tá lendo até aqui, é porque os números do teu saldo no banco te assustam.</p>
+      <p style="font-size:18px;color:var(--text);margin-top:12px"><span class="hl">Isso aqui não faz os números sumirem.</span> Faz você ter coragem de olhar pra eles.</p>
+      <p style="font-size:16px;color:var(--text);margin-top:12px">E só de olhar, <span class="hl">você já economiza.</span></p>
+      <p style="font-size:14px;color:var(--text-aux);margin-top:12px">— Porque o primeiro passo pra resolver um problema é <span class="hl">conseguir encará-lo.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY -->
+<div class="sticky" id="sticky">
+  <div class="wrap">
+    <a href="SEU-LINK-KIWIFY" class="btn" style="width:100%;margin:0">ACESSAR O RESET 5 POR R$27</a>
+  </div>
+</div>
+
+<!-- COOKIE -->
+<div class="cookie-banner" id="cookieBanner">
+  Usamos cookies pra melhorar sua experiência e analisar tráfego. 
+  <button onclick="aceitarCookie()">OK, ENTENDI</button>
+</div>
+
+<!-- RODAPÉ DISCLAIMER FB -->
+<footer style="font-size:11px;color:#94A3B8;text-align:center;padding:40px 24px;border-top:1px solid rgba(255,255,255,0.08);background:var(--bg)">
+  <p>O Reset 5 é um produto digital de educação comportamental. Não é consultoria financeira, não substitui terapia e não promete eliminação de compromissos financeiros. Resultados dependem da aplicação individual.</p>
+  <p style="margin-top:8px">© 2026 Reset 5. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+  function aceitarCookie() {
+    document.getElementById('cookieBanner').classList.add('hide');
+    localStorage.setItem('cookieAceito', 'sim');
+  }
+  if(localStorage.getItem('cookieAceito') === 'sim') {
+    document.getElementById('cookieBanner').classList.add('hide');
+  }
+  
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>
