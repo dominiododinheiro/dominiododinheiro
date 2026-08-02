@@ -245,13 +245,24 @@ body{background:#0F172A;color:#CBD5E1;font-family:Inter,sans-serif;display:flex;
   <script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
 
   <script>
-    (function(){
-      const bump = new URLSearchParams(window.location.search).get('bump');
-      const venda = document.getElementById('bloco-desarme-venda');
-      const ja = document.getElementById('bloco-desarme-ja-comprou');
-      if (bump === 'sim') { ja.style.display='block'; }
-      else { venda.style.display='block'; }
-    })();
-  </script>
+  (function(){
+    const urlParams = new URLSearchParams(window.location.search);
+    const bump = urlParams.get('bump') || urlParams.get('v'); // aceita ?bump= ou ?v=
+    
+    const venda = document.getElementById('bloco-desarme-venda');
+    const ja = document.getElementById('bloco-desarme-ja-comprou');
+    
+    // Se bump=sim OU se tiver "sim" em qualquer lugar da URL, mostra "já comprou"
+    if (bump === 'sim' || window.location.href.includes('bump=sim')) { 
+      ja.style.display='block'; 
+      venda.style.display='none';
+    } else { 
+      venda.style.display='block'; 
+      ja.style.display='none';
+    }
+  })();
+</script>
+</body>
+</html>
 </body>
 </html>
