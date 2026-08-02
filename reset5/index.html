@@ -37,20 +37,17 @@
   .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 20px;color:var(--text-secondary)}
   .faq-item.open .faq-a{max-height:400px;padding:20px}
   .sticky{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);padding:16px;border-top:1px solid var(--line);z-index:9999}
-  .cookie-banner {position: fixed;bottom:80px;left:0;right:0;background:#1E293B;color:#CBD5E1;padding:12px 20px;font-size:14px;text-align:center;z-index:9998;border-top:1px solid rgba(255,255,255,0.12)}
-  .cookie-banner button {background:var(--gold);color:#0F172A;border:none;padding:8px 16px;border-radius:6px;font-weight:700;margin-left:12px;cursor:pointer}
-  .cookie-banner.hide { display: none; }
   .badge{display:inline-block;background:var(--gold-soft);border:1px solid var(--gold);color:var(--gold);font-size:11px;font-weight:800;letter-spacing:0.5px;padding:4px 10px;border-radius:20px;margin-bottom:8px;text-transform:uppercase}
   .price-old{color:var(--text-aux);text-decoration:line-through;font-size:16px}
   .price-new{color:var(--white);font-size:36px;font-weight:800}
   .ironia-box{background:var(--bg-secondary);border-radius:12px;padding:20px;margin:16px 0;border:1px solid var(--line)}
   .ironia-box p{font-size:17px;color:var(--text);font-style:italic;text-align:center}
   .ironia-box .autor{font-size:13px;color:var(--text-aux);margin-top:8px;font-style:normal}
+  footer a{color:var(--text-aux);text-decoration:none;margin:0 8px}
+  footer a:hover{color:var(--gold)}
   @media (max-width:768px){
     .hero h1{font-size:30px}
     section{padding:60px 0}
-    .cookie-banner {font-size:12px;bottom:80px;padding:10px 16px;left:12px;right:12px;border-radius:12px}
-    .cookie-banner button {display:block;margin:8px auto 0;width:100%;max-width:200px}
     .sticky {padding:12px 16px}
     .sticky .btn {padding:14px 24px;font-size:14px}
   }
@@ -58,7 +55,7 @@
 </head>
 <body>
 
-<!-- HERO - AJUSTE: H1 CICLO + EXTINTOR -->
+<!-- HERO -->
 <section class="hero">
   <div class="wrap">
     <div class="prehead">Se você trava quando a fatura chega...</div>
@@ -153,15 +150,15 @@
     </div>
 
     <div class="card">
-  <h3>📘 06 - Cartilha Reset (25 páginas) com 4 bônus</h3>
-  <p style="font-size:15px;margin-bottom:12px">Explicação completa do Reset 5 + exemplo da Renata + bônus. <span class="hl">Leia só depois de 2 noites dormindo melhor:</span></p>
-  <ul style="font-size:14px;list-style:none;padding:0">
-    <li style="margin-bottom:6px">🎁 <strong style="color:var(--white)">Bônus 1 - Conversor de Vergonha (pág 19-21)</strong></li>
-    <li style="margin-bottom:6px">🎁 <strong style="color:var(--white)">Bônus 2 - 3 Regras de Ouro para Parar o Pânico (pág 22)</strong></li>
-    <li style="margin-bottom:6px">🎁 <strong style="color:var(--white)">Bônus 3 - Template Círculo de Controle (pág 23)</strong></li>
-    <li style="margin-bottom:6px">🎁 <strong style="color:var(--white)">Bônus 4 - Checklist Ações Imediatas (pág 24)</strong></li>
-  </ul>
-</div>
+      <h3>📘 06 - Cartilha Reset (25 páginas) com 4 bônus</h3>
+      <p style="font-size:15px;margin-bottom:12px">Explicação completa do Reset 5 + exemplo da Renata + bônus. <span class="hl">Leia só depois de 2 noites dormindo melhor:</span></p>
+      <ul style="font-size:14px;list-style:none;padding:0">
+        <li style="margin-bottom:6px">🎁 <strong style="color:var(--white)">Bônus 1 - Conversor de Vergonha (pág 19-21)</strong></li>
+        <li style="margin-bottom:6px">🎁 <strong style="color:var(--white)">Bônus 2 - 3 Regras de Ouro para Parar o Pânico (pág 22)</strong></li>
+        <li style="margin-bottom:6px">🎁 <strong style="color:var(--white)">Bônus 3 - Template Círculo de Controle (pág 23)</strong></li>
+        <li style="margin-bottom:6px">🎁 <strong style="color:var(--white)">Bônus 4 - Checklist Ações Imediatas (pág 24)</strong></li>
+      </ul>
+    </div>
 
     <div style="text-align:center;margin-top:32px">
       <a href="#checkout" class="btn" style="font-size:18px">ACESSAR O RESET 5 AGORA - R$27</a>
@@ -170,7 +167,7 @@
   </div>
 </section>
 
-<!-- DE ONDE VEIO - AJUSTE: TEASER DOMÍNIO -->
+<!-- DE ONDE VEIO -->
 <section>
   <div class="wrap">
     <h2>De onde veio esse protocolo?</h2>
@@ -179,7 +176,7 @@
       <p style="font-size:16px;color:var(--text)">"O <span class="hl">Reset 5</span> é a ferramenta de emergência que abre a cartilha <span class="hl">Domínio do Dinheiro</span> — o mesmo método que a Renata, o Diego e a Mariana usaram pra parar de fugir."</p>
     </div>
 
-    <p style="font-size:18px;color:var(--text)">Eles não começaram lendo 20 páginas. <span class="hl">Começaram com 5 minutos.</span> Começaram com o Reset.</p><br>
+    <p style="font-size:18px;color:var(--text)">Eles não começaram lendo 25 páginas. <span class="hl">Começaram com 5 minutos.</span> Começaram com o Reset.</p><br>
 
     <div class="card-gold" style="margin-top:24px">
       <div class="badge">DEPOIS QUE VOCÊ RESPIRAR</div>
@@ -254,34 +251,24 @@
   </div>
 </section>
 
-<!-- STICKY -->
+<!-- STICKY CTA -->
 <div class="sticky" id="sticky">
   <div class="wrap">
     <a href="SEU-LINK-KIWIFY" class="btn" style="width:100%;margin:0">ACESSAR O RESET 5 POR R$27</a>
   </div>
 </div>
 
-<!-- COOKIE -->
-<div class="cookie-banner" id="cookieBanner">
-  Usamos cookies pra melhorar sua experiência e analisar tráfego. 
-  <button onclick="aceitarCookie()">OK, ENTENDI</button>
-</div>
-
-<!-- RODAPÉ DISCLAIMER FB -->
+<!-- RODAPÉ COM LINKS LEGAIS - SUBSTITUI COOKIE BANNER -->
 <footer style="font-size:11px;color:#94A3B8;text-align:center;padding:40px 24px;border-top:1px solid rgba(255,255,255,0.08);background:var(--bg)">
+  <p style="margin-bottom:12px">
+    <a href="/politica-de-privacidade">Política de Privacidade</a> | 
+    <a href="/termos-de-uso">Termos de Uso</a>
+  </p>
   <p>O Reset 5 é um produto digital de educação comportamental. Não é consultoria financeira, não substitui terapia e não promete eliminação de compromissos financeiros. Resultados dependem da aplicação individual.</p>
   <p style="margin-top:8px">© 2026 Reset 5. Todos os direitos reservados.</p>
 </footer>
 
 <script>
-  function aceitarCookie() {
-    document.getElementById('cookieBanner').classList.add('hide');
-    localStorage.setItem('cookieAceito', 'sim');
-  }
-  if(localStorage.getItem('cookieAceito') === 'sim') {
-    document.getElementById('cookieBanner').classList.add('hide');
-  }
-  
   document.querySelectorAll('.faq-q').forEach(q => {
     q.addEventListener('click', () => {
       const item = q.parentElement;
