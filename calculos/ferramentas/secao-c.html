@@ -125,21 +125,52 @@ body {
   margin-top: 2px;
 }
 
-/* ── AVISO ── */
+/* ── AVISO LEI DO TETO ── */
 .aviso-card {
+  background: #E8F5E9;
+  border-radius: 12px;
+  border: 1.5px solid #2E7D32;
+  border-left: 5px solid #2E7D32;
+  padding: 14px 16px;
+}
+.aviso-card .aviso-titulo {
+  font-size: clamp(14px, 2.2vw, 17px);
+  font-weight: 700;
+  color: #1B5E20;
+  margin-bottom: 4px;
+}
+.aviso-card p {
+  font-size: clamp(13px, 2vw, 16px);
+  color: #1B5E20;
+  line-height: 1.6;
+}
+.aviso-card .destaque-lei {
+  background: #fff;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 10px;
+  border: 1.5px solid #2E7D32;
+}
+.aviso-card .destaque-lei strong {
+  color: #C0392B;
+  font-size: clamp(15px, 2.4vw, 18px);
+}
+
+/* ── AVISO MENOR CUSTO ── */
+.aviso-menor {
   background: #FFF3CD;
   border-radius: 12px;
   border: 1.5px solid #F0C040;
   border-left: 5px solid #F0C040;
   padding: 14px 16px;
 }
-.aviso-card .aviso-titulo {
+.aviso-menor .aviso-titulo {
   font-size: clamp(14px, 2.2vw, 17px);
   font-weight: 700;
   color: #7D4E00;
   margin-bottom: 4px;
 }
-.aviso-card p {
+.aviso-menor p {
   font-size: clamp(13px, 2vw, 16px);
   color: #7D4E00;
   line-height: 1.6;
@@ -309,6 +340,32 @@ body {
   font-weight: 700;
 }
 .radio-opt:active { transform: scale(.96); }
+
+/* ── ALERTA LEI DO TETO ── */
+.alert-teto {
+  background: #E8F5E9;
+  border-radius: 8px;
+  padding: 10px 14px;
+  border-left: 4px solid #2E7D32;
+  margin-top: 8px;
+  display: none;
+}
+.alert-teto.visible {
+  display: block;
+}
+.alert-teto .titulo-teto {
+  font-weight: 700;
+  color: #1B5E20;
+  font-size: clamp(13px, 2vw, 16px);
+}
+.alert-teto .texto-teto {
+  font-size: clamp(12px, 1.6vw, 14px);
+  color: #1B5E20;
+  margin-top: 2px;
+}
+.alert-teto .texto-teto strong {
+  color: #C0392B;
+}
 
 /* ── RESULTADO ── */
 .resultado-card {
@@ -580,7 +637,7 @@ body {
   #card-divida2 { page-break-after: always; }
 
   /* Nunca quebrar dentro de seções */
-  .header-card, .aviso-card, .divida-card, .total-card, .estrategia-content, .obs-card {
+  .header-card, .aviso-card, .aviso-menor, .divida-card, .total-card, .estrategia-content, .obs-card {
     page-break-inside: avoid;
   }
 
@@ -601,12 +658,26 @@ body {
     padding: 5px 8px;
     border-width: 1px;
     border-left-width: 3px;
-    background: #FFF3CD !important;
+    background: #E8F5E9 !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
   .aviso-card .aviso-titulo { font-size: 9px; margin-bottom: 2px; }
   .aviso-card p { font-size: 8px; }
+  .aviso-card .destaque-lei { padding: 4px 8px; }
+  .aviso-card .destaque-lei strong { font-size: 9px; }
+
+  .aviso-menor {
+    border-radius: 3px;
+    padding: 5px 8px;
+    border-width: 1px;
+    border-left-width: 3px;
+    background: #FFF3CD !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .aviso-menor .aviso-titulo { font-size: 9px; margin-bottom: 2px; }
+  .aviso-menor p { font-size: 8px; }
 
   .divida-card {
     border-radius: 3px;
@@ -640,6 +711,10 @@ body {
     border-radius: 4px;
   }
   .radio-opt.selected { background: #e8f0f8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .alert-teto { padding: 4px 8px; }
+  .alert-teto .titulo-teto { font-size: 8px; }
+  .alert-teto .texto-teto { font-size: 7.5px; }
 
   .resultado-card {
     border-radius: 3px;
@@ -748,8 +823,27 @@ body {
     <div class="subtitulo2">Taxas baixas e bem associado — mantenha as parcelas em dia</div>
   </div>
 
-  <!-- AVISO -->
+  <!-- AVISO LEI DO TETO -->
   <div class="aviso-card">
+    <div class="aviso-titulo">✅ NOVA LEI: Teto do Rotativo (Lei 14.690/2023)</div>
+    <p>
+      <strong>O valor total cobrado em juros e encargos na dívida do cartão de crédito NÃO pode ultrapassar 100% do valor principal da dívida original.</strong>
+    </p>
+    <div class="destaque-lei">
+      <p style="font-size:clamp(14px, 2.2vw, 17px); color:#1B5E20; margin-bottom:4px;">
+        <strong>Exemplo:</strong> Se você devia <strong>R$ 1.000</strong>, o valor cobrado em juros não pode passar de <strong>R$ 1.000</strong>.
+      </p>
+      <p style="font-size:clamp(16px, 2.6vw, 20px); font-weight:800; color:#C0392B;">
+        Totalizando no máximo R$ 2.000.
+      </p>
+    </div>
+    <p style="margin-top:8px;">
+      💡 <strong>A dívida não pode mais dobrar indefinidamente.</strong> Mas a <strong>conversão para parcelado com taxa fixa</strong> ainda é a melhor escolha.
+    </p>
+  </div>
+
+  <!-- AVISO MENOR CUSTO -->
+  <div class="aviso-menor">
     <div class="aviso-titulo">💡 Lembrete</div>
     <p>
       <strong>Crédito consignado:</strong> taxas entre 15% e 30% ao ano.<br>
@@ -774,11 +868,21 @@ body {
       </div>
 
       <div class="campo">
-        <label>Valor total da dívida</label>
+        <label>Valor principal da dívida original</label>
+        <div class="input-wrap">
+          <span class="input-prefix">R$</span>
+          <input class="val-input" id="d1-original" type="number" min="0" step="0.01" placeholder="0,00" oninput="calcularD1()">
+        </div>
+        <span style="font-size:11px; color:#888; font-style:italic;">💡 Valor que você pegou emprestado originalmente</span>
+      </div>
+
+      <div class="campo">
+        <label>Valor total da dívida (com juros)</label>
         <div class="input-wrap">
           <span class="input-prefix">R$</span>
           <input class="val-input" id="d1-total" type="number" min="0" step="0.01" placeholder="0,00" oninput="calcularD1()">
         </div>
+        <span style="font-size:11px; color:#888; font-style:italic;">💡 Valor total que você deve hoje</span>
       </div>
 
       <div class="campo">
@@ -823,6 +927,12 @@ body {
             <input type="radio" name="bem1" value="sem"> ⚪ Sem bem
           </label>
         </div>
+      </div>
+
+      <!-- ALERTA LEI DO TETO -->
+      <div class="alert-teto" id="d1-teto-alert">
+        <div class="titulo-teto">✅ Você está protegido pela Lei 14.690/2023!</div>
+        <div class="texto-teto" id="d1-teto-texto">Os juros cobrados não podem ultrapassar 100% do valor original.</div>
       </div>
 
       <!-- RESULTADO -->
@@ -871,11 +981,21 @@ body {
       </div>
 
       <div class="campo">
-        <label>Valor total da dívida</label>
+        <label>Valor principal da dívida original</label>
+        <div class="input-wrap">
+          <span class="input-prefix">R$</span>
+          <input class="val-input" id="d2-original" type="number" min="0" step="0.01" placeholder="0,00" oninput="calcularD2()">
+        </div>
+        <span style="font-size:11px; color:#888; font-style:italic;">💡 Valor que você pegou emprestado originalmente</span>
+      </div>
+
+      <div class="campo">
+        <label>Valor total da dívida (com juros)</label>
         <div class="input-wrap">
           <span class="input-prefix">R$</span>
           <input class="val-input" id="d2-total" type="number" min="0" step="0.01" placeholder="0,00" oninput="calcularD2()">
         </div>
+        <span style="font-size:11px; color:#888; font-style:italic;">💡 Valor total que você deve hoje</span>
       </div>
 
       <div class="campo">
@@ -920,6 +1040,11 @@ body {
             <input type="radio" name="bem2" value="sem"> ⚪ Sem bem
           </label>
         </div>
+      </div>
+
+      <div class="alert-teto" id="d2-teto-alert">
+        <div class="titulo-teto">✅ Você está protegido pela Lei 14.690/2023!</div>
+        <div class="texto-teto" id="d2-teto-texto">Os juros cobrados não podem ultrapassar 100% do valor original.</div>
       </div>
 
       <div class="resultado-card" id="resultado2">
@@ -967,11 +1092,21 @@ body {
       </div>
 
       <div class="campo">
-        <label>Valor total da dívida</label>
+        <label>Valor principal da dívida original</label>
+        <div class="input-wrap">
+          <span class="input-prefix">R$</span>
+          <input class="val-input" id="d3-original" type="number" min="0" step="0.01" placeholder="0,00" oninput="calcularD3()">
+        </div>
+        <span style="font-size:11px; color:#888; font-style:italic;">💡 Valor que você pegou emprestado originalmente</span>
+      </div>
+
+      <div class="campo">
+        <label>Valor total da dívida (com juros)</label>
         <div class="input-wrap">
           <span class="input-prefix">R$</span>
           <input class="val-input" id="d3-total" type="number" min="0" step="0.01" placeholder="0,00" oninput="calcularD3()">
         </div>
+        <span style="font-size:11px; color:#888; font-style:italic;">💡 Valor total que você deve hoje</span>
       </div>
 
       <div class="campo">
@@ -1016,6 +1151,11 @@ body {
             <input type="radio" name="bem3" value="sem"> ⚪ Sem bem
           </label>
         </div>
+      </div>
+
+      <div class="alert-teto" id="d3-teto-alert">
+        <div class="titulo-teto">✅ Você está protegido pela Lei 14.690/2023!</div>
+        <div class="texto-teto" id="d3-teto-texto">Os juros cobrados não podem ultrapassar 100% do valor original.</div>
       </div>
 
       <div class="resultado-card" id="resultado3">
@@ -1088,6 +1228,22 @@ body {
     </div>
   </div>
 
+<!-- NOTA LEGAL - DISCLAIMER -->
+<div style="background:#f5f0ef; border-radius:8px; padding:12px 16px; font-size:12px; color:#666; border:1px solid #ddd; margin-top:16px;">
+  <strong>⚠️ Aviso Legal</strong>
+  <p style="margin:4px 0 0 0; font-size:12px; color:#666;">
+    Esta calculadora tem caráter <strong>meramente informativo e educacional</strong>. 
+    Os resultados são estimativas baseadas em premissas simplificadas e não consideram 
+    sua situação financeira pessoal, seus objetivos ou necessidades específicas. 
+    <strong>Não constitui</strong> recomendação de investimento, aconselhamento financeiro, 
+    jurídico, tributário ou de qualquer outra natureza profissional. 
+    Consulte um <strong>profissional qualificado</strong> (planejador financeiro, contador 
+    ou advogado) antes de tomar qualquer decisão financeira importante. 
+    Leis, taxas e regulamentações podem mudar — confirme as condições atuais com a 
+    instituição responsável.
+  </p>
+</div>
+
   <div class="footer-note">
     Domínio do Dinheiro — O Guia Estoico para Quitar Dívidas e Ter Paz com o Dinheiro
   </div>
@@ -1138,6 +1294,45 @@ body {
       case 'veiculo': return '2%';
       case 'outro': return '1,5%';
       default: return '1,5%';
+    }
+  }
+
+  // =============================================
+  // VERIFICAR LEI DO TETO
+  // =============================================
+  function verificarTeto(numero) {
+    var original = parseFloat(document.getElementById('d' + numero + '-original').value) || 0;
+    var total = parseFloat(document.getElementById('d' + numero + '-total').value) || 0;
+    var alertEl = document.getElementById('d' + numero + '-teto-alert');
+    var textoEl = document.getElementById('d' + numero + '-teto-texto');
+
+    if (original > 0 && total > 0) {
+      var juros = total - original;
+      var limite = original;
+      
+      if (juros > limite) {
+        alertEl.classList.add('visible');
+        textoEl.innerHTML = '⚠️ <strong>' + fmt(juros) + '</strong> em juros — ultrapassou o limite de <strong>' + fmt(limite) + '</strong> (100% do valor original). <strong>Você tem direito a revisão!</strong>';
+        alertEl.style.borderLeftColor = '#C0392B';
+        alertEl.style.background = '#FFEBEE';
+        textoEl.style.color = '#C0392B';
+      } else if (juros > limite * 0.8) {
+        alertEl.classList.add('visible');
+        textoEl.innerHTML = '✅ Você está próximo do limite legal: <strong>' + fmt(juros) + '</strong> em juros. Limite é ' + fmt(limite) + '. <strong>Converse com o banco!</strong>';
+        alertEl.style.borderLeftColor = '#F0C040';
+        alertEl.style.background = '#FFF3CD';
+        textoEl.style.color = '#7D4E00';
+      } else if (juros > 0) {
+        alertEl.classList.add('visible');
+        textoEl.innerHTML = '✅ Você está dentro do limite legal: <strong>' + fmt(juros) + '</strong> em juros. Limite é ' + fmt(limite) + '. <strong>Faça a portabilidade para uma taxa fixa!</strong>';
+        alertEl.style.borderLeftColor = '#2E7D32';
+        alertEl.style.background = '#E8F5E9';
+        textoEl.style.color = '#1B5E20';
+      } else {
+        alertEl.classList.remove('visible');
+      }
+    } else {
+      alertEl.classList.remove('visible');
     }
   }
 
@@ -1200,6 +1395,7 @@ body {
   // FUNÇÃO GERAL PARA CALCULAR DÍVIDA
   // =============================================
   function calcularDivida(numero) {
+    var original = parseFloat(document.getElementById('d' + numero + '-original').value) || 0;
     var total = parseFloat(document.getElementById('d' + numero + '-total').value) || 0;
     var tipo = document.getElementById('d' + numero + '-tipo').value;
     var personalizada = parseFloat(document.getElementById('d' + numero + '-taxa-personalizada').value) || 0;
@@ -1208,10 +1404,13 @@ body {
     var taxa = getTaxa(tipo, personalizada);
     var taxaDisplay = getTaxaDisplay(tipo, personalizada);
 
+    // Usa o valor total para cálculo (já que inclui juros)
+    var valorBase = total > 0 ? total : original;
+
     // Parcela com juros compostos
-    var parcela = calcularParcela(total, taxa, parcelas);
+    var parcela = calcularParcela(valorBase, taxa, parcelas);
     var totalPagar = parcela * parcelas;
-    var juros = totalPagar - total;
+    var juros = totalPagar - valorBase;
 
     document.getElementById('d' + numero + '-parcela').textContent = fmt(parcela);
     document.getElementById('d' + numero + '-total-pagar').textContent = fmt(totalPagar);
@@ -1221,7 +1420,7 @@ body {
     var msg = document.getElementById('d' + numero + '-msg');
     var submsg = document.getElementById('d' + numero + '-submsg');
 
-    if (total === 0 || parcelas === 0) {
+    if (valorBase === 0 || parcelas === 0) {
       statusDiv.className = 'resultado-status azul';
       msg.textContent = 'Preencha os dados acima';
       submsg.textContent = 'Informe o valor, tipo e parcelas para ver a análise.';
@@ -1237,6 +1436,7 @@ body {
     msg.textContent = icon + ' ' + statusMsg;
     submsg.textContent = statusSub + ' Total: ' + fmt(totalPagar) + ' em ' + parcelas + 'x. Parcela: ' + fmt(parcela);
 
+    verificarTeto(numero);
     calcTotais();
   }
 
@@ -1251,17 +1451,17 @@ body {
   // CALCULAR TOTAIS
   // =============================================
   function calcTotais() {
-    var d1 = parseFloat(document.getElementById('d1-total').value) || 0;
-    var d2 = parseFloat(document.getElementById('d2-total').value) || 0;
-    var d3 = parseFloat(document.getElementById('d3-total').value) || 0;
+    var d1 = parseFloat(document.getElementById('d1-total').value) || parseFloat(document.getElementById('d1-original').value) || 0;
+    var d2 = parseFloat(document.getElementById('d2-total').value) || parseFloat(document.getElementById('d2-original').value) || 0;
+    var d3 = parseFloat(document.getElementById('d3-total').value) || parseFloat(document.getElementById('d3-original').value) || 0;
 
     var p1 = parseFloat(document.getElementById('d1-parcelas').value) || 0;
     var p2 = parseFloat(document.getElementById('d2-parcelas').value) || 0;
     var p3 = parseFloat(document.getElementById('d3-parcelas').value) || 0;
 
-    var t1 = parseFloat(document.getElementById('d1-total').value) || 0;
-    var t2 = parseFloat(document.getElementById('d2-total').value) || 0;
-    var t3 = parseFloat(document.getElementById('d3-total').value) || 0;
+    var t1 = parseFloat(document.getElementById('d1-total').value) || parseFloat(document.getElementById('d1-original').value) || 0;
+    var t2 = parseFloat(document.getElementById('d2-total').value) || parseFloat(document.getElementById('d2-original').value) || 0;
+    var t3 = parseFloat(document.getElementById('d3-total').value) || parseFloat(document.getElementById('d3-original').value) || 0;
 
     // Taxas para calcular parcelas reais
     var taxa1 = getTaxa(
