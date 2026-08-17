@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reset 5 Minutos</title>
+  <title>Kit Reset 5 Minutos</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -16,7 +16,6 @@
       --surface:      #111827;
       --surface2:     #0f1724;
       --gold:         #d4af37;
-      --gold-lt:      #e8c84a;
       --gold-dim:     rgba(212,175,55,.12);
       --gold-border:  rgba(212,175,55,.25);
       --text:         #e2e8f0;
@@ -90,7 +89,7 @@
       display: inline-flex; align-items: center; justify-content: center;
       gap: 8px;
       font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.05rem;
-      padding: 18px 36px; border-radius: 60px;
+      padding: 16px 32px; border-radius: 14px;
       text-decoration: none; border: none; cursor: pointer;
       transition: transform .2s, box-shadow .2s;
       width: 100%; max-width: 440px;
@@ -137,6 +136,10 @@
     .check-list li {
       display: flex; align-items: flex-start; gap: 10px;
       font-size: .9rem; color: var(--text-dim); line-height: 1.5;
+    }
+    .check-list.green li::before {
+      content: '✓'; color: var(--green); font-weight: 800;
+      font-size: .85rem; margin-top: 2px; flex-shrink: 0;
     }
     .check-list li::before {
       content: '✓'; color: var(--gold); font-weight: 800;
@@ -210,7 +213,7 @@
       font-size: .75rem; color: var(--text-faint); line-height: 1.7; text-align: left;
     }
 
-    /* ── SISTEMA DOMÍNIO DO DINHEIRO ── */
+    /* ── RESET 5 ── */
     .system-box {
       background: rgba(212,175,55,.04);
       border: 1px solid var(--gold-border);
@@ -277,6 +280,7 @@
 
     /* ── MOBILE ── */
     @media (max-width: 640px) {
+      .btn { padding: 14px 22px; border-radius: 12px; font-size: .95rem; }
       section { padding: 40px 0; }
       h1 { font-size: 1.8rem; }
       h2 { font-size: 1.4rem; }
@@ -297,7 +301,7 @@
 <section style="padding-top: 48px; padding-bottom: 48px;">
   <div class="wn">
 
-    <div class="eyebrow">KIT RESET 5</div>
+    <div class="eyebrow">RESET 5</div>
 
     <!-- Linha de identificação — abre com a cena, não com a solução -->
     <p style="font-size: 1.05rem; color: var(--text-dim); margin-bottom: 18px; font-style: italic;">
@@ -305,7 +309,7 @@
     </p>
 
     <h1 style="font-size: clamp(2rem, 5.5vw, 3.1rem); margin-bottom: 22px;">
-      Mas existe um protocolo de <span class="gold">5 minutos</span> para momentos em que imprevistos financeiros geram sobrecarga mental.
+      Mas existe um jeito de quebrar em <span class="gold">5 minutos</span> o ciclo do "recebi, paguei tudo e no fim não sobrou nada".
     </h1>
 
     <div class="quote">
@@ -330,10 +334,10 @@
 
     <div class="card" style="margin-top: 22px; padding: 16px 18px; display:flex; gap:12px; align-items:center;">
         <div style="background: var(--gold-dim); color: var(--gold); width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800;">✓</div>
-        <p style="font-size:.85rem; color: var(--text-dim); line-height:1.5;"><strong style="color:var(--text);">O que muda:</strong> 3 áudios de 40~80s para o modo noite + checklist para colar na parede ao lado da cama + ferramenta online de 5 passos para o modo dia. Sem planilhas. Sem promessa financeira.</p>
+        <p style="font-size:.85rem; color: var(--text-dim); line-height:1.5;"><strong style="color:var(--text);">O que muda:</strong> 3 áudios de 40~80s para o modo noite + checklist para colar na parede + ferramenta online de 5 passos para o modo dia. Não é planilha. É clareza mental.</p>
       </div>
     <div style="text-align: center; margin-top: 32px;">
-      <a href="https://pay.kiwify.com.br/YZJHrXG" class="btn btn-gold">QUERO INTERROMPER O CICLO HOJE</a>
+      <a href="https://pay.kiwify.com.br/YZJHrXG" class="btn btn-gold">QUERO QUEBRAR O CICLO DO 'NUNCA SOBRA'</a>
       <p style="font-size: .75rem; color: #fbf9f6; margin-top: 10px;">
         Acesso imediato · Áudios + Ferramenta Online + Guia PDF · Garantia de 7 dias
       </p>
@@ -388,26 +392,56 @@
     <div class="rule"></div>
 
     <div class="card card-dark" style="padding: 28px;">
-      <p style="color: var(--text-dim); margin-bottom: 14px; font-size: .95rem; line-height: 1.7;">
+      <p style="color: var(--text-dim); margin-bottom: 22px; font-size: .95rem; line-height: 1.7;">
         Imagine que uma notificação de cobrança fora do esperado chega no final do dia. São 23h, a mente acelera e o sono foge. Em vez de passar a madrugada remoendo o cenário completo, veja como você aplica o protocolo na prática:
       </p>
 
-      <ul class="check-list" style="margin-bottom: 18px;">
-        <li><strong>Passo 1:ouvir o Áudio 1 (70s):</strong> Guia de desaceleração da respiração para interromper a resposta imediata de estresse.</li>
-        <li><strong>Passo 2: abrir o Reset Online (Modo Dia/Noite):</strong> Isso separa em 2 minutos o que é um fato real (valor e data) do que é projeção mental exagerada.</li>
-        <li><strong>Passo 3: Definir uma única ação concreta:</strong> A pessoa escolhe uma tarefa simples para o dia seguinte às 9h (ex: ligar para o banco ou checar um lançamento).</li>
-        <li><strong>Passo 4: Desligar o celular e voltar a dormir:</strong> A pendência não desaparece na hora, mas o peso mental desnecessário é removido para garantir o seu descanso.</li>
-      </ul>
-      <p style="color: var(--gold); font-weight: 600; font-size: .95rem; font-style: italic;">
-        "O objetivo não é resolver um mês inteiro em 5 minutos, mas garantir a clareza e a calma necessárias para agir com inteligência no dia seguinte."
-      </p>
+      <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 22px;">
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="background: var(--gold-dim); border: 1px solid var(--gold-border); color: var(--gold); width: 32px; height: 32px; min-width: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: .85rem;">1</div>
+          <div>
+            <strong style="color: var(--text); font-size: .9rem; display: block; margin-bottom: 4px;">Ouvir o Áudio 1 (70s)</strong>
+            <span style="color: var(--text-dim); font-size: .88rem; line-height: 1.6;">Guia de desaceleração da respiração para interromper a resposta imediata de estresse.</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="background: var(--gold-dim); border: 1px solid var(--gold-border); color: var(--gold); width: 32px; height: 32px; min-width: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: .85rem;">2</div>
+          <div>
+            <strong style="color: var(--text); font-size: .9rem; display: block; margin-bottom: 4px;">Abrir o Reset Online (Modo Dia/Noite)</strong>
+            <span style="color: var(--text-dim); font-size: .88rem; line-height: 1.6;">Isso separa em 2 minutos o que é um fato real (valor e data) do que é projeção mental exagerada.</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="background: var(--gold-dim); border: 1px solid var(--gold-border); color: var(--gold); width: 32px; height: 32px; min-width: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: .85rem;">3</div>
+          <div>
+            <strong style="color: var(--text); font-size: .9rem; display: block; margin-bottom: 4px;">Definir uma única ação concreta</strong>
+            <span style="color: var(--text-dim); font-size: .88rem; line-height: 1.6;">A pessoa escolhe uma tarefa simples para o dia seguinte às 9h (ex: ligar para o banco ou checar um lançamento).</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; align-items: flex-start;">
+          <div style="background: rgba(74, 222, 128, .12); border: 1px solid rgba(74, 222, 128, .25); color: var(--green); width: 32px; height: 32px; min-width: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .85rem;">✓</div>
+          <div>
+            <strong style="color: var(--text); font-size: .9rem; display: block; margin-bottom: 4px;">Desligar o celular e voltar a dormir</strong>
+            <span style="color: var(--text-dim); font-size: .88rem; line-height: 1.6;">A pendência não desaparece na hora, mas o peso mental desnecessário é removido para garantir o seu descanso.</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: rgba(212,175,55,.06); border-left: 3px solid var(--gold); border-radius: 0 12px 12px 0; padding: 16px 18px;">
+        <p style="color: var(--gold-lt); font-weight: 600; font-size: .92rem; font-style: italic; line-height: 1.6;">
+          "O objetivo não é resolver um mês inteiro em 5 minutos, mas garantir a clareza e a calma necessárias para agir com inteligência no dia seguinte."
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
 
 <!-- ══════════════════════════════════════
-     PARA QUEM É / PARA QUEM NÃO É (VTSD & Compliance)
+     PARA QUEM É / PARA QUEM NÃO É 
 ══════════════════════════════════════ -->
 <section>
   <div class="wn">
@@ -421,7 +455,7 @@
         <strong style="color: var(--green); font-size: .9rem; text-transform: uppercase; letter-spacing: .1em; display: block; margin-bottom: 12px;">
           ✓ Para quem é:
         </strong>
-        <ul class="check-list">
+        <ul class="check-list green">
           <li>Quem sente a mente sobrecarregada diante de imprevistos financeiros e quer clareza mental imediata.</li>
           <li>Quem perde o sono de madrugada remoendo problemas e precisa de um guia prático para desacelerar.</li>
           <li>Quem quer uma ferramenta simples de 5 minutos para separar fatos reais de preocupações exageradas.</li>
@@ -577,14 +611,14 @@
 
 
 <!-- ══════════════════════════════════════
-     SISTEMA DOMÍNIO DO DINHEIRO
+   RESET 5
 ══════════════════════════════════════ -->
 <section style="border-bottom: none; padding-bottom: 32px;">
   <div class="wn">
     <div class="system-box">
-      <h3>Sistema Domínio do Dinheiro</h3>
+      <h3>Reset 5</h3>
       <p>
-        O Sistema Domínio do Dinheiro é um método prático criado para ajudar pessoas a atravessar momentos de sobrecarga financeira com mais clareza. O Reset 5 é uma ferramenta desenvolvida para os primeiros minutos após um imprevisto, quando a mente precisa de um guia simples para retomar o equilíbrio.
+        Reset 5 é um método prático criado para ajudar pessoas a atravessar momentos de sobrecarga financeira com mais clareza. O Reset 5 é uma ferramenta desenvolvida para os primeiros minutos após um imprevisto, quando a mente precisa de um guia simples para retomar o equilíbrio.
       </p>
     </div>
   </div>
@@ -624,7 +658,7 @@
       </div>
 
       <a href="https://pay.kiwify.com.br/YZJHrXG" class="btn btn-gold" style="margin-top: 4px;">
-        QUERO INTERROMPER O CICLO HOJE
+        QUERO QUEBRAR O CICLO DO 'NUNCA SOBRA'
       </a>
       <p style="font-size: .72rem; color: var(--text-faint); margin-top: 10px;">
         Kiwify · Pagamento 100% seguro · Acesso liberado na hora após aprovação
@@ -711,7 +745,7 @@
       Não é fechando o app e empurrando tudo para amanhã que se resolve a situação.
     </p>
     <a href="https://pay.kiwify.com.br/YZJHrXG" class="btn btn-gold" style="margin: 0 auto;">
-      QUERO INTERROMPER O CICLO HOJE
+      QUERO QUEBRAR O CICLO DO 'NUNCA SOBRA'
     </a>
     <p style="font-size: .72rem; color: var(--text-faint); margin-top: 10px;">
       R$ 27 · Condição de Lançamento · Acesso na hora · Garantia de 7 dias
@@ -729,7 +763,7 @@
   <div class="w">
 
     <div class="disclaimer-box">
-      <strong style="color: var(--text-dim);">Aviso importante:</strong> O Kit Reset 5 Minutos é uma ferramenta educacional para apoio emocional e organização pessoal desenvolvida pelo Sistema Domínio do Dinheiro, um método prático criado para oferecer clareza em momentos de sobrecarga financeira. Não é serviço financeiro, não é consultoria jurídica e não substitui acompanhamento psicológico ou médico. As técnicas de respiração e organização de pensamentos são de caráter informativo e educativo.<br><br>
+      <strong style="color: var(--text-dim);">Aviso importante:</strong> O Kit Reset 5 Minutos é uma ferramenta educacional para apoio emocional e organização pessoal desenvolvida para oferecer clareza em momentos de sobrecarga financeira. Não é um serviço financeiro, não é consultoria jurídica e não substitui acompanhamento psicológico ou médico. As técnicas de respiração e organização de pensamentos são exclusivamente de caráter informativo e educativo.<br><br>
       <strong style="color: var(--text-dim);">Em crise emocional intensa, ligue 188 (CVV — Centro de Valorização da Vida). Funciona 24h e é gratuito.</strong>
     </div>
 
@@ -743,7 +777,7 @@
     </p>
 
     <p style="margin-top: 14px;">
-      ©Sistema Domínio do Dinheiro · [Jackson R Liller] · Todos os direitos reservados.
+      ©Reset 5 · [J R Liller] · Todos os direitos reservados.
     </p>
     <p style="margin-top: 8px; opacity: .6;">
       Este site não possui vínculo com Facebook, Instagram ou Meta Inc.
