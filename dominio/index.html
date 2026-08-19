@@ -1,159 +1,977 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Domínio do Dinheiro | A casa à prova de fogo</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#07090f;--gold:#d4af37;--gold2:#e8c84a;--text:#e2e8f0;--dim:#94a3b8;--red:#f87171;--green:#4ade80;--border:rgba(255,255,255,.08)}
-*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.7}
-.w{max-width:720px;margin:0 auto;padding:0 22px}
-section{padding:54px 0;border-bottom:1px solid var(--border)}
-h1,h2,h3{font-family:'Fraunces',serif;color:#fff;line-height:1.15}
-.gold{color:var(--gold)}
-.btn{display:flex;align-items:center;justify-content:center;width:100%;max-width:520px;margin:0 auto;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#07090f;font-weight:900;font-size:1.15rem;padding:22px 30px;border-radius:60px;text-decoration:none;box-shadow:0 12px 40px rgba(212,175,55,.3);transition:.2s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 18px 50px rgba(212,175,55,.45)}
-.badge{display:inline-block;background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.25);color:var(--gold);font-size:.7rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:7px 14px;border-radius:30px;margin-bottom:18px}
-.quote{border-left:3px solid var(--gold);background:rgba(212,175,55,.05);padding:18px 22px;border-radius:0 14px 14px 0;margin:22px 0;font-style:italic;color:#cbd5e1}
-.card{background:#111827;border:1px solid var(--border);border-radius:20px;padding:26px;margin:16px 0}
-li{margin-bottom:10px}
-.check{list-style:none} .check li::before{content:'✓ ';color:var(--gold);font-weight:800}
-.price-box{background:#0f1724;border:2px solid var(--gold);border-radius:24px;padding:36px 28px;text-align:center;max-width:520px;margin:0 auto}
-.timer{background:#000;border:1px solid var(--gold);color:var(--gold);font-family:'JetBrains Mono';font-weight:800;padding:12px 18px;border-radius:12px;display:inline-block;margin:12px 0}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Domínio do Dinheiro - Método Completo para Quitar Dívidas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Merriweather:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background: #f7fafc;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', 'Georgia', serif;
+            line-height: 1.25;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: #0d233a;
+            margin-bottom: 28px;
+            position: relative;
+            padding: 0 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #d4a017, #ecc94b);
+            margin: 12px auto 0;
+            border-radius: 4px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, #2b6cb0, #1a365d);
+            color: #ffffff;
+            font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+            font-weight: 700;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 50px;
+            box-shadow: 0 8px 24px rgba(26, 54, 93, 0.35);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(26, 54, 93, 0.5);
+            background: linear-gradient(135deg, #1a365d, #0d233a);
+        }
+
+        .btn-cta.gold {
+            background: linear-gradient(135deg, #d4a017, #ecc94b);
+            color: #0d233a;
+            box-shadow: 0 8px 24px rgba(212, 160, 23, 0.35);
+        }
+
+        .btn-cta.gold:hover {
+            box-shadow: 0 12px 32px rgba(212, 160, 23, 0.5);
+            background: linear-gradient(135deg, #c4900e, #d4a017);
+        }
+
+        .btn-cta.green {
+            background: linear-gradient(135deg, #38a169, #2f855a);
+            box-shadow: 0 8px 24px rgba(56, 161, 105, 0.35);
+        }
+
+        .btn-cta.green:hover {
+            box-shadow: 0 12px 32px rgba(56, 161, 105, 0.5);
+            background: linear-gradient(135deg, #2f855a, #276749);
+        }
+
+        .cta-subtext {
+            font-size: 0.8rem;
+            color: #a0aec0;
+            margin-top: 10px;
+            font-weight: 400;
+        }
+
+        /* ===== HEADER / HERO ===== */
+        .hero {
+            background: linear-gradient(145deg, #0d233a 0%, #1a365d 100%);
+            color: #ffffff;
+            padding: 40px 0 44px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 160, 23, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        /* ===== TOP ALERT ===== */
+        .alert-top {
+            background: rgba(212, 160, 23, 0.12);
+            border: 1px solid rgba(212, 160, 23, 0.25);
+            border-radius: 30px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            font-size: 0.75rem;
+            color: #ecc94b;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .alert-top span {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.5rem, 4.5vw, 2.8rem);
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+            padding: 0 10px;
+        }
+
+        .hero h1 span {
+            color: #ecc94b;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(0.9rem, 1.3vw, 1.15rem);
+            color: #cbd5e0;
+            max-width: 720px;
+            margin: 0 auto 28px;
+            font-weight: 300;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+            padding: 0 10px;
+        }
+
+        .hero .subtitle strong {
+            color: #ecc94b;
+            font-weight: 600;
+        }
+
+        .hero .badge-step {
+            display: inline-block;
+            background: rgba(56, 161, 105, 0.15);
+            border: 1px solid rgba(56, 161, 105, 0.3);
+            color: #4ade80;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 30px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            padding: 48px 0;
+            width: 100%;
+        }
+
+        section:nth-child(even) {
+            background: #ffffff;
+        }
+
+        section:nth-child(odd) {
+            background: #f7fafc;
+        }
+
+        /* ===== SECTION DARK ===== */
+        .section-dark {
+            background: #0d233a !important;
+            color: #ffffff !important;
+        }
+
+        .section-dark .section-title {
+            color: #ffffff !important;
+        }
+
+        .section-dark .section-title::after {
+            background: linear-gradient(90deg, #ecc94b, #d4a017) !important;
+        }
+
+        .section-dark p {
+            color: #cbd5e0 !important;
+        }
+
+        /* ===== DAYS LIST - DARK THEME ===== */
+        .days-list {
+            list-style: none;
+            max-width: 680px;
+            margin: 20px auto 0;
+            padding: 0;
+        }
+
+        .days-list li {
+            margin-bottom: 10px;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: clamp(0.9rem, 0.95vw, 1rem);
+            transition: all 0.2s ease;
+            word-break: break-word;
+        }
+
+        /* Estilos para lista dentro de section-dark */
+        .section-dark .days-list li {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border-left: 4px solid #ecc94b !important;
+            color: #e2e8f0 !important;
+        }
+
+        .section-dark .days-list li:hover {
+            background: rgba(255, 255, 255, 0.14) !important;
+        }
+
+        .section-dark .days-list li strong {
+            color: #ecc94b !important;
+        }
+
+        /* Estilos para lista fora de section-dark (fallback) */
+        .days-list li {
+            background: #ffffff;
+            border-left: 4px solid #d4a017;
+            color: #2d3748;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .days-list li strong {
+            color: #0d233a;
+        }
+
+        /* ===== STORY / EMPATIA ===== */
+        .story-box {
+            background: #ffffff;
+            border-left: 5px solid #d4a017;
+            padding: 24px 28px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .story-box p {
+            font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .story-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-text {
+            font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+            line-height: 1.8;
+            color: #2d3748;
+            margin-bottom: 14px;
+        }
+
+        .highlight-text strong {
+            color: #0d233a;
+        }
+
+        /* ===== TABLES ===== */
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            font-size: clamp(0.8rem, 0.9vw, 0.95rem);
+            min-width: 480px;
+        }
+
+        th {
+            background: #0d233a;
+            color: #ffffff;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: clamp(0.7rem, 0.8vw, 0.85rem);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #edf2f7;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #f7fafc;
+        }
+
+        td small {
+            color: #718096;
+            font-size: clamp(0.7rem, 0.75vw, 0.8rem);
+        }
+
+        .table-highlight {
+            background: #fffbef !important;
+        }
+
+        .table-highlight td {
+            border-bottom-color: #feebc8;
+        }
+
+        /* ===== FEATURES / CARDS ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px 22px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .feature-card:hover {
+            border-color: #d4a017;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        .feature-card.highlight {
+            border: 2px solid #d4a017;
+            background: #fffbef;
+        }
+
+        .feature-card h3 {
+            color: #1a365d;
+            font-size: clamp(1rem, 1.1vw, 1.15rem);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-card h3 .emoji {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .feature-card p {
+            color: #4a5568;
+            font-size: clamp(0.85rem, 0.9vw, 0.95rem);
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 8px;
+        }
+
+        .feature-card ul li {
+            padding: 6px 0 6px 26px;
+            border-bottom: 1px dashed #edf2f7;
+            position: relative;
+            color: #4a5568;
+            font-size: clamp(0.82rem, 0.85vw, 0.92rem);
+        }
+
+        .feature-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-card ul li::before {
+            content: "✓";
+            color: #38a169;
+            font-weight: 700;
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+
+        .feature-card .badge-module {
+            display: inline-block;
+            background: #0d233a;
+            color: #ecc94b;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-left: 8px;
+        }
+
+        .feature-card .badge-module.gold {
+            background: #d4a017;
+            color: #0d233a;
+        }
+
+        /* ===== BONUS ===== */
+        .bonus-card {
+            background: #fffbef;
+            border: 1px solid #feebc8;
+            border-left: 5px solid #d4a017;
+            padding: 18px 22px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+        }
+
+        .bonus-card h4 {
+            color: #b7791f;
+            font-size: clamp(0.95rem, 1vw, 1.05rem);
+            margin-bottom: 4px;
+        }
+
+        .bonus-card p {
+            color: #4a5568;
+            font-size: clamp(0.85rem, 0.9vw, 0.95rem);
+        }
+
+        /* ===== OFFER / PRICE ===== */
+        .price-box {
+            background: #ffffff;
+            border: 2px solid #d4a017;
+            border-radius: 16px;
+            padding: 32px 24px;
+            max-width: 520px;
+            margin: 0 auto 28px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: #a0aec0;
+            font-size: clamp(0.95rem, 1vw, 1.1rem);
+        }
+
+        .price-current {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: #276749;
+            font-weight: 800;
+            margin: 6px 0;
+            line-height: 1.2;
+        }
+
+        .price-current small {
+            font-size: clamp(0.8rem, 0.9vw, 1rem);
+            color: #4a5568;
+            font-weight: 400;
+        }
+
+        .price-box .price-sub {
+            color: #718096;
+            font-size: clamp(0.8rem, 0.85vw, 0.9rem);
+            margin-top: 4px;
+        }
+
+        .price-box .integration-note {
+            background: #edf2f7;
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin: 12px 0 16px;
+            font-size: 0.85rem;
+            color: #2d3748;
+        }
+
+        .price-box .integration-note strong {
+            color: #0d233a;
+        }
+
+        /* ===== GUARANTEE ===== */
+        .guarantee-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px 28px;
+            max-width: 720px;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .guarantee-icon {
+            font-size: 2.4rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .guarantee-box h4 {
+            color: #0d233a;
+            font-size: clamp(0.95rem, 1vw, 1.1rem);
+            margin-bottom: 4px;
+        }
+
+        .guarantee-box p {
+            color: #4a5568;
+            font-size: clamp(0.85rem, 0.9vw, 0.92rem);
+            line-height: 1.6;
+        }
+
+        /* ===== COMPARISON SECTION ===== */
+        .comparison-section {
+            background: #ffffff;
+        }
+
+        .comparison-section .section-title {
+            color: #0d233a;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0d233a;
+            color: #a0aec0;
+            text-align: center;
+            padding: 28px 0;
+            font-size: clamp(0.7rem, 0.8vw, 0.82rem);
+            border-top: 1px solid #2d3748;
+            width: 100%;
+        }
+
+        footer p {
+            margin-bottom: 4px;
+        }
+
+        footer p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 32px 0 36px;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .btn-cta {
+                font-size: 0.9rem;
+                padding: 14px 24px;
+                max-width: 100%;
+            }
+
+            section {
+                padding: 36px 0;
+            }
+
+            .price-current {
+                font-size: 2rem;
+            }
+
+            .guarantee-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 18px;
+            }
+
+            .guarantee-icon {
+                font-size: 2.2rem;
+            }
+
+            .story-box {
+                padding: 18px 18px;
+            }
+
+            .story-box p {
+                font-size: 0.9rem;
+            }
+
+            .feature-card {
+                padding: 16px 18px;
+            }
+
+            .price-box {
+                padding: 24px 18px;
+            }
+
+            .bonus-card {
+                padding: 14px 16px;
+            }
+
+            .section-dark .days-list li {
+                font-size: 0.85rem;
+                padding: 10px 14px;
+            }
+
+            table {
+                font-size: 0.78rem;
+                min-width: 380px;
+            }
+
+            th, td {
+                padding: 10px 12px;
+            }
+
+            .container {
+                padding: 0 14px;
+            }
+
+            .alert-top {
+                font-size: 0.65rem;
+                padding: 8px 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            table {
+                font-size: 0.72rem;
+                min-width: 320px;
+            }
+
+            th, td {
+                padding: 8px 10px;
+            }
+
+            .price-current {
+                font-size: 1.7rem;
+            }
+
+            .btn-cta {
+                font-size: 0.8rem;
+                padding: 12px 20px;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            section {
+                padding: 28px 0;
+            }
+
+            .guarantee-box {
+                padding: 16px 14px;
+            }
+
+            .section-dark .days-list li {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+            }
+
+            .feature-card {
+                padding: 14px 14px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<section style="padding-top:70px">
-<div class="w">
-<div class="badge">Upsell Exclusivo · Só para quem pegou o Reset 5</div>
-<h1 style="font-size:clamp(2.1rem,6vw,3.4rem);margin-bottom:18px;">O Reset 5 apagou o incêndio.<br><span class="gold">Agora vamos construir a casa que não pega fogo.</span></h1>
-<p style="color:var(--dim);font-size:1.08rem;margin-bottom:22px;">Você já tem o extintor na mão. Consegue dormir hoje. Mas amanhã o boleto continua chegando. E se você não tiver um sistema, vai voltar a apagar incêndio todo mês.</p>
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="container">
+            <div class="alert-top">
+                ✅ Você já deu o primeiro passo! Seu <span>Reset de 5 Minutos</span> está garantido.
+            </div>
 
-<div class="quote">"Não é que eu gastava demais. Eu não sabia quanto era o meu suficiente. Então todo dinheiro que entrava parecia pouco." — Renata, Juiz de Fora</div>
+            <div class="badge-step">⬆️ Passo 2 de 2 — UPGRADE</div>
 
-<div style="background:#000;border:1px dashed rgba(212,175,55,.4);border-radius:18px;padding:28px;text-align:center;margin:28px 0">
-<p style="color:var(--gold);font-weight:800;letter-spacing:.15em;text-transform:uppercase;font-size:.75rem;margin-bottom:8px">▶ Vídeo de vendas VTSD - 7 min</p>
-<p style="color:var(--dim);font-size:.9rem">Dante explica na lousa: Por que o seu cérebro mente sobre o tamanho da sua dívida + Fórmula do Suficiente Real</p>
-<div style="margin-top:18px;background:#111827;height:220px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--dim)">[ EMBED DO VÍDEO AQUI ]</div>
-</div>
+            <h1>Você já apagou a ansiedade.<br>Agora <span>quite suas dívidas</span> e construa sua blindagem financeira definitiva.</h1>
 
-<a href="#oferta" class="btn">Quero a casa à prova de fogo →</a>
-<p style="text-align:center;color:#4b5563;font-size:.78rem;margin-top:12px">156 páginas · Acesso imediato · Garantia de 30 dias</p>
-</div>
-</section>
+            <p class="subtitle">
+                O <strong>Reset de 5 Minutos</strong> é o seu extintor de incêndio — ele interrompe o pânico e te dá fôlego. 
+                O <strong>Domínio do Dinheiro</strong> é a reconstrução da casa: mapeamento completo, renegociação estratégica, 
+                quitação de dívidas e o sistema que impede você de voltar a passar por isso.
+            </p>
 
-<section>
-<div class="w">
-<h2 style="font-size:2rem;margin-bottom:12px;">Por que 70 milhões de brasileiros continuam apagando incêndio todo mês?</h2>
-<div style="width:44px;height:3px;background:var(--gold);margin:14px 0 22px"></div>
-<p style="color:var(--dim);margin-bottom:14px;">Não é falta de disciplina. É falta de Número.</p>
-<p style="color:var(--dim);margin-bottom:14px;">O brasileiro médio não tem FGTS, não tem seguro-desemprego garantido, não tem décimo terceiro garantido. 38% é informal (IBGE). E todo guia gringo de finanças que você leu ignora isso.</p>
-<p style="color:var(--dim);margin-bottom:14px;"><strong style="color:#fff;">Quando você não sabe qual é o seu Suficiente, todo dinheiro parece pouco. E toda dívida parece impagável.</strong></p>
+            <a href="https://pay.kiwify.com.br/gvXZj7j" class="btn-cta gold">QUERO COMPLETAR MEU MÉTODO E QUITAR MINHAS DÍVIDAS</a>
+            <p class="cta-subtext">Acesso imediato • Integração com seu Reset de 5 Minutos • Garantia de 7 dias</p>
+        </div>
+    </header>
 
-<div class="card" style="border-left:3px solid var(--gold)">
-<h3 style="font-size:1.2rem;margin-bottom:10px;">A Fórmula que muda tudo:</h3>
-<p style="font-family:'JetBrains Mono';background:rgba(212,175,55,.12);padding:14px;border-radius:10px;text-align:center;color:#fff;margin:12px 0">Número de Segurança Base + Total de Parcelas = Número de Segurança REAL</p>
-<p style="color:var(--dim);font-size:.88rem">Base = o que você precisa para viver bem, sem dívidas.<br>Real = o que você precisa para viver bem E pagar suas dívidas.<br>A diferença é o custo da sua dívida. É isso que você vai recuperar.</p>
-</div>
+    <!-- ===== JORNADA DO CLIENTE ===== -->
+    <section class="comparison-section">
+        <div class="container">
+            <h2 class="section-title">Sua Jornada de Transformação Financeira</h2>
+            <p style="text-align:center;max-width:650px;margin:0 auto 24px;color:#4a5568;font-size:clamp(0.95rem,1vw,1.05rem);padding:0 10px;">
+                O Reset de 5 Minutos foi seu primeiro passo. Agora, complete o método com o sistema completo de reestruturação financeira.
+            </p>
 
-<div class="card">
-<p style="color:var(--dim)"><strong style="color:#fff;">Exemplo da Renata:</strong><br>
-Base: R$3.360<br>
-Parcela renegociada: +R$380<br>
-Real: R$3.740<br><br>
-<span style="color:var(--gold);font-style:italic">"Quando eu quitei minha dívida, meu Suficiente Real voltou a ser R$3.360. Foi como tirar um peso das costas."</span></p>
-</div>
-</div>
-</section>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Etapa</th>
+                            <th>Ferramenta</th>
+                            <th>Objetivo Principal</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Passo 1</strong></td>
+                            <td>Reset de 5 Minutos</td>
+                            <td>Apagar a ansiedade e destravar a mente em crises</td>
+                            <td style="color:#38a169;font-weight:700;">✅ Já Adquirido</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong style="color:#d4a017;">Passo 2</strong></td>
+                            <td><strong>Domínio do Dinheiro</strong></td>
+                            <td>Mapear, renegociar, quitar dívidas e criar o "Suficiente"</td>
+                            <td style="color:#d4a017;font-weight:700;">⬆️ Oferta Atual</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 
-<section style="background:rgba(255,255,255,.015)">
-<div class="w">
-<div class="badge">O que tem dentro</div>
-<h2 style="font-size:2rem;margin-bottom:22px;">Domínio do Dinheiro não é curso. É o manual de instruções que o banco nunca te deu.</h2>
+    <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">O Que Você Vai Aprender e Aplicar no Método 'Domínio'</h2>
 
-<div class="card">
-<h3>📘 Parte 1 — A Declaração do Suficiente</h3>
-<p style="color:var(--dim);font-size:.92rem;margin-top:8px">Você define, com caneta na mão, qual é o seu Suficiente. Para moradia, filhos, saúde, locomoção. Para parar de se comparar com quem ganha 5x mais. Inclui modelo preenchido da Renata + revisão trimestral, semestral e anual.</p>
-</div>
-<div class="card">
-<h3>📙 Parte 2 — O Cálculo do Número de Segurança</h3>
-<p style="color:var(--dim);font-size:.92rem;margin-top:8px">Planilha simples para descobrir Base e Real. Sem fórmula de rico. Feita para quem tem renda variável, bico, informal.</p>
-</div>
-<div class="card" style="border:2px solid rgba(212,175,55,.3)">
-<h3>🚨 Parte 3 — Kit de Emergência Completo (a parte mais longa)</h3>
-<p style="color:var(--dim);font-size:.92rem;margin-top:8px">Protocolos específicos para as situações que o brasileiro enfrenta:</p>
-<ul class="check" style="margin-top:14px;color:var(--dim);font-size:.9rem">
-<li><strong style="color:#fff;">Protocolo 0:</strong> Recalculando seu Suficiente com dívidas dentro</li>
-<li><strong style="color:#fff;">Protocolo 1:</strong> Mapeamento Completo — Registrato Banco Central + Serasa + SPC em 10 min</li>
-<li><strong style="color:#fff;">Protocolo 2:</strong> Separação em 3 categorias (A/B/C) por urgência e juros</li>
-<li><strong style="color:#fff;">Protocolo 3:</strong> Como falar com credor sem se desesperar (o que dizer / o que NUNCA dizer)</li>
-<li><strong style="color:#fff;">Protocolo 4:</strong> Mapa de Canais Oficiais — Procon, Defensoria, consumidor.gov.br em 2 min</li>
-<li><strong style="color:#fff;">Protocolo 5:</strong> Plano de 30/60/90 dias para recuperar o custo da dívida</li>
-</ul>
-<p style="color:var(--gold);font-size:.85rem;margin-top:14px">Cada protocolo tem passo-a-passo, exemplo preenchido e ferramenta pronta pra usar HOJE.</p>
-</div>
-</div>
-</section>
+            <div class="features-grid">
+                <div class="feature-card highlight" style="grid-column: 1 / -1;">
+                    <h3>
+                        <span class="emoji">🔍</span> 
+                        Mapeamento de Dívidas (Sem Medo)
+                        <span class="badge-module gold">★ MÓDULO PRINCIPAL</span>
+                    </h3>
+                    <p>Protocolo passo a passo para extrair todas as suas dívidas do <strong>Registrato (Banco Central)</strong> e <strong>Serasa</strong> em menos de 10 minutos. Sem ansiedade, sem julgamento.</p>
+                </div>
 
-<section>
-<div class="w" style="text-align:center">
-<h2 style="font-size:2.2rem;margin-bottom:14px;">Isso é pra quem já cansou de apagar incêndio.</h2>
-<p style="color:var(--dim);max-width:520px;margin:0 auto 28px">Se você quer planilha de rico, livro de 400 páginas ou promessa de ficar milionário, não é pra você.</p>
+                <div class="feature-card highlight" style="grid-column: 1 / -1;">
+                    <h3>
+                        <span class="emoji">📞</span> 
+                        Scripts de Renegociação de Dívidas
+                        <span class="badge-module gold">★ MÓDULO PRINCIPAL</span>
+                    </h3>
+                    <p>Roteiros prontos com <strong>o que dizer (e o que NUNCA dizer)</strong> para gerentes de banco e credores. Estratégias testadas para conseguir descontos reais e condições que cabem no seu bolso.</p>
+                </div>
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left;margin:24px 0">
-<div class="card"><p style="color:var(--green);font-weight:800;margin-bottom:6px">✓ É PRA VOCÊ SE:</p><ul style="color:var(--dim);font-size:.88rem;list-style:none"><li>• Já tem o Reset 5 e quer o sistema completo</li><li>• Tem dívida no cartão, empréstimo ou parcelado</li><li>• Renda varia e precisa de número real</li><li>• Quer dormir sem acordar às 3AM</li></ul></div>
-<div class="card"><p style="color:var(--red);font-weight:800;margin-bottom:6px">✗ NÃO É PRA VOCÊ SE:</p><ul style="color:var(--dim);font-size:.88rem;list-style:none"><li>• Quer fórmula mágica pra dívida sumir</li><li>• Não quer abrir Registrato e Serasa</li><li>• Procura consultoria jurídica</li></ul></div>
-</div>
-</div>
-</section>
+                <div class="feature-card highlight" style="grid-column: 1 / -1;">
+                    <h3>
+                        <span class="emoji">⚖️</span> 
+                        Segurança Jurídica
+                        <span class="badge-module gold">★ MÓDULO PRINCIPAL</span>
+                    </h3>
+                    <p>Guia prático de uso da <strong>Lei do Superendividamento (Lei nº 14.181/2021)</strong>. Conheça seus direitos e proteja-se contra cobranças abusivas e práticas ilegais.</p>
+                </div>
 
-<section id="oferta" style="background:radial-gradient(circle at center, rgba(212,175,55,.12), transparent 70%)">
-<div class="w">
-<div class="price-box">
-<p style="color:var(--gold);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;margin-bottom:14px">Domínio do Dinheiro — Sistema Completo</p>
-<p style="color:#4b5563;text-decoration:line-through;font-size:.9rem">De R$197,00</p>
-<p style="font-family:'JetBrains Mono';font-size:64px;font-weight:800;color:#fff;line-height:1">R$47</p>
-<p style="color:var(--dim);font-size:.85rem;margin:8px 0 20px">ou 9x de R$5,83 · Pagamento único · Acesso vitalício</p>
+                <div class="feature-card">
+                    <h3>
+                        <span class="emoji">💰</span> 
+                        Estratégias de Quitação
+                    </h3>
+                    <p>Métodos <strong>Avalanche</strong> (economia de juros) e <strong>Bola de Neve</strong> (vitórias psicológicas rápidas). Escolha a estratégia certa para o seu perfil.</p>
+                </div>
 
-<div class="timer">⚠ Oferta de upsell só nesta página — expira em 15:00</div>
+                <div class="feature-card">
+                    <h3>
+                        <span class="emoji">🛡️</span> 
+                        Declaração do Suficiente
+                    </h3>
+                    <p>Seu escudo emocional contra <strong>compras por impulso e comparação social</strong>. Defina exatamente quanto você precisa para viver com dignidade e paz.</p>
+                </div>
 
-<div style="text-align:left;border-top:1px solid var(--border);margin:22px 0 0;padding-top:18px">
-<ul class="check" style="color:var(--dim);font-size:.9rem">
-<li>PDF completo 150 páginas — Domínio do Dinheiro</li>
-<li>Declaração do Suficiente editável + Exemplo da Renata</li>
-<li>Calculadora Base + Real (planilha simples)</li>
-<li>Kit de Emergência com 6 Protocolos prontos</li>
-<li>Checklist Registrato + Serasa + SPC (10 min)</li>
-<li>Bônus: 3 Mantras Estoicos + Conversor de Culpa</li>
-<li>Acesso vitalício + atualizações</li>
-</ul>
-</div>
+                <div class="feature-card" style="grid-column: 1 / -1;">
+                    <h3>
+                        <span class="emoji">📅</span> 
+                        Planner Estoico de Acompanhamento
+                        <span class="badge-module">BÔNUS</span>
+                    </h3>
+                    <p>Estrutura simples de acompanhamento financeiro <strong>diário, semanal e mensal</strong>. Sem fórmulas complexas. Foco em consistência e clareza.</p>
+                </div>
 
-<a href="SEU_LINK_CHECKOUT_UPSELL" class="btn" style="margin-top:26px">SIM, QUERO O SISTEMA COMPLETO POR R$47 →</a>
-<p style="color:#64748b;font-size:.75rem;margin-top:12px">Kiwify · PIX e Cartão · Acesso na hora no seu e-mail</p>
-</div>
+                <div class="feature-card" style="grid-column: 1 / -1;background:#f7fafc;border-style:dashed;">
+                    <h3>
+                        <span class="emoji">🧘</span> 
+                        Reset de 5 Minutos
+                        <span class="badge-module">MÓDULO 1</span>
+                    </h3>
+                    <p style="color:#718096;">
+                        <strong>Você já tem este módulo!</strong> O protocolo de emergência para interromper a ansiedade 
+                        e destravar a mente em momentos de crise financeira. Agora integrado ao método completo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div style="display:flex;gap:14px;max-width:520px;margin:22px auto 0;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:18px;padding:18px">
-<div style="font-size:2rem">🛡️</div>
-<div><strong style="color:var(--gold);font-size:.9rem">Garantia de 30 dias — sem letra miúda</strong><p style="color:var(--dim);font-size:.82rem;margin-top:4px">Lê, usa, calcula seu Número. Se achar que não vale R$47, manda 1 e-mail e devolvo tudo. Você fica com o PDF.</p></div>
-</div>
+    <!-- ===== DESAFIO 7 DIAS - CORRIGIDO COM !important ===== -->
+    <section class="section-dark" style="background:#0d233a !important;">
+        <div class="container">
+            <h2 class="section-title" style="color:#ffffff !important;">O Desafio dos 7 Dias</h2>
+            <p style="text-align:center;max-width:600px;margin:0 auto 6px;color:#cbd5e0 !important;font-size:clamp(0.9rem,1vw,1.05rem);padding:0 10px;">
+                Apenas 5 a 10 minutos por dia para reestruturar sua vida financeira:
+            </p>
 
-<p style="text-align:center;color:var(--dim);font-size:.9rem;margin-top:28px">Você já apagou o incêndio com o Reset 5.<br><strong style="color:#fff;">Agora é hora de construir a casa que não pega fogo.</strong></p>
-<div style="text-align:center;margin-top:18px"><a href="#" style="color:#4b5563;font-size:.8rem;text-decoration:none">Não, quero continuar só com o Reset 5 →</a></div>
-</div>
-</section>
+            <ul class="days-list">
+                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
+                    <strong style="color:#ecc94b !important;">Dia 1:</strong> Escrever a sua Declaração do Suficiente.
+                </li>
+                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
+                    <strong style="color:#ecc94b !important;">Dia 2:</strong> Mapear todas as suas dívidas ativas (Registrato + Serasa).
+                </li>
+                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
+                    <strong style="color:#ecc94b !important;">Dia 3:</strong> Aplicar o Reset de 5 Minutos e preparar a mentalidade para renegociação.
+                </li>
+                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
+                    <strong style="color:#ecc94b !important;">Dia 4:</strong> Escolher a estratégia de quitação (Avalanche ou Bola de Neve).
+                </li>
+                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
+                    <strong style="color:#ecc94b !important;">Dia 5:</strong> Executar o primeiro contato com credores usando o script.
+                </li>
+                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
+                    <strong style="color:#ecc94b !important;">Dia 6:</strong> Revisar os direitos legais e verificar possíveis abusos.
+                </li>
+                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
+                    <strong style="color:#ecc94b !important;">Dia 7:</strong> Preencher seu primeiro Planner Estoico e planejar o próximo mês.
+                </li>
+            </ul>
+        </div>
+    </section>
 
-<footer style="background:#04060b;padding:36px 20px;text-align:center;color:#4b5563;font-size:.75rem;line-height:1.8">
-<p><strong>Aviso:</strong> Domínio do Dinheiro é educacional. Não é consultoria financeira, jurídica ou de investimentos. Para superendividamento, procure Procon, Defensoria Pública ou consumidor.gov.br. Para orientação personalizada, procure um CFP ou assessor CVM.</p>
-<p style="margin-top:12px">© Sistema Domínio do Dinheiro · Todos os direitos reservados.<br>Esta página não tem vínculo com Meta Inc.</p>
-</footer>
+    <!-- ===== BÔNUS ===== -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Bônus Exclusivos para Quem Completa o Método</h2>
 
-<script>
-// timer  15 min 
-let t=900; setInterval(()=>{t--;let m=Math.floor(t/60),s=t%60;document.querySelectorAll('.timer').forEach(e=>e.innerHTML='⚠ Oferta de upsell só nesta página — expira em '+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')); if(t<=0) t=900},1000)
-</script>
+            <div class="bonus-card">
+                <h4>🎁 Bônus 1: Kit de 14 Ferramentas e Calculadoras Online</h4>
+                <p>Mapeadores de dívidas, calculadoras de juros e geradores de relatórios em PDF — tudo prático e imediato.</p>
+            </div>
+
+            <div class="bonus-card">
+                <h4>🎁 Bônus 2: Planner Estoico Financeiro (Diário, Semanal e Mensal)</h4>
+                <p>O sistema completo de acompanhamento para manter o controle mês após mês, sem burocracia.</p>
+            </div>
+
+            <div class="bonus-card">
+                <h4>🎁 Bônus 3: Todos 15 Templates Preenchíveis em PDF A4</h4>
+                <p>Versões imprimíveis da Declaração do Suficiente, planilhas de dívidas e cronogramas de renegociação.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== OFERTA ===== -->
+    <section id="oferta" style="background:#edf2f7;">
+        <div class="container">
+            <h2 class="section-title">Complete Seu Método Agora</h2>
+
+            <div class="price-box">
+                <p class="price-old">De R$ 97,00 por apenas</p>
+                <div class="price-current">12x R$ 4,90 <small>ou R$ 47,00 à vista</small></div>
+                <p class="price-sub">Acesso imediato • Pagamento 100% seguro</p>
+
+                <div class="integration-note">
+                    🔗 <strong>Integração garantida:</strong> Seu <strong>Reset de 5 Minutos</strong> já está na sua conta. 
+                    Ao adquirir o Domínio do Dinheiro, você terá acesso ao método completo no mesmo ambiente.
+                </div>
+
+                <a href="https://pay.kiwify.com.br/gvXZj7j" class="btn-cta green">QUERO COMPLETAR MEU MÉTODO E QUITAR MINHAS DÍVIDAS</a>
+                <p class="cta-subtext" style="color:#718096;">Pix ou Cartão de Crédito • Acesso na hora no seu e-mail</p>
+            </div>
+
+            <div class="guarantee-box">
+                <div class="guarantee-icon">🛡️</div>
+                <div>
+                    <h4>Garantia Incondicional de 7 Dias</h4>
+                    <p>Baixe o material, aplique os protocolos de mapeamento e renegociação. Se em até 7 dias você sentir que o método não trouxe clareza e resultados práticos para sua vida financeira, basta enviar um e-mail e receberá 100% do seu dinheiro de volta. Sem burocracia.</p>
+                </div>
+            </div>
+
+            <div style="text-align:center;margin-top:24px;padding:0 10px;">
+                <a href="https://dashboard.kiwify.com.br/courses" style="color:#a0aec0;font-size:clamp(0.75rem,0.8vw,0.85rem);text-decoration:underline;">Não, obrigado. Prefiro continuar apenas com o Reset de 5 Minutos →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <p>&copy; Domínio do Dinheiro. Todos os direitos reservados.</p>
+        </div>
+
+<div class="disclaimer-box">
+      <strong style="color: #D3D3D3;">Aviso importante: Este produto não é um serviço financeiro, não é consultoria jurídica e não garante a obtenção de resultados financeiros sem a devida aplicação prática de seu conteúdo e os resultados podem variar para cada pessoa.</strong> O Método 'Domínio do Dinheiro' é uma ferramenta educacional para organização pessoal desenvolvida para oferecer clareza em momentos de sobrecarga financeira e resultados práticos para a vida financeira. Não substitui acompanhamento psicológico ou médico. <br><br>
+
+    <p>
+      <a href="https://www.evergreenscribe.com/dominio/termos-de-uso" style="color: #D3D3D3;">Termos de Uso</a> |
+      <a href="https://www.evergreenscribe.com/dominio/politica-privacidade" style="color: #D3D3D3;" >Política de Privacidade</a> |
+      <p style="font-size: .75rem; color: var(--text-faint); margin-top: 10px;">
+        Dúvidas? Fale conosco: 
+        <a href="mailto:reset5suporte@gmail.com" style="color: #4b5563; text-decoration: none;">Contato</a>
+</p>
+    </p>
+    <p style="margin-top: 8px; color: #D3D3D3;">
+      Este site não possui vínculo com Facebook, Instagram ou Meta Inc.
+    </p>
+
+    </div>
+    </footer>
 
 </body>
 </html>
