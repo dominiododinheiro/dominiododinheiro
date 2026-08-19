@@ -3,290 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pagamento Aprovado - Kit Reset 5</title>
+<title>Obrigado - Seu próximo passo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
-body{background:#0F172A;color:#CBD5E1;font-family:Inter,sans-serif;display:flex;justify-content:center;padding:24px}
-.card{background:#FFF;border-radius:16px;padding:32px;max-width:560px;width:100%;color:#1E293B;text-align:center}
-.btn{display:block;background:#0F172A;color:#FFF;font-weight:800;padding:16px;border-radius:10px;text-decoration:none;margin:16px 0;transition:all 0.2s}
-.btn-gold{background:#D4AF37;color:#0F172A}
-.btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.15)}
-.bump{margin-top:24px;border-radius:12px;padding:20px;text-align:left;display:none}
-.bump-nao{background:#FFFBEB;border:1px solid #FDE68A}
-.bump-sim{background:#F0FDF4;border:1px solid #BBF7D0}
-.upsell-dominio{background:#1E293B;border:2px solid #D4AF37;border-radius:12px;padding:24px;margin:24px 0;text-align:left;color:#CBD5E1}
-.mockup-container{background:#0F172A;border-radius:10px;padding:30px 20px;margin:30px 0;border:1px solid #334155;text-align:center}
-.mockup-screen{background:#1E293B;border-radius:8px;padding:20px;max-width:400px;margin:0 auto;border:1px solid #334155}
-.mockup-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.mockup-dot{width:12px;height:12px;border-radius:50%}
-.mockup-content{background:#0F172A;border-radius:6px;padding:16px;text-align:left}
-.mockup-row{ display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #334155;
-  padding-bottom:10px;
-  margin-bottom:10px;
-  gap:12px; /* ← Evita grudar */}
-.mockup-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-.mockup-label{color:#94A3B8;font-size:12px}
-.mockup-value-gold{color:#D4AF37;font-weight:800}
-.mockup-value-white{color:#CBD5E1}
-.mockup-value-green{color:#4ADE80}
-.mockup-sub{color:#94A3B8;font-size:11px;margin-top:12px}
-.kit-visual{display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;margin:15px 0 5px}
-.kit-item{background:#1E293B;padding:12px 18px;border-radius:8px;border:1px solid #334155;display:flex;align-items:center;gap:8px;color:#CBD5E1;font-size:14px}
-.kit-item span{font-size:20px}
-
-  /* MOBILE: Empilha label em cima, valor embaixo */
-@media (max-width:480px){
-  .mockup-row{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:4px;
-  }
-  .mockup-label{
-    font-size:11px;
-    opacity:0.8;
-  }
-  .mockup-value-gold,
-  .mockup-value-white,
-  .mockup-value-green{
-    font-size:18px; /* Valor maior pra destacar */
-    font-weight:900;
-  }
-}
+body{background:#0F172A;color:#CBD5E1;font-family:Inter,sans-serif;display:flex;justify-content:center;padding:20px;margin:0}
+.card{background:#FFF;border-radius:16px;padding:28px 26px;max-width:560px;width:100%;color:#1E293B;text-align:left}
+.alert-top{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:30px;padding:8px 16px;display:inline-block;margin-bottom:18px;font-size:11px;color:#166534;font-weight:700}
+.btn{display:block;background:#0F172A;color:#FFF;font-weight:800;padding:16px;border-radius:10px;text-decoration:none;margin:16px 0;text-align:center;transition:all .2s}
+.btn-gold{background:#D4AF37;color:#0F172A;font-size:17px;padding:20px 24px;box-shadow:0 10px 30px rgba(212,175,55,.3)}
+.btn:hover{transform:translateY(-2px)}
+.upsell-box{background:#1E293B;border:2px solid #D4AF37;border-radius:12px;padding:24px;margin:24px 0;color:#CBD5E1}
+.mockup{background:#0F172A;border-radius:8px;padding:18px;border:1px solid #334155;margin:18px 0}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #334155;font-size:13px}
+.row:last-child{border:none}
+.label{color:#94A3B8;font-size:11px}
+.val-gold{color:#D4AF37;font-weight:800}
+.val-white{color:#FFF}
+.val-green{color:#4ADE80;font-weight:800}
+.bullet{padding:8px 0 8px 28px;position:relative;font-size:15px;line-height:1.5}
+.bullet::before{content:"✓";position:absolute;left:4px;color:#16A34A;font-weight:900}
+.quote-box{background:#FFFBEB;border-left:4px solid #D4AF37;padding:16px 18px;border-radius:0 10px 10px 0;margin:20px 0}
 </style>
 </head>
 <body>
 <div class="card">
-  <p style="color:#D4AF37;font-size:11px;font-weight:800;letter-spacing:1px;">PAGAMENTO APROVADO</p>
+  <div class="alert-top">✅ Pagamento aprovado - Seu Reset 5 já está liberado</div>
   
-  <!-- #1 - HEADLINE PRINCIPAL -->
-  <h1 style="font-family:Georgia,serif;font-size:30px;line-height:1.2;color:#0F172A;font-weight:700;margin-bottom:18px;">
-    Parabéns. Você acabou de interromper um ciclo que prende milhares de pessoas durante anos.
+  <h1 style="font-family:Georgia,serif;font-size:26px;line-height:1.2;color:#0F172A;margin:0 0 12px;font-weight:700">
+    Você apagou o incêndio de hoje.<br>
+    <span style="color:#B45309">Agora vamos fechar o vazamento que faz ele voltar.</span>
   </h1>
-
-  <p style="font-size:17px;line-height:1.7;color:#475569;max-width:470px;margin:0 auto 18px;">
-    Seu acesso ao RESET 5 já está liberado. Agora o mais importante é continuar avançando enquanto essa decisão ainda está fresca.
+  
+  <p style="font-size:15px;line-height:1.6;color:#475569;margin:0 0 18px">
+    O <strong style="color:#0F172A">Reset 5</strong> interrompeu o pânico. Agora você tem o mapa.<br>
+    <em>"E mapas têm caminhos."</em> — É o que você vai construir no próximo passo.
   </p>
-  
-  <!-- #2 - BOTÃO RESET -->
-  <a href="https://dashboard.kiwify.com.br/courses" class="btn" style="padding:20px;font-size:24px;font-weight:800;border-radius:12px;box-shadow:0 10px 30px rgba(15,23,42,.18);margin:28px 0 40px;">
-    ABRIR O RESET 5 AGORA ▶️​​
-  </a>
-  
- 
-  <!-- BLOCO 1: KIT DESARME - BUMP NAO -->
-  <div id="bloco-desarme-venda" class="bump bump-nao">
-    <h3 style="font-size:20px;line-height:1.45;color:#92400E;margin-bottom:18px;">
-      O RESET 5 resolve o momento da crise.
-      <br>
-      O Kit Desarme ajuda você quando a vida real voltar a bater na porta.
-    </h3>
-    <p style="font-size:15px;line-height:1.7;color:#374151;">
-      Hoje você já sabe como interromper o pânico.
-      <br>
-      Mas amanhã podem surgir novas cobranças, novas mensagens e novas decisões.
+
+  <div class="quote-box">
+    <p style="font-size:14px;line-height:1.6;color:#92400E;margin:0;font-style:italic">
+      "Meu salário é R$ 3.800. Meu número de segurança é R$ 3.360. A diferença é R$ 440 por mês. 
+      Esse exercício me mostrou que eu já ganho o suficiente para viver bem. 
+      <strong>O problema não era renda.</strong> Era que eu estava gastando R$ 800 por mês em coisas que não estão nessa lista."
     </p>
-    <p style="font-size:15px;line-height:1.7;color:#374151;">
-      O Kit Desarme foi criado exatamente para esses momentos.
-    </p>
-    <p style="font-size:13px;"><strong>Você não pegou o Kit Desarme no checkout.</strong> Ele está disponível agora, nesta página.</p>
-    <p style="font-size:13px;color:#7C2D12;line-height:1.6;margin-top:14px;">
-      Você não verá esta condição novamente depois que sair desta página.
-    </p>
-    <a href="https://pay.kiwify.com.br/UBd709D" class="btn btn-gold">⚡️SIM, QUERO ADICIONAR O KIT DESARME POR R$19</a>
+    <p style="font-size:11px;font-weight:700;color:#B45309;margin:8px 0 0">— Renata, 34 anos, Juiz de Fora - MG. Caso real do Domínio do Dinheiro (Cap. 6)</p>
   </div>
 
-  <!-- BLOCO 2: KIT DESARME - BUMP SIM -->
-  <div id="bloco-desarme-ja-comprou" class="bump bump-sim">
-    <h3 style="font-size:16px;color:#166534;">✅ Você já garantiu o Kit Desarme</h3>
-    <p style="font-size:13px;">Ele já está na sua área de membros junto com o Reset 5.</p>
-  </div>
+  <p style="font-size:14px;line-height:1.6;color:#334155;margin:0 0 18px">
+    Renata tinha R$ 14.200 em dívidas com 2 filhos. Quando fez a Declaração do Suficiente, descobriu que o vazamento não era a falta de dinheiro. Eram assinaturas, compras por impulso e saídas que ela nem lembrava.
+  </p>
 
-  
-    <!-- TRANSIÇÃO PARA DOMÍNIO -->
-  <div style="margin:24px 0 10px;text-align:center;">
-    <p style="font-size:14px;font-weight:800;letter-spacing:1px;color:#0F172A;text-transform:uppercase;">👉 ANTES DE CONTINUAR...</p>
-  </div>
+  <a href="#dominio" class="btn" style="font-size:14px;padding:12px">👇 QUERO FECHAR MEU VAZAMENTO TAMBÉM</a>
 
-  <!-- #5 - PROVA SOCIAL -->
-  <div style="background:#F8FAFC;border-left:5px solid #D4AF37;padding:24px;margin:34px 0;border-radius:10px;text-align:left;">
-    <div style="color:#D4AF37;font-size:20px;margin-bottom:10px;">★★★★★</div>
-    <p style="font-size:16px;line-height:1.8;font-style:italic;color:#334155;margin:0;">
-      "Comecei comprando apenas o RESET 5. Depois percebi que precisava organizar minha vida financeira inteira. O Domínio do Dinheiro me deu exatamente esse caminho."
-    </p>
-    <p style="margin-top:14px;font-size:13px;font-weight:700;color:#64748B;">
-      J.B.L
-    </p>
-  </div>
-
-  <!-- BLOCO 3: DOMÍNIO DO DINHEIRO - SEMPRE APARECE -->
-  <div class="upsell-dominio">
-    <span style="background:#D4AF37;color:#0F172A;font-size:10px;font-weight:800;padding:4px 10px;border-radius:20px;display:inline-block;margin-bottom:12px;">SEU PRÓXIMO PASSO</span>
+  <!-- UPSELL LADEIRA -->
+  <div id="dominio" class="upsell-box">
+    <span style="background:#D4AF37;color:#0F172A;font-size:10px;font-weight:800;padding:4px 10px;border-radius:20px;display:inline-block;margin-bottom:12px;">OFERTA LIBERADA SÓ NESTA PÁGINA</span>
     
-    <!-- #6 - TÍTULO DO UPSELL -->
-    <h3 style="font-size:32px;line-height:1.2;color:#FFF;margin-bottom:20px;">
-      Você já conseguiu interromper o pânico.
-      <br>
-      Agora chegou a hora de impedir que ele volte.
-    </h3>
-    
-    <!-- #7 - TEXTO DO UPSELL (REFINADO) -->
-    <p style="font-size:17px;line-height:1.8;color:#CBD5E1;">
-      O RESET 5 foi criado para resolver o momento mais difícil: quando o medo faz você tomar decisões financeiras no impulso.
-    </p>
-    <p style="font-size:17px;line-height:1.8;color:#CBD5E1;">
-      O Domínio do Dinheiro foi criado para resolver o problema que vem antes disso: a desorganização financeira que faz o pânico voltar todos os meses.
-    </p>
+    <h2 style="font-size:22px;line-height:1.3;color:#FFF;margin:0 0 12px">
+      O Domínio do Dinheiro te dá 3 ferramentas que o Reset 5 não dá:
+    </h2>
 
-    <!-- ALTERAÇÃO 2 - MECANISMO EXCLUSIVO (REFINADO) -->
-    <div style="background:#263245;border-left:4px solid #D4AF37;padding:22px;margin:30px 0;border-radius:10px;">
-      <h4 style="margin-top:0;margin-bottom:12px;color:#FFF;font-size:20px;">
-        Por que este método é diferente?
-      </h4>
-      <p style="margin:0;font-size:16px;line-height:1.8;color:#CBD5E1;">
-        Enquanto a maioria dos materiais fala apenas em economizar, o Domínio do Dinheiro mostra exatamente quanto você precisa para viver com tranquilidade e como organizar sua vida financeira a partir desse número.
-      </p>
-    </div>
-
-    <!-- ALTERAÇÃO 3 - MOCKUP COM FRASE EMOCIONAL -->
-    <div class="mockup-container">
-      <div class="mockup-screen">
-        <div class="mockup-header">
-          <div class="mockup-dot" style="background:#D4AF37;"></div>
-          <div class="mockup-dot" style="background:#475569;"></div>
-          <div class="mockup-dot" style="background:#475569;"></div>
-          <span style="color:#94A3B8;font-size:12px;margin-left:auto;">Domínio do Dinheiro</span>
-        </div>
-        <div class="mockup-content">
-          <div class="mockup-row">
-            <span class="mockup-label">SEU NÚMERO DE SEGURANÇA</span>
-            <span class="mockup-value-gold">R$&nbsp;2.450,00</span>          </div>
-          <div class="mockup-row">
-            <span class="mockup-label">GASTOS ESSENCIAIS</span>
-            <span class="mockup-value-white">R$ 1.870,00</span>
-          </div>
-          <div class="mockup-row">
-            <span class="mockup-label">MARGEM DE SEGURANÇA</span>
-            <span class="mockup-value-green">R$ 580,00</span>
-          </div>
-        </div>
-        <p class="mockup-sub">Descubra em menos de 30 segundos quanto você realmente precisa para viver sem entrar no vermelho.</p>
+    <div class="mockup">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;color:#94A3B8;font-size:11px">
+        <span style="width:10px;height:10px;background:#D4AF37;border-radius:50%;display:inline-block"></span> Exemplo real - Calculadora do Número de Segurança
       </div>
+      <div class="row"><span class="label">NECESSIDADES REAIS</span><span class="val-white">R$ 3.090</span></div>
+      <div class="row"><span class="label">ALEGRIAS REAIS</span><span class="val-white">R$ 170</span></div>
+      <div class="row"><span class="label">NÚMERO DE SEGURANÇA</span><span class="val-gold">R$ 3.360</span></div>
+      <p style="font-size:11px;color:#94A3B8;margin:10px 0 0">Descubra em menos de 10 minutos quanto você realmente precisa pra viver sem voltar ao vermelho.</p>
     </div>
 
-    <!-- CHAMADA PARA O NÚMERO DE SEGURANÇA -->
-    <div style="background:rgba(212,175,55,0.08);padding:16px 20px;border-radius:8px;margin:-10px 0 25px;border:1px solid rgba(212,175,55,0.2);">
-      <p style="margin:0;font-size:15px;color:#CBD5E1;line-height:1.6;">
-        <strong style="color:#D4AF37;">Uma das ferramentas mais utilizadas do Domínio do Dinheiro é o Número de Segurança.</strong>
-        <br>
-        Em poucos segundos ela mostra quanto você realmente precisa para viver sem voltar ao vermelho.
-      </p>
+    <div style="margin:18px 0">
+      <div class="bullet"><strong style="color:#FFF">Mapeamento sem medo:</strong> Protocolo pra puxar tudo do Registrato + Serasa em 10 min (Cap. 2 do livro)</div>
+      <div class="bullet"><strong style="color:#FFF">Declaração do Suficiente:</strong> Seu escudo contra compras por impulso. Pergunta que a Renata usa: <em>"Isso serve à minha vida ou serve ao medo de ficar para trás?"</em></div>
+      <div class="bullet"><strong style="color:#FFF">Scripts de renegociação:</strong> O que falar e o que NUNCA falar pra conseguir desconto real</div>
     </div>
 
-  
-    <p style="font-size:12px;color:#94A3B8;text-align:center;margin:8px 0 20px;">Acesso em qualquer dispositivo + material para imprimir</p>
-
-    <!-- ALTERAÇÃO 4 - 14 FERRAMENTAS (TÍTULO REFINADO) -->
-    <div style="margin:35px 0;">
-      <h4 style="font-size:21px;color:#FFFFFF;margin-bottom:20px;">
-        Você não recebe apenas um guia. Recebe um Sistema de Manutenção para organizar sua vida financeira.
-      </h4>
-      <ul style="font-size:16px;line-height:2;color:#CBD5E1;padding-left:20px;">
-        <li>Calculadoras que fazem os cálculos automaticamente.</li>
-        <li>Ferramentas para descobrir seu Número de Segurança.</li>
-        <li>Templates prontos para organizar sua vida financeira.</li>
-        <li>Exercícios simples para colocar tudo em prática.</li>
-      </ul>
+    <div style="text-align:center;margin:22px 0 8px">
+      <p style="font-size:13px;text-decoration:line-through;color:#94A3B8;margin:0">De R$97,00</p>
+      <p style="font-size:42px;font-weight:900;color:#D4AF37;margin:2px 0;line-height:1">R$47</p>
+      <p style="font-size:13px;color:#CBD5E1;margin:0">Pagamento único • Acesso imediato • 1 clique • Mesma área de membros</p>
     </div>
 
-    <!-- #8 - BULLETS (REFINADOS - FOCAM NO RESULTADO) -->
-    <ul style="font-size:16px;line-height:2.2;padding-left:20px;margin-bottom:28px;color:#CBD5E1;">
-      <li>Pare de decidir no impulso.</li>
-      <li>Saiba quanto realmente precisa ganhar.</li>
-      <li>Tenha um plano simples para sair das dívidas.</li>
-      <li>Construa tranquilidade financeira mês após mês.</li>
-      <li>Pare de viver apagando incêndios.</li>
-    </ul>
-
-    <!-- #9 - VISUALIZAÇÃO DO FUTURO (REFINADO - MAIS CÊNICO) -->
-    <div style="background:rgba(255,255,255,.05);padding:22px;border-radius:10px;margin:28px 0;">
-      <p style="font-size:16px;line-height:2;margin:0;color:#F8FAFC;">
-        Imagine abrir sua conta daqui a alguns meses...
-        <br><br>
-        Ver que ainda existe dinheiro disponível.
-        <br>
-        Saber exatamente quanto pode gastar.
-        <br>
-        Não sentir aquele aperto antes de olhar o saldo.
-      </p>
-    </div>
-
-    <!-- #10 - PREÇO -->
-    <div style="text-align:center;margin:28px 0;">
-      <p style="font-size:14px;color:#94A3B8;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">
-        Oferta Exclusiva Extendida de Lançamento
-      </p>
-      <p style="font-size:15px;text-decoration:line-through;color:#94A3B8;margin:0;">
-        Preço normal R$97
-      </p>
-      <p style="font-size:54px;font-weight:900;color:#D4AF37;margin:4px 0;">
-        R$47
-      </p>
-      <p style="font-size:15px;color:#CBD5E1;">
-        Pagamento Único • Acesso Imediato
-      </p>
-    </div>
-
-    <!-- #11 - BOTÃO (REFINADO) -->
     <div style="text-align:center" id="kiwify-upsell-AkmLgum" data-upsell-url="" data-downsell-url="">
-      <button id="kiwify-upsell-trigger-AkmLgum" style="background-color:#D4AF37;padding:16px 32px;cursor:pointer;color:#0F172A;font-weight:800;border-radius:8px;border:none;font-size:16px;width:100%;transition:all 0.2s;">
-        ⚡ SIM, QUERO SAIR DO CICLO DAS DÍVIDAS POR R$47
+      <button id="kiwify-upsell-trigger-AkmLgum" style="background-color:#D4AF37;padding:18px 28px;cursor:pointer;color:#0F172A;font-weight:800;border-radius:10px;border:none;font-size:16px;width:100%;box-shadow:0 8px 24px rgba(212,175,55,.35)">
+        ⚡ SIM, QUERO FECHAR MEU VAZAMENTO POR R$47
       </button>
-      
-      <!-- #12 - LINK -->
-      <div id="kiwify-upsell-cancel-trigger-AkmLgum" style="margin-top:12px;cursor:pointer;font-size:13px;color:#c1cdde;font-family:sans-serif;text-decoration:underline;">
-        Prefiro continuar apenas com o RESET 5 por enquanto.
+      <div id="kiwify-upsell-cancel-trigger-AkmLgum" style="margin-top:14px;cursor:pointer;font-size:12px;color:#94A3B8;text-decoration:underline;">
+        Não, prefiro continuar apenas com o Reset 5 por enquanto →
       </div>
-      
-      <p style="font-size:12px;text-align:center;color:#CBD5E1;margin-top:12px;line-height:1.5;">
-        Este preço Extendido de Lançamento existe apenas porque você acabou de comprar o Kit Reset 5.
-      </p>
-      
-      <!-- #13 - FECHAMENTO -->
-      <hr style="margin:36px 0;border:none;height:1px;background:rgba(255,255,255,.08);">
-      <p style="font-size:18px;line-height:1.8;text-align:center;color:#FFFFFF;margin-bottom:10px;">
-        O RESET 5 ajuda você a recuperar o controle hoje.
-      </p>
-      <p style="font-size:18px;line-height:1.8;text-align:center;color:#D4AF37;font-weight:700;">
-        O Domínio do Dinheiro ajuda você a continuar no controle daqui para frente.
+      <p style="font-size:11px;color:#64748B;margin-top:12px;line-height:1.4">
+        Preço de R$47 liberado porque você acabou de comprar o Reset 5. Fora desta página volta para R$97.
       </p>
     </div>
-
-    <p style="font-size:11px;color:#c1cdde;margin-top:16px;text-align:center;line-height:1.4;">
-     Preço Extendido de Lançamento. Fora desta página o preço volta para R$97.
-    </p>
   </div>
 
-  <script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
+  <div style="text-align:center;margin-top:16px">
+    <a href="https://kiwify.com.br/membros" style="font-size:13px;color:#64748B;text-decoration:underline">Ir direto pro Reset 5 →</a>
+  </div>
+</div>
 
-  <script>
-  (function(){
-    const urlParams = new URLSearchParams(window.location.search);
-    const bump = urlParams.get('bump') || urlParams.get('v'); // aceita ?bump= ou ?v=
-    
-    const venda = document.getElementById('bloco-desarme-venda');
-    const ja = document.getElementById('bloco-desarme-ja-comprou');
-    
-    // Se bump=sim OU se tiver "sim" em qualquer lugar da URL, mostra "já comprou"
-    if (bump === 'sim' || window.location.href.includes('bump=sim')) { 
-      ja.style.display='block'; 
-      venda.style.display='none';
-    } else { 
-      venda.style.display='block'; 
-      ja.style.display='none';
-    }
-  })();
-</script>
+<script src="https://snippets.kiwify.com/upsell/upsell.min.js"></script>
 </body>
 </html>
