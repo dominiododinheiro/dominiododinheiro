@@ -59,6 +59,14 @@
             border-radius: 4px;
         }
 
+        .section-dark .section-title {
+            color: #ffffff;
+        }
+
+        .section-dark .section-title::after {
+            background: linear-gradient(90deg, #ecc94b, #d4a017);
+        }
+
         /* ===== BUTTONS ===== */
         .btn-cta {
             display: inline-block;
@@ -224,40 +232,28 @@
             color: #ffffff !important;
         }
 
-        .section-dark .section-title {
-            color: #ffffff !important;
-        }
-
-        .section-dark .section-title::after {
-            background: linear-gradient(90deg, #ecc94b, #d4a017) !important;
-        }
-
         .section-dark p {
             color: #cbd5e0 !important;
         }
 
         /* ===== DAYS LIST - DARK THEME ===== */
-        .days-list {
+        .section-dark .days-list {
             list-style: none;
             max-width: 680px;
             margin: 20px auto 0;
             padding: 0;
         }
 
-        .days-list li {
+        .section-dark .days-list li {
+            background: rgba(255, 255, 255, 0.08) !important;
             margin-bottom: 10px;
             padding: 12px 18px;
             border-radius: 8px;
+            border-left: 4px solid #ecc94b !important;
+            color: #e2e8f0 !important;
             font-size: clamp(0.9rem, 0.95vw, 1rem);
             transition: all 0.2s ease;
             word-break: break-word;
-        }
-
-        /* Estilos para lista dentro de section-dark */
-        .section-dark .days-list li {
-            background: rgba(255, 255, 255, 0.08) !important;
-            border-left: 4px solid #ecc94b !important;
-            color: #e2e8f0 !important;
         }
 
         .section-dark .days-list li:hover {
@@ -266,18 +262,6 @@
 
         .section-dark .days-list li strong {
             color: #ecc94b !important;
-        }
-
-        /* Estilos para lista fora de section-dark (fallback) */
-        .days-list li {
-            background: #ffffff;
-            border-left: 4px solid #d4a017;
-            color: #2d3748;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .days-list li strong {
-            color: #0d233a;
         }
 
         /* ===== STORY / EMPATIA ===== */
@@ -463,6 +447,11 @@
             color: #0d233a;
         }
 
+        .feature-card .badge-module.bonus {
+            background: #2e7d32;
+            color: #ffffff;
+        }
+
         /* ===== BONUS ===== */
         .bonus-card {
             background: #fffbef;
@@ -482,6 +471,17 @@
         .bonus-card p {
             color: #4a5568;
             font-size: clamp(0.85rem, 0.9vw, 0.95rem);
+        }
+
+        .bonus-card .value-tag {
+            display: inline-block;
+            background: #0d233a;
+            color: #ecc94b;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-top: 6px;
         }
 
         /* ===== OFFER / PRICE ===== */
@@ -532,6 +532,34 @@
 
         .price-box .integration-note strong {
             color: #0d233a;
+        }
+
+        .price-box .whats-included {
+            text-align: left;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 18px;
+            margin-top: 4px;
+        }
+
+        .price-box .whats-included ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .price-box .whats-included ul li {
+            padding: 4px 0 4px 26px;
+            position: relative;
+            font-size: clamp(0.82rem, 0.85vw, 0.9rem);
+            color: #4a5568;
+        }
+
+        .price-box .whats-included ul li::before {
+            content: "✓";
+            color: #38a169;
+            font-weight: 700;
+            position: absolute;
+            left: 0;
+            top: 4px;
         }
 
         /* ===== GUARANTEE ===== */
@@ -731,6 +759,7 @@
     <!-- ===== HERO ===== -->
     <header class="hero">
         <div class="container">
+            <!-- ALERTA DE RECONHECIMENTO -->
             <div class="alert-top">
                 ✅ Você já deu o primeiro passo! Seu <span>Reset de 5 Minutos</span> está garantido.
             </div>
@@ -793,103 +822,114 @@
             <h2 class="section-title">O Que Você Vai Aprender e Aplicar no Método 'Domínio'</h2>
 
             <div class="features-grid">
-                <div class="feature-card highlight" style="grid-column: 1 / -1;">
-                    <h3>
-                        <span class="emoji">🔍</span> 
-                        Mapeamento de Dívidas (Sem Medo)
-                        <span class="badge-module gold">★ MÓDULO PRINCIPAL</span>
-                    </h3>
-                    <p>Protocolo passo a passo para extrair todas as suas dívidas do <strong>Registrato (Banco Central)</strong> e <strong>Serasa</strong> em menos de 10 minutos. Sem ansiedade, sem julgamento.</p>
-                </div>
-
-                <div class="feature-card highlight" style="grid-column: 1 / -1;">
-                    <h3>
-                        <span class="emoji">📞</span> 
-                        Scripts de Renegociação de Dívidas
-                        <span class="badge-module gold">★ MÓDULO PRINCIPAL</span>
-                    </h3>
-                    <p>Roteiros prontos com <strong>o que dizer (e o que NUNCA dizer)</strong> para gerentes de banco e credores. Estratégias testadas para conseguir descontos reais e condições que cabem no seu bolso.</p>
-                </div>
-
-                <div class="feature-card highlight" style="grid-column: 1 / -1;">
-                    <h3>
-                        <span class="emoji">⚖️</span> 
-                        Segurança Jurídica
-                        <span class="badge-module gold">★ MÓDULO PRINCIPAL</span>
-                    </h3>
-                    <p>Guia prático de uso da <strong>Lei do Superendividamento (Lei nº 14.181/2021)</strong>. Conheça seus direitos e proteja-se contra cobranças abusivas e práticas ilegais.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>
-                        <span class="emoji">💰</span> 
-                        Estratégias de Quitação
-                    </h3>
-                    <p>Métodos <strong>Avalanche</strong> (economia de juros) e <strong>Bola de Neve</strong> (vitórias psicológicas rápidas). Escolha a estratégia certa para o seu perfil.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>
-                        <span class="emoji">🛡️</span> 
-                        Declaração do Suficiente
-                    </h3>
-                    <p>Seu escudo emocional contra <strong>compras por impulso e comparação social</strong>. Defina exatamente quanto você precisa para viver com dignidade e paz.</p>
-                </div>
-
+                <!-- CARD - FILOSOFIA ESTOICA -->
                 <div class="feature-card" style="grid-column: 1 / -1;">
                     <h3>
-                        <span class="emoji">📅</span> 
-                        Planner Estoico de Acompanhamento
-                        <span class="badge-module">BÔNUS</span>
+                        <span class="emoji">🏛️</span> 
+                        A Filosofia Estoica Aplicada às Finanças
+                        <span class="badge-module gold">★ MÓDULO PRINCIPAL</span>
                     </h3>
-                    <p>Estrutura simples de acompanhamento financeiro <strong>diário, semanal e mensal</strong>. Sem fórmulas complexas. Foco em consistência e clareza.</p>
+                    <p>Duas ideias estoicas simples que mudam tudo: <strong>O Círculo de Controle</strong> (separar o que você controla do que não controla) e <strong>As Quatro Virtudes</strong> (Sabedoria, Coragem, Justiça, Temperança) aplicadas na prática com dinheiro.</p>
                 </div>
 
+                <!-- CARD - DECLARAÇÃO DO SUFICIENTE -->
+                <div class="feature-card" style="grid-column: 1 / -1;">
+                    <h3>
+                        <span class="emoji">📄</span> 
+                        A Declaração do Suficiente
+                        <span class="badge-module gold">★ MÓDULO PRINCIPAL</span>
+                    </h3>
+                    <p>O documento mais importante do método. Você vai descobrir <strong>quanto realmente precisa para viver com dignidade e paz</strong>, e criar um escudo contra a comparação social e o consumo por impulso.</p>
+                    <ul>
+                        <li><strong>Pergunta 1:</strong> Quais são suas necessidades reais?</li>
+                        <li><strong>Pergunta 2:</strong> O que realmente traz alegria duradoura?</li>
+                        <li><strong>Pergunta 3:</strong> Qual é seu Número de Segurança Base?</li>
+                    </ul>
+                </div>
+
+                <!-- CARD - RESET (POSICIONADO COMO MÓDULO 1) -->
                 <div class="feature-card" style="grid-column: 1 / -1;background:#f7fafc;border-style:dashed;">
                     <h3>
                         <span class="emoji">🧘</span> 
                         Reset de 5 Minutos
-                        <span class="badge-module">MÓDULO 1</span>
+                        <span class="badge-module">MÓDULO 1 • VOCÊ JÁ TEM</span>
                     </h3>
                     <p style="color:#718096;">
-                        <strong>Você já tem este módulo!</strong> O protocolo de emergência para interromper a ansiedade 
+                        O protocolo de primeiros socorros mentais para interromper a ansiedade 
                         e destravar a mente em momentos de crise financeira. Agora integrado ao método completo.
                     </p>
+                </div>
+
+                <!-- CARD - KIT DE EMERGÊNCIA -->
+                <div class="feature-card highlight" style="grid-column: 1 / -1;">
+                    <h3>
+                        <span class="emoji">🛠️</span> 
+                        Kit de Emergência — 8 Protocolos Práticos
+                        <span class="badge-module gold">★ MÓDULO PRINCIPAL</span>
+                    </h3>
+                    <p>O capítulo mais longo do guia. Protocolos específicos para as situações que o brasileiro enfrenta:</p>
+                    <ul>
+                        <li><strong>Protocolo 0:</strong> Recalculando seu Suficiente com dívidas dentro</li>
+                        <li><strong>Protocolo 1:</strong> Mapeamento Completo — Registrato + Serasa + SPC em 10 min</li>
+                        <li><strong>Protocolo 2:</strong> Segurança Jurídica — Lei do Superendividamento (14.181/2021)</li>
+                        <li><strong>Protocolo 3:</strong> Estratégias de Quitação — Avalanche e Bola de Neve</li>
+                        <li><strong>Protocolo 4:</strong> Como Renegociar — Scripts prontos para falar com credores</li>
+                        <li><strong>Protocolo 5:</strong> Auditoria de Estilo de Vida — encontre os vazamentos</li>
+                        <li><strong>Protocolo 6:</strong> Árvore de Decisão — o que fazer em cada situação</li>
+                        <li><strong>Protocolo 7:</strong> Filtro de 10 Perguntas — sistema anti-impulso</li>
+                        <li><strong>Protocolo 8:</strong> Conversor de Vergonha — transforme culpa em ação</li>
+                    </ul>
+                </div>
+
+                <!-- CARD - PLANNERS -->
+                <div class="feature-card" style="grid-column: 1 / -1;">
+                    <h3>
+                        <span class="emoji">📅</span> 
+                        Sistema de Planejamento — Diário, Semanal e Mensal
+                        <span class="badge-module bonus">BÔNUS</span>
+                    </h3>
+                    <p>Três camadas de planejamento que se alimentam: <strong>Prática Diária</strong> (5 min/dia), <strong>Planner Semanal</strong> e <strong>Orçamento Mensal</strong>. O sistema simples que transforma intenção em ação.</p>
+                </div>
+
+                <!-- CARD - DESAFIO DOS 7 DIAS -->
+                <div class="feature-card" style="grid-column: 1 / -1;">
+                    <h3>
+                        <span class="emoji">🏆</span> 
+                        Desafio dos 7 Dias
+                        <span class="badge-module bonus">BÔNUS</span>
+                    </h3>
+                    <p>Uma tarefa por dia, 5 a 10 minutos cada — o caminho guiado para colocar tudo em prática:</p>
+                    <ul>
+                        <li><strong>Dia 1:</strong> Escrever sua Declaração do Suficiente</li>
+                        <li><strong>Dia 2:</strong> Listar todas as suas dívidas ativas</li>
+                        <li><strong>Dia 3:</strong> Aplicar o Reset de 5 Minutos e preparar a mentalidade</li>
+                        <li><strong>Dia 4:</strong> Intenção Matinal + Gratidão Noturna</li>
+                        <li><strong>Dia 5:</strong> Executar a Auditoria de Estilo de Vida</li>
+                        <li><strong>Dia 6:</strong> Escolher a Virtude do Mês</li>
+                        <li><strong>Dia 7:</strong> Preencher seu primeiro Planner</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== DESAFIO 7 DIAS - CORRIGIDO COM !important ===== -->
-    <section class="section-dark" style="background:#0d233a !important;">
+    <!-- ===== DESAFIO 7 DIAS ===== -->
+    <!-- CORRIGIDO: Agora com fundo escuro e texto claro -->
+    <section class="section-dark">
         <div class="container">
-            <h2 class="section-title" style="color:#ffffff !important;">O Desafio dos 7 Dias</h2>
+            <h2 class="section-title">O Desafio dos 7 Dias</h2>
             <p style="text-align:center;max-width:600px;margin:0 auto 6px;color:#cbd5e0 !important;font-size:clamp(0.9rem,1vw,1.05rem);padding:0 10px;">
                 Apenas 5 a 10 minutos por dia para reestruturar sua vida financeira:
             </p>
 
             <ul class="days-list">
-                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
-                    <strong style="color:#ecc94b !important;">Dia 1:</strong> Escrever a sua Declaração do Suficiente.
-                </li>
-                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
-                    <strong style="color:#ecc94b !important;">Dia 2:</strong> Mapear todas as suas dívidas ativas (Registrato + Serasa).
-                </li>
-                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
-                    <strong style="color:#ecc94b !important;">Dia 3:</strong> Aplicar o Reset de 5 Minutos e preparar a mentalidade para renegociação.
-                </li>
-                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
-                    <strong style="color:#ecc94b !important;">Dia 4:</strong> Escolher a estratégia de quitação (Avalanche ou Bola de Neve).
-                </li>
-                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
-                    <strong style="color:#ecc94b !important;">Dia 5:</strong> Executar o primeiro contato com credores usando o script.
-                </li>
-                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
-                    <strong style="color:#ecc94b !important;">Dia 6:</strong> Revisar os direitos legais e verificar possíveis abusos.
-                </li>
-                <li style="background:rgba(255,255,255,0.08) !important;border-left:4px solid #ecc94b !important;color:#e2e8f0 !important;">
-                    <strong style="color:#ecc94b !important;">Dia 7:</strong> Preencher seu primeiro Planner Estoico e planejar o próximo mês.
-                </li>
+                <li><strong>Dia 1:</strong> Escrever a sua Declaração do Suficiente.</li>
+                <li><strong>Dia 2:</strong> Mapear todas as suas dívidas ativas (Registrato + Serasa).</li>
+                <li><strong>Dia 3:</strong> Aplicar o Reset de 5 Minutos e preparar a mentalidade para renegociação.</li>
+                <li><strong>Dia 4:</strong> Aplicar o ritual de Intenção Matinal e Gratidão Noturna.</li>
+                <li><strong>Dia 5:</strong> Executar a Auditoria de Estilo de Vida.</li>
+                <li><strong>Dia 6:</strong> Definir a Virtude Estoica do Mês.</li>
+                <li><strong>Dia 7:</strong> Preencher seu primeiro Planner e planejar o próximo mês.</li>
             </ul>
         </div>
     </section>
@@ -900,18 +940,27 @@
             <h2 class="section-title">Bônus Exclusivos para Quem Completa o Método</h2>
 
             <div class="bonus-card">
-                <h4>🎁 Bônus 1: Kit de 14 Ferramentas e Calculadoras Online</h4>
-                <p>Mapeadores de dívidas, calculadoras de juros e geradores de relatórios em PDF — tudo prático e imediato.</p>
+                <h4>🎁 Bônus 1: 14 Ferramentas e Calculadoras Online</h4>
+                <p>Mapeadores de dívidas, calculadoras de juros e geradores de relatórios em PDF — tudo prático e imediato para aplicar os protocolos.</p>
+                <span class="value-tag">Incluso no método</span>
             </div>
 
             <div class="bonus-card">
                 <h4>🎁 Bônus 2: Planner Estoico Financeiro (Diário, Semanal e Mensal)</h4>
-                <p>O sistema completo de acompanhamento para manter o controle mês após mês, sem burocracia.</p>
+                <p>O sistema completo de acompanhamento em PDF A4 imprimível e digital. Preencha online ou à mão.</p>
+                <span class="value-tag">Incluso no método</span>
             </div>
 
             <div class="bonus-card">
-                <h4>🎁 Bônus 3: Todos 15 Templates Preenchíveis em PDF A4</h4>
-                <p>Versões imprimíveis da Declaração do Suficiente, planilhas de dívidas e cronogramas de renegociação.</p>
+                <h4>🎁 Bônus 3: 3 Áudios de Suporte + Mantras Estoicos</h4>
+                <p>Áudio SOS Compra (3 min para travar impulso na hora H), Áudio de Respiração 4-4-4 e Áudio de Reflexão Noturna. E os 3 mantras estoicos anti-pânico para colocar na geladeira.</p>
+                <span class="value-tag">Incluso no método</span>
+            </div>
+
+            <div class="bonus-card">
+                <h4>🎁 Bônus 4: Templates Preenchíveis em PDF</h4>
+                <p>Versões editáveis da Declaração do Suficiente, planilhas de mapeamento de dívidas e cronogramas de renegociação.</p>
+                <span class="value-tag">Incluso no método</span>
             </div>
         </div>
     </section>
@@ -923,12 +972,27 @@
 
             <div class="price-box">
                 <p class="price-old">De R$ 97,00 por apenas</p>
-                <div class="price-current">12x R$ 4,90 <small>ou R$ 47,00 à vista</small></div>
+                <div class="price-current">10x R$ 5,65 <small>ou R$ 47,00 à vista</small></div>
                 <p class="price-sub">Acesso imediato • Pagamento 100% seguro</p>
 
                 <div class="integration-note">
                     🔗 <strong>Integração garantida:</strong> Seu <strong>Reset de 5 Minutos</strong> já está na sua conta. 
                     Ao adquirir o Domínio do Dinheiro, você terá acesso ao método completo no mesmo ambiente.
+                </div>
+
+                <div class="whats-included">
+                    <p style="font-weight:700; color:#0d233a; margin-bottom:8px;">📦 Você recebe:</p>
+                    <ul>
+                        <li>Cartilha Domínio do Dinheiro (150+ páginas)</li>
+                        <li>Declaração do Suficiente + 3 Perguntas guiadas</li>
+                        <li>Kit de Emergência com 8 Protocolos Práticos</li>
+                        <li>Planner Diário, Semanal e Mensal</li>
+                        <li>Desafio dos 7 Dias (passo a passo completo)</li>
+                        <li>14 Ferramentas Online (calculadoras + mapeadores)</li>
+                        <li>3 Áudios de Suporte (SOS Compra + Respiração + Reflexão)</li>
+                        <li>Mantras Estoicos + Conversor de Vergonha</li>
+                        <li>Acesso vitalício + atualizações</li>
+                    </ul>
                 </div>
 
                 <a href="https://pay.kiwify.com.br/gvXZj7j" class="btn-cta green">QUERO COMPLETAR MEU MÉTODO E QUITAR MINHAS DÍVIDAS</a>
@@ -944,7 +1008,7 @@
             </div>
 
             <div style="text-align:center;margin-top:24px;padding:0 10px;">
-                <a href="https://dashboard.kiwify.com.br/courses" style="color:#a0aec0;font-size:clamp(0.75rem,0.8vw,0.85rem);text-decoration:underline;">Não, obrigado. Prefiro continuar apenas com o Reset de 5 Minutos →</a>
+                <a href="https://dashboard.kiwify.com.br/courses" style="color:#a0aec0;font-size:clamp(0.75rem,0.8vw,0.85rem);text-decoration:underline;">Não, obrigado. Prefiro continuar apenas com o Reset de 5 Minutos.</a>
             </div>
         </div>
     </section>
@@ -953,17 +1017,14 @@
     <footer>
         <div class="container">
             <p>&copy; Domínio do Dinheiro. Todos os direitos reservados.</p>
+            <p>Este produto não garante a obtenção de resultados financeiros sem a devida aplicação prática de seu conteúdo. Resultados podem variar de pessoa para pessoa.</p>
+             <strong style="color: #D3D3D3;">Aviso importante:</strong> O Domínio do Dinheiro é uma ferramenta educacional para apoio emocional e organização pessoal desenvolvida para oferecer clareza em momentos de sobrecarga financeira. Não é um serviço financeiro, não é consultoria jurídica e não substitui acompanhamento psicológico ou médico. As técnicas usadas no Domínio do Dinheiro são exclusivamente de caráter informativo e educativo.<br><br>Em caso de crise emocional intensa, ligue 188 (CVV — Centro de Valorização da Vida). Funciona 24h e é gratuito  
         </div>
-
-<div class="disclaimer-box">
-      <strong style="color: #D3D3D3;">Aviso importante: Este produto não é um serviço financeiro, não é consultoria jurídica e não garante a obtenção de resultados financeiros sem a devida aplicação prática de seu conteúdo e os resultados podem variar para cada pessoa.</strong> O Método 'Domínio do Dinheiro' é uma ferramenta educacional para organização pessoal desenvolvida para oferecer clareza em momentos de sobrecarga financeira e resultados práticos para a vida financeira. Não substitui acompanhamento psicológico ou médico. <br><br>
 
     <p>
       <a href="https://www.evergreenscribe.com/dominio/termos-de-uso" style="color: #D3D3D3;">Termos de Uso</a> |
       <a href="https://www.evergreenscribe.com/dominio/politica-privacidade" style="color: #D3D3D3;" >Política de Privacidade</a> |
       <p style="font-size: .75rem; color: var(--text-faint); margin-top: 10px;">
-        Dúvidas? Fale conosco: 
-        <a href="mailto:reset5suporte@gmail.com" style="color: #4b5563; text-decoration: none;">Contato</a>
 </p>
     </p>
     <p style="margin-top: 8px; color: #D3D3D3;">
@@ -972,6 +1033,5 @@
 
     </div>
     </footer>
-
 </body>
 </html>
